@@ -4,13 +4,14 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import 'presentation/customBottomAppBar.dart';
 
-class About extends StatefulWidget {
+class Accounts extends StatefulWidget {
+
   @override
-  _AboutState createState() => _AboutState();
+  _AccountsState createState() => _AccountsState();
 }
 
-class _AboutState extends State<About> {
-  final _url = 'https://www.eapo.org/ru/about.html?mode=m';
+class _AccountsState extends State<Accounts> {
+  final _url = 'https://www.eapo.org/ru/accounts.html?mode=m';
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +32,9 @@ class _AboutState extends State<About> {
           title: Text('О ЕАПВ'),
         ),
         body: Center(
-          child: Container(
-           child: WebView(initialUrl: this._url),
-          )
+            child: Container(
+              child: WebView(initialUrl: this._url),
+            )
         ),
         bottomNavigationBar: CustomBottomAppBar(
           color: Colors.white,

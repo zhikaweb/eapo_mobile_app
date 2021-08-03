@@ -1,6 +1,8 @@
+import 'package:eapo_mobile_app/contacts.dart';
 import 'package:flutter/material.dart';
 import '../about.dart';
-import '../CustomBottomAppBar.dart';
+import '../accounts.dart';
+import '../presentation/customBottomAppBar.dart';
 import '../presentation/icons.dart';
 import '../inner_menu/menuGetPatent.dart';
 
@@ -36,18 +38,26 @@ class MenuEAPVScreen extends StatelessWidget {
                    child: SizedBox (
                       width: 232,
                       height: 56,
-                      child: RaisedButton(
-                          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
-                          onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                                  return About();
-                                })
-                            );
-                          },
-                          child: Text('О ведомстве'),
-                          color: Color.fromRGBO(233, 241, 245, 1.0),
-                          textColor: Color.fromRGBO(30, 111, 165, 1.0)
+                     child: ElevatedButton(
+                         style: ButtonStyle(
+                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                                 RoundedRectangleBorder(
+                                     borderRadius: BorderRadius.circular(4)
+                                 )
+                             ),
+                             backgroundColor: MaterialStateProperty.all(
+                                 Color.fromRGBO(233, 241, 245, 1.0)
+                             ),
+                             foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
+                         ),
+                            onPressed: () {
+                                  Navigator.push(context,
+                                      MaterialPageRoute(builder: (context) {
+                                        return About();
+                                      })
+                                  );
+                                },
+                          child: Text('О ведомстве')
                       ),
                     ),
                 ),
@@ -56,18 +66,26 @@ class MenuEAPVScreen extends StatelessWidget {
                   child: SizedBox (
                     width: 232,
                     height: 56,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4)
+                              )
+                          ),
+                          backgroundColor: MaterialStateProperty.all(
+                              Color.fromRGBO(233, 241, 245, 1.0)
+                          ),
+                          foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
+                      ),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                              return MenuGetPatent();
+                              return About();
                             })
                         );
                       },
-                      child: Text('Процедура получения патента', textAlign: TextAlign.center,),
-                      color: Color.fromRGBO(233, 241, 245, 1.0),
-                      textColor: Color.fromRGBO(30, 111, 165, 1.0),
+                      child: Text('Процедура получения патента', textAlign: TextAlign.center,)
                     ),
                   ),
                 ),
@@ -76,18 +94,26 @@ class MenuEAPVScreen extends StatelessWidget {
                   child: SizedBox (
                     width: 232,
                     height: 56,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4)
+                              )
+                          ),
+                          backgroundColor: MaterialStateProperty.all(
+                              Color.fromRGBO(233, 241, 245, 1.0)
+                          ),
+                          foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
+                      ),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                              return About();
+                              return Accounts();
                             })
                         );
                       },
-                      child: Text('Банковские реквизиты'),
-                      color: Color.fromRGBO(233, 241, 245, 1.0),
-                      textColor: Color.fromRGBO(30, 111, 165, 1.0),
+                      child: Text('Банковские реквизиты')
                     ),
                   ),
                 ),
@@ -95,18 +121,26 @@ class MenuEAPVScreen extends StatelessWidget {
                   child: SizedBox (
                     width: 232,
                     height: 56,
-                    child: RaisedButton(
-                      shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(4)),
+                    child: ElevatedButton(
+                      style: ButtonStyle(
+                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
+                              RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(4)
+                              )
+                          ),
+                          backgroundColor: MaterialStateProperty.all(
+                              Color.fromRGBO(233, 241, 245, 1.0)
+                          ),
+                          foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
+                      ),
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                              return About();
+                              return Contacts();
                             })
                         );
                       },
-                      child: Text('Контакты'),
-                      color: Color.fromRGBO(233, 241, 245, 1.0),
-                      textColor: Color.fromRGBO(30, 111, 165, 1.0),
+                      child: Text('Контакты')
                     ),
                   ),
                 ),
