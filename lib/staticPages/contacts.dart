@@ -2,7 +2,7 @@ import 'package:eapo_mobile_app/presentation/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'presentation/customBottomAppBar.dart';
+import '../presentation/customBottomAppBar.dart';
 
 class Contacts extends StatefulWidget {
 

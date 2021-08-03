@@ -1,5 +1,8 @@
+import 'package:eapo_mobile_app/designPages/designBulletin.dart';
+import 'package:eapo_mobile_app/designPages/designDocs.dart';
+import 'package:eapo_mobile_app/inventPages/searchPubl.dart';
 import 'package:flutter/material.dart';
-import '../about.dart';
+import '../staticPages/about.dart';
 import '../presentation/customBottomAppBar.dart';
 import '../presentation/icons.dart';
 import '../inner_menu/menuGetPatent.dart';
@@ -56,7 +59,7 @@ class _MenuDesignsState extends State<MenuDesigns> {
                           onPressed: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                                  return About();
+                                  return DesignDocs();
                                 })
                             );
                           },
@@ -84,7 +87,7 @@ class _MenuDesignsState extends State<MenuDesigns> {
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                                return About();
+                                return DesignBulletin();
                               })
                           );
                         },
@@ -111,7 +114,7 @@ class _MenuDesignsState extends State<MenuDesigns> {
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                                return About();
+                                return SearchPubl();
                               })
                           );
                         },

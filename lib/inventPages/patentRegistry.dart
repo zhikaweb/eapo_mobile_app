@@ -2,15 +2,15 @@ import 'package:eapo_mobile_app/presentation/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'presentation/customBottomAppBar.dart';
+import '../presentation/customBottomAppBar.dart';
 
-class About extends StatefulWidget {
+class PatentRegistry extends StatefulWidget {
   @override
-  _AboutState createState() => _AboutState();
+  _PatentRegistryState createState() => _PatentRegistryState();
 }
 
-class _AboutState extends State<About> {
-  final _url = 'https://www.eapo.org/ru/about.html?mode=m';
+class _PatentRegistryState extends State<PatentRegistry> {
+  final _url = 'http://www.eapoorg2018.eapo/ru/mobile/reestr.php';
 
   @override
   Widget build(BuildContext context) {
@@ -28,12 +28,12 @@ class _AboutState extends State<About> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text('О ЕАПВ'),
+          title: Text('Изобретения'),
         ),
         body: Center(
-          child: Container(
-           child: WebView(initialUrl: this._url),
-          )
+            child: Container(
+              child: WebView(initialUrl: this._url),
+            )
         ),
         bottomNavigationBar: CustomBottomAppBar(
           color: Colors.white,

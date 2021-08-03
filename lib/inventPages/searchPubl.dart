@@ -2,16 +2,16 @@ import 'package:eapo_mobile_app/presentation/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import 'presentation/customBottomAppBar.dart';
+import '../presentation/customBottomAppBar.dart';
 
-class Accounts extends StatefulWidget {
+class SearchPubl extends StatefulWidget {
 
   @override
-  _AccountsState createState() => _AccountsState();
+  _SearchPublState createState() => _SearchPublState();
 }
 
-class _AccountsState extends State<Accounts> {
-  final _url = 'https://www.eapo.org/ru/accounts.html?mode=m';
+class _SearchPublState extends State<SearchPubl> {
+  final _url = 'http://www.eapoorg2018.eapo/ru/mobile/publicat.php';
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +29,7 @@ class _AccountsState extends State<Accounts> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text('О ЕАПВ'),
+          title: Text('Изобретения'),
         ),
         body: Center(
             child: Container(

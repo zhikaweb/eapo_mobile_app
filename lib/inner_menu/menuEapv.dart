@@ -1,7 +1,7 @@
-import 'package:eapo_mobile_app/contacts.dart';
+import 'package:eapo_mobile_app/staticPages/contacts.dart';
 import 'package:flutter/material.dart';
-import '../about.dart';
-import '../accounts.dart';
+import '../staticPages/about.dart';
+import '../staticPages/accounts.dart';
 import '../presentation/customBottomAppBar.dart';
 import '../presentation/icons.dart';
 import '../inner_menu/menuGetPatent.dart';
@@ -81,7 +81,7 @@ class MenuEAPVScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.push(context,
                             MaterialPageRoute(builder: (context) {
-                              return About();
+                              return MenuGetPatent();
                             })
                         );
                       },

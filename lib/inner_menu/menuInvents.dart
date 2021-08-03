@@ -1,5 +1,9 @@
+import 'package:eapo_mobile_app/inventPages/inventBulletin.dart';
+import 'package:eapo_mobile_app/inventPages/inventDocs.dart';
+import 'package:eapo_mobile_app/inventPages/patentRegistry.dart';
+import 'package:eapo_mobile_app/inventPages/searchPubl.dart';
 import 'package:flutter/material.dart';
-import '../about.dart';
+import '../staticPages/about.dart';
 import '../presentation/customBottomAppBar.dart';
 import '../presentation/icons.dart';
 import '../inner_menu/menuGetPatent.dart';
@@ -56,7 +60,7 @@ class _MenuInventsState extends State<MenuInvents> {
                           onPressed: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                                  return About();
+                                  return InventDocs();
                                 })
                             );
                           },
@@ -84,7 +88,7 @@ class _MenuInventsState extends State<MenuInvents> {
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                                return About();
+                                return InventBulletin();
                               })
                           );
                         },
@@ -112,7 +116,7 @@ class _MenuInventsState extends State<MenuInvents> {
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                                return About();
+                                return SearchPubl();
                               })
                           );
                         },
@@ -139,7 +143,7 @@ class _MenuInventsState extends State<MenuInvents> {
                         onPressed: () {
                           Navigator.push(context,
                               MaterialPageRoute(builder: (context) {
-                                return About();
+                                return PatentRegistry();
                               })
                           );
                         },
