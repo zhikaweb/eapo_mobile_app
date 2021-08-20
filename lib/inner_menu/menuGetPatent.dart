@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../presentation/customBottomAppBar.dart';
 import '../presentation/icons.dart';
-import '../staticPages/about.dart';
 
 class MenuGetPatent extends StatefulWidget {
   @override
@@ -187,6 +186,6 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
   }
 
   void _launchUrl(String url) async =>
-      await canLaunch(url) ? await launch(url) : throw 'Could not launch $url';
+      await canLaunch(Uri.encodeFull(url)) ? await launch(Uri.encodeFull(url)) : throw 'Could not launch $url';
 
 }

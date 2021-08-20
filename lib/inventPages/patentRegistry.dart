@@ -10,7 +10,7 @@ class PatentRegistry extends StatefulWidget {
 }
 
 class _PatentRegistryState extends State<PatentRegistry> {
-  final _url = 'http://www.eapoorg2018.eapo/ru/mobile/reestr.php';
+  final _url = 'https://www.eapo.org/ru/mobile/reestr.php';
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +32,7 @@ class _PatentRegistryState extends State<PatentRegistry> {
         ),
         body: Center(
             child: Container(
-              child: WebView(initialUrl: this._url),
+              child: WebView(initialUrl: 'https://www.eapo.org/ru/mobile/reestr.php'),
             )
         ),
         bottomNavigationBar: CustomBottomAppBar(

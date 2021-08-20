@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:eapo_mobile_app/presentation/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -11,7 +13,14 @@ class SearchPubl extends StatefulWidget {
 }
 
 class _SearchPublState extends State<SearchPubl> {
-  final _url = 'http://www.eapoorg2018.eapo/ru/mobile/publicat.php';
+  final _url = 'https://www.eapo.org/ru/mobile/publicat.php';
+
+  @override
+  void initState() {
+    super.initState();
+    // Enable hybrid composition.
+    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -33,7 +42,7 @@ class _SearchPublState extends State<SearchPubl> {
         ),
         body: Center(
             child: Container(
-              child: WebView(initialUrl: this._url),
+              child: WebView(initialUrl: 'https://www.eapo.org/ru/mobile/publicat.php'),
             )
         ),
         bottomNavigationBar: CustomBottomAppBar(

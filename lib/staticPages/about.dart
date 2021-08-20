@@ -1,7 +1,11 @@
+import 'dart:convert';
+
 import 'package:eapo_mobile_app/presentation/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
 
+import '../myWebview.dart';
 import '../presentation/customBottomAppBar.dart';
 
 class About extends StatefulWidget {
@@ -10,7 +14,6 @@ class About extends StatefulWidget {
 }
 
 class _AboutState extends State<About> {
-  final _url = 'https://www.eapo.org/ru/about.html?mode=m';
 
   @override
   Widget build(BuildContext context) {
@@ -27,14 +30,16 @@ class _AboutState extends State<About> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: Text('О ЕАПВ'),
+        // appBar: AppBar(
+        //   title: Text('О ЕАПВ'),
+        // ),
+        body: MyWebView(
+          title: "О ЕАПВ",
+          selectedUrl: "https://www.eapo.org/ru/about.html?mode=m",
+          // selectedUrl: "http://google.com",
         ),
-        body: Center(
-          child: Container(
-           child: WebView(initialUrl: this._url),
-          )
-        ),
+        //   )
+        // ),
         bottomNavigationBar: CustomBottomAppBar(
           color: Colors.white,
           backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
