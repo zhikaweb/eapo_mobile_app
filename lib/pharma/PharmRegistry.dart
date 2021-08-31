@@ -3,6 +3,7 @@ import 'dart:io';
 import 'package:eapo_mobile_app/utils/icons.dart';
 import 'package:eapo_mobile_app/utils/myWebview.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 import '../utils/customBottomAppBar.dart';
@@ -35,9 +36,12 @@ class _PharmRegistryState extends State<PharmRegistry> {
           title: Text('Фармреестр'),
         ),
         body: Container(
+          height: 600,
           child: Column(
             children: [
               Form(
+                child: Container(
+                  height: 100,
                   child: Column(
                     children: [
                       TextFormField(
@@ -57,13 +61,16 @@ class _PharmRegistryState extends State<PharmRegistry> {
                       ),
                     ],
                   ),
+                )
               ),
-              // Padding(
-              //   padding: EdgeInsets.all(8.0),
-              //   child: WebView(
-              //     initialUrl: Uri.parse(_url).toString(),
-              //   ),
-              // )
+              new SizedBox(
+                height: 400.0,
+                width: 400.0,
+                child:
+                InAppWebView(
+                  initialUrlRequest: URLRequest(url: Uri.parse(_url)),
+                ),
+              )
             ],
           ),
         ),
