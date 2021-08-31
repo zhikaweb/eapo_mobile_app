@@ -2,8 +2,8 @@ import 'package:eapo_mobile_app/staticPages/contacts.dart';
 import 'package:flutter/material.dart';
 import '../staticPages/about.dart';
 import '../staticPages/accounts.dart';
-import '../presentation/customBottomAppBar.dart';
-import '../presentation/icons.dart';
+import '../utils/customBottomAppBar.dart';
+import '../utils/icons.dart';
 import '../inner_menu/menuGetPatent.dart';
 
 class MenuEAPVScreen extends StatelessWidget {

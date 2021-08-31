@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class MyWebView extends StatelessWidget {
@@ -21,16 +22,19 @@ class MyWebView extends StatelessWidget {
           title: Text(title),
         ),
         body: WebView(
-          initialUrl: selectedUrl,
+          initialUrl: Uri.encodeFull(selectedUrl),
           debuggingEnabled: true,
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _controller.complete(webViewController);
           },
-          navigationDelegate: (navigationRequest) {
-            print(navigationRequest.url);
-            return navigationRequest.url == selectedUrl ? NavigationDecision.navigate : NavigationDecision.prevent;
+          onPageStarted: (String url) {
+            print('Page started loading: $url');
           },
+          onPageFinished: (String url) {
+            print('Page finished loading: $url');
+          },
+          gestureNavigationEnabled: true,
         )
     );
   }

@@ -1,8 +1,9 @@
-import 'package:eapo_mobile_app/presentation/icons.dart';
+import 'package:eapo_mobile_app/utils/icons.dart';
+import 'package:eapo_mobile_app/utils/myWebview.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../presentation/customBottomAppBar.dart';
+import '../utils/customBottomAppBar.dart';
 
 class InventDocs extends StatefulWidget {
 
@@ -28,13 +29,9 @@ class _InventDocsState extends State<InventDocs> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        appBar: AppBar(
-          title: Text('Изобретения'),
-        ),
-        body: Center(
-            child: Container(
-              child: WebView(initialUrl: this._url),
-            )
+        body: MyWebView(
+          title: "Изобретения",
+          selectedUrl: Uri.parse(_url).toString(),
         ),
         bottomNavigationBar: CustomBottomAppBar(
           color: Colors.white,

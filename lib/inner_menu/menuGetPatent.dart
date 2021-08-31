@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../presentation/customBottomAppBar.dart';
-import '../presentation/icons.dart';
+import '../utils/customBottomAppBar.dart';
+import '../utils/icons.dart';
 
 class MenuGetPatent extends StatefulWidget {
   @override
