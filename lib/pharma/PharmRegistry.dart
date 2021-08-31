@@ -7,14 +7,14 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import '../utils/customBottomAppBar.dart';
 
-class SearchPubl extends StatefulWidget {
-
+class PharmRegistry extends StatefulWidget {
   @override
-  _SearchPublState createState() => _SearchPublState();
+  _PharmRegistryState createState() => _PharmRegistryState();
 }
 
-class _SearchPublState extends State<SearchPubl> {
-  final _url = 'https://www.eapo.org/ru/mobile/publicat.php';
+class _PharmRegistryState extends State<PharmRegistry> {
+  final _url = 'https://www.eapo.org/ru/mobile/sfarma.php';
+  late String _searchRequest;
 
   @override
   Widget build(BuildContext context) {
@@ -31,9 +31,41 @@ class _SearchPublState extends State<SearchPubl> {
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
-        body: MyWebView(
-          title: "Изобретения",
-          selectedUrl: Uri.parse(_url).toString(),
+        appBar: AppBar(
+          title: Text('Фармреестр'),
+        ),
+        body: Container(
+          child: Column(
+            children: [
+              Form(
+                  child: Column(
+                    children: [
+                      TextFormField(
+                        onSaved: (value) {
+                          this._searchRequest = value!;
+                          print(this._searchRequest);
+                        },
+                        decoration: InputDecoration(
+                          hintText: 'VAR'
+                        ),
+                      ),
+                      ElevatedButton(
+                        child: Text('Поиск'),
+                        onPressed: () {
+                          print('valid');
+                        }
+                      ),
+                    ],
+                  ),
+              ),
+              // Padding(
+              //   padding: EdgeInsets.all(8.0),
+              //   child: WebView(
+              //     initialUrl: Uri.parse(_url).toString(),
+              //   ),
+              // )
+            ],
+          ),
         ),
         bottomNavigationBar: CustomBottomAppBar(
           color: Colors.white,

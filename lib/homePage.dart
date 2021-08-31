@@ -1,3 +1,4 @@
+import 'package:eapo_mobile_app/pharma/PharmRegistry.dart';
 import 'package:flutter/material.dart';
 import 'inner_menu/menuDesigns.dart';
 import 'inner_menu/menuEapv.dart';
@@ -63,7 +64,7 @@ class _HomePageState extends State<HomePage> {
                               })
                           );
                         },
-                      child: Image(
+                        child: Image(
                             image: AssetImage('assets/images/izobretenie.png'),
                             fit: BoxFit.fitWidth
                         ),
@@ -76,7 +77,7 @@ class _HomePageState extends State<HomePage> {
                               })
                           );
                         },
-                      child: Image(
+                        child: Image(
                             image: AssetImage('assets/images/promobrazcy.png'),
                             fit: BoxFit.fitWidth
                         )
@@ -89,10 +90,19 @@ class _HomePageState extends State<HomePage> {
                             image: AssetImage('assets/images/emptygear.png'),
                             fit: BoxFit.fitWidth
                         ),
-                        Image(
-                            image: AssetImage('assets/images/farmreestr.png'),
-                            fit: BoxFit.fitWidth
-                        ),
+                      FlatButton(
+                          onPressed: () {
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                                  return PharmRegistry();
+                                })
+                            );
+                          },
+                          child: Image(
+                              image: AssetImage('assets/images/farmreestr.png'),
+                              fit: BoxFit.fitWidth
+                          )
+                      ),
                       Image(
                             image: AssetImage('assets/images/lichny_cab.png'),
                             fit: BoxFit.fitWidth
