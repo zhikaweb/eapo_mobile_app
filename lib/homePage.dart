@@ -25,6 +25,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
+  // iPhone 7
   Widget _buildNormalContainer() {
     return Container(
       decoration: BoxDecoration(
@@ -207,18 +208,63 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    Row(mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          transform: Matrix4.translationValues(0, -120, 0),
+                          child: Row(
+                              children: [
+                                TextButton(
+                                  onPressed: () {  },
+                                  child: Image(
+                                      image: AssetImage('assets/images/facebook.png'),
+                                      fit: BoxFit.fitWidth
+                                  ),
+                                ),
+                              ]
+                          ),
+                        ),
+                        Container(
+                          transform: Matrix4.translationValues(0, -120, 0),
+                          child: Row(
+                              children: [
+                                TextButton(
+                                  onPressed: () {  },
+                                  child: Image(
+                                      image: AssetImage('assets/images/youtube.png'),
+                                      fit: BoxFit.fitWidth
+                                  ),
+                                ),
+                              ]
+                          ),
+                        ),
+                        Container(
+                          transform: Matrix4.translationValues(0, -120, 0),
+                          child: Row(
+                              children: [
+                                TextButton(
+                                  onPressed: () {  },
+                                  child: Image(
+                                      image: AssetImage('assets/images/twitter.png'),
+                                      fit: BoxFit.fitWidth
+                                  ),
+                                ),
+                              ]
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-              )
-
-
+              ),
           ),
           backgroundColor: Colors.transparent
       ),
     );
   }
 
+  // iPhone 12
   Widget _buildWideContainers() {
     return Container(
       decoration: BoxDecoration(
@@ -401,12 +447,56 @@ class _HomePageState extends State<HomePage> {
                           ),
                         ),
                       ],
-                    )
+                    ),
+                    Row(mainAxisAlignment: MainAxisAlignment.center,
+                      children: <Widget>[
+                        Container(
+                          transform: Matrix4.translationValues(0, 0, 0),
+                          child: Row(
+                              children: [
+                                TextButton(
+                                  onPressed: () {  },
+                                  child: Image(
+                                      image: AssetImage('assets/images/facebook.png'),
+                                      fit: BoxFit.fitWidth
+                                  ),
+                                ),
+                              ]
+                          ),
+                        ),
+                        Container(
+                          transform: Matrix4.translationValues(0, 0, 0),
+                          child: Row(
+                              children: [
+                                TextButton(
+                                  onPressed: () {  },
+                                  child: Image(
+                                      image: AssetImage('assets/images/youtube.png'),
+                                      fit: BoxFit.fitWidth
+                                  ),
+                                ),
+                              ]
+                          ),
+                        ),
+                        Container(
+                          transform: Matrix4.translationValues(0, 0, 0),
+                          child: Row(
+                              children: [
+                                TextButton(
+                                  onPressed: () {  },
+                                  child: Image(
+                                      image: AssetImage('assets/images/twitter.png'),
+                                      fit: BoxFit.fitWidth
+                                  ),
+                                ),
+                              ]
+                          ),
+                        ),
+                      ],
+                    ),
                   ],
                 ),
-              )
-
-
+              ),
           ),
           backgroundColor: Colors.transparent
       ),
