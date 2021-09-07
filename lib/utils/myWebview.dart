@@ -2,13 +2,19 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:webview_flutter/platform_interface.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class MyWebView extends StatelessWidget {
   final String title;
   final String selectedUrl;
 
+  final userAgent =
+      'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Mobile Safari/537.36';
+
+
   final Completer<WebViewController> _controller = Completer<WebViewController>();
+  // late WebViewController _controller;
 
   MyWebView({
     required this.title,
@@ -22,12 +28,23 @@ class MyWebView extends StatelessWidget {
           title: Text(title),
         ),
         body: WebView(
-          initialUrl: Uri.encodeFull(selectedUrl),
-          debuggingEnabled: true,
+          // initialUrl: "https://www.eapo.org/ru",
+          // initialUrl: "https://google.com",
+          initialUrl: Uri.parse(selectedUrl).toString(),
+          // initialUrl: selectedUrl,
+          // debuggingEnabled: true,
           javascriptMode: JavascriptMode.unrestricted,
-          onWebViewCreated: (WebViewController webViewController) {
-            _controller.complete(webViewController);
+          // onWebViewCreated: (WebViewController webViewController) {
+          //   _controller.complete(webViewController);
+          // },
+          navigationDelegate: (request) {
+            if (request.url.startsWith('https://www.eapo.org')){
+              print(request);
+              return NavigationDecision.navigate;
+            }
+            return NavigationDecision.prevent;
           },
+          userAgent: userAgent,
           onPageStarted: (String url) {
             print('Page started loading: $url');
           },

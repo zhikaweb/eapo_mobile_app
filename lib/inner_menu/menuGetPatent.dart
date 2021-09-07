@@ -11,7 +11,8 @@ class MenuGetPatent extends StatefulWidget {
 class _MenuGetPatentState extends State<MenuGetPatent> {
   List listUrl = ['https://www.eapo.org/ru/inventors01.html',
     'https://www.eapo.org/ru/inventors02.html',
-  'https://www.eapo.org/ru/getpatent2018/', 'https://www.eapo.org/ru/getpatentpct/',
+  'https://www.eapo.org/ru/getpatent2018/',
+    'https://www.eapo.org/ru/getpatentpct/',
   'https://www.eapo.org/ru/application2019/'];
 
   @override
@@ -83,7 +84,7 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                             foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                         ),
                         onPressed: () {
-                          _launchUrl(listUrl[0]);
+                          _launchUrl(listUrl[1]);
                         },
                         child: Text('Пять шагов к Евразийскому патенту', textAlign: TextAlign.center,),
                       ),
@@ -107,7 +108,7 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                             foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                         ),
                         onPressed: () {
-                          _launchUrl(listUrl[0]);
+                          _launchUrl(listUrl[2]);
                         },
                         child: Text('Как получить Евразийский патент', textAlign: TextAlign.center),
                       ),
@@ -131,7 +132,7 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                             foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                         ),
                         onPressed: () {
-                          _launchUrl(listUrl[0]);
+                          _launchUrl(listUrl[3]);
                         },
                         child: Text('Получение Евразийского патента по процедуре РСТ',
                             textAlign: TextAlign.center),
@@ -155,7 +156,7 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                             foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                         ),
                         onPressed: () {
-                          _launchUrl(listUrl[0]);
+                          _launchUrl(listUrl[4]);
                         },
                         child: Text('Как подать евразийскую заявку',
                             textAlign: TextAlign.center),

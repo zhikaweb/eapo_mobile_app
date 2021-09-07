@@ -1,10 +1,12 @@
+import 'dart:async';
 import 'dart:convert';
+import 'dart:io';
 
 import 'package:eapo_mobile_app/utils/icons.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
-import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
-import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+// import 'package:flutter_webview_plugin/flutter_webview_plugin.dart';
+// import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 
 import '../utils/myWebview.dart';
 import '../utils/customBottomAppBar.dart';
@@ -16,6 +18,12 @@ class About extends StatefulWidget {
 
 class _AboutState extends State<About> {
   final _url = "https://www.eapo.org/ru/about.html?mode=m";
+
+  @override
+  void initState() {
+    super.initState();
+    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -34,7 +42,8 @@ class _AboutState extends State<About> {
         backgroundColor: Colors.transparent,
         body: MyWebView(
           title: "О ЕАПВ",
-          selectedUrl: Uri.parse(_url).toString(),
+          // selectedUrl: _url,
+          selectedUrl: Uri.encodeFull(_url),
           // selectedUrl: "http://google.com",
         ),
         bottomNavigationBar: CustomBottomAppBar(
