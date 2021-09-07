@@ -1,5 +1,6 @@
 import 'package:eapo_mobile_app/pharma/PharmRegistry.dart';
 import 'package:flutter/material.dart';
+import 'package:url_launcher/url_launcher.dart';
 import 'inner_menu/menuDesigns.dart';
 import 'inner_menu/menuEapv.dart';
 import 'inner_menu/menuInvents.dart';
@@ -10,6 +11,10 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+  List listUrl = ['https://www.facebook.com/eapo.official',
+    'https://www.youtube.com/channel/UCPzUFvo897pAnXjU1H06POA',
+    'https://twitter.com/EAPO_official'];
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -216,7 +221,7 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                               children: [
                                 TextButton(
-                                  onPressed: () {  },
+                                  onPressed: () { _launchUrl(listUrl[0]); },
                                   child: Image(
                                       image: AssetImage('assets/images/facebook.png'),
                                       fit: BoxFit.fitWidth
@@ -230,7 +235,7 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                               children: [
                                 TextButton(
-                                  onPressed: () {  },
+                                  onPressed: () { _launchUrl(listUrl[1]); },
                                   child: Image(
                                       image: AssetImage('assets/images/youtube.png'),
                                       fit: BoxFit.fitWidth
@@ -244,7 +249,7 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                               children: [
                                 TextButton(
-                                  onPressed: () {  },
+                                  onPressed: () { _launchUrl(listUrl[2]); },
                                   child: Image(
                                       image: AssetImage('assets/images/twitter.png'),
                                       fit: BoxFit.fitWidth
@@ -455,7 +460,7 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                               children: [
                                 TextButton(
-                                  onPressed: () {  },
+                                  onPressed: () { _launchUrl(listUrl[0]); },
                                   child: Image(
                                       image: AssetImage('assets/images/facebook.png'),
                                       fit: BoxFit.fitWidth
@@ -469,7 +474,7 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                               children: [
                                 TextButton(
-                                  onPressed: () {  },
+                                  onPressed: () { _launchUrl(listUrl[1]); },
                                   child: Image(
                                       image: AssetImage('assets/images/youtube.png'),
                                       fit: BoxFit.fitWidth
@@ -483,7 +488,7 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                               children: [
                                 TextButton(
-                                  onPressed: () {  },
+                                  onPressed: () { _launchUrl(listUrl[2]); },
                                   child: Image(
                                       image: AssetImage('assets/images/twitter.png'),
                                       fit: BoxFit.fitWidth
@@ -502,4 +507,7 @@ class _HomePageState extends State<HomePage> {
       ),
     );
   }
+
+  void _launchUrl(String url) async =>
+      await canLaunch(Uri.encodeFull(url)) ? await launch(Uri.encodeFull(url)) : throw 'Could not launch $url';
 }
