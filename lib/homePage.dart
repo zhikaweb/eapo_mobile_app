@@ -1,3 +1,4 @@
+import 'package:eapo_mobile_app/CustomNavigation.dart';
 import 'package:eapo_mobile_app/pharma/PharmRegistry.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -165,11 +166,6 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return PharmRegistry();
-                                        })
-                                    );
                                   },
                                   child: Image(
                                       image: AssetImage('assets/images/lichny_cab.png'),
@@ -314,7 +310,7 @@ class _HomePageState extends State<HomePage> {
                           onPressed: () {
                             Navigator.push(context,
                                 MaterialPageRoute(builder: (context) {
-                                  return MenuEAPVScreen();
+                                  return CustomNavigation(0);
                                 })
                             );
                           },

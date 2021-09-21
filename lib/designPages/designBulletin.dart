@@ -1,9 +1,9 @@
-import 'package:eapo_mobile_app/utils/icons.dart';
+import 'package:eapo_mobile_app/presentation/icons.dart';
 import 'package:eapo_mobile_app/utils/myWebview.dart';
 import 'package:flutter/material.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-import '../utils/customBottomAppBar.dart';
+import '../presentation/customBottomAppBar.dart';
 
 class DesignBulletin extends StatefulWidget {
 

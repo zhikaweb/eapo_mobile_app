@@ -4,8 +4,8 @@ import 'package:eapo_mobile_app/inventPages/patentRegistry.dart';
 import 'package:eapo_mobile_app/inventPages/searchPubl.dart';
 import 'package:flutter/material.dart';
 import '../staticPages/about.dart';
-import '../utils/customBottomAppBar.dart';
-import '../utils/icons.dart';
+import '../presentation/customBottomAppBar.dart';
+import '../presentation/icons.dart';
 import '../inner_menu/menuGetPatent.dart';
 
 class MenuInvents extends StatefulWidget {

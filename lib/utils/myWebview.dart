@@ -1,6 +1,8 @@
 import 'dart:async';
+import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/platform_interface.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -29,20 +31,13 @@ class MyWebView extends StatelessWidget {
         ),
         body: WebView(
           // initialUrl: "https://www.eapo.org/ru",
-          // initialUrl: "https://google.com",
-          initialUrl: Uri.parse(selectedUrl).toString(),
-          // initialUrl: selectedUrl,
+          // initialUrl: "https://www.google.com",
+          // initialUrl: Uri.parse(selectedUrl).toString(),
+          initialUrl: selectedUrl,
           // debuggingEnabled: true,
           javascriptMode: JavascriptMode.unrestricted,
-          // onWebViewCreated: (WebViewController webViewController) {
-          //   _controller.complete(webViewController);
-          // },
-          navigationDelegate: (request) {
-            if (request.url.startsWith('https://www.eapo.org')){
-              print(request);
-              return NavigationDecision.navigate;
-            }
-            return NavigationDecision.prevent;
+          onWebViewCreated: (WebViewController webViewController) {
+            _controller.complete(webViewController);
           },
           userAgent: userAgent,
           onPageStarted: (String url) {
@@ -51,7 +46,6 @@ class MyWebView extends StatelessWidget {
           onPageFinished: (String url) {
             print('Page finished loading: $url');
           },
-          gestureNavigationEnabled: true,
         )
     );
   }

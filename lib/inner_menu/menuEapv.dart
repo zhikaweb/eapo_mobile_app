@@ -2,11 +2,14 @@ import 'package:eapo_mobile_app/staticPages/contacts.dart';
 import 'package:flutter/material.dart';
 import '../staticPages/about.dart';
 import '../staticPages/accounts.dart';
-import '../utils/customBottomAppBar.dart';
-import '../utils/icons.dart';
+import '../presentation/customBottomAppBar.dart';
+import '../presentation/icons.dart';
 import '../inner_menu/menuGetPatent.dart';
 
 class MenuEAPVScreen extends StatelessWidget {
+
+
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -152,8 +155,8 @@ class MenuEAPVScreen extends StatelessWidget {
           color: Colors.white,
           backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
           selectedColor: Colors.white,
-//          notchedShape: null,
-//          onTabSelected: _onTapped,
+         notchedShape: CircularNotchedRectangle(),
+         // onTabSelected: _onTapped(),
           items: [
             CustomBottomAppBarItem(iconData: MyFlutterApp.home),
             CustomBottomAppBarItem(iconData: MyFlutterApp.eye),
