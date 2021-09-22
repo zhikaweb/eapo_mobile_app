@@ -14,6 +14,7 @@ class MenuDesigns extends StatefulWidget {
 }
 
 class _MenuDesignsState extends State<MenuDesigns> {
+  int _currentIndex = 0;
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -119,8 +120,13 @@ class _MenuDesignsState extends State<MenuDesigns> {
             color: Colors.white,
             backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
             selectedColor: Colors.white,
-//          notchedShape: null,
-//          onTabSelected: _onTapped,
+         notchedShape: CircularNotchedRectangle(),
+         onTabSelected: (value) {
+            final routes = ["/home", "/menuEapo", "/menuInvents", "/menuDesigns", "/pharma"];
+            _currentIndex = value;
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                routes[value], (route) => false);
+          },
             items: [
               CustomBottomAppBarItem(iconData: MyFlutterApp.home),
               CustomBottomAppBarItem(iconData: MyFlutterApp.eye),

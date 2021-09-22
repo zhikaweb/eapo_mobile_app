@@ -16,6 +16,7 @@ class PharmRegistry extends StatefulWidget {
 class _PharmRegistryState extends State<PharmRegistry> {
   final _url = 'https://www.eapo.org/ru/mobile/sfarma.php';
   late String _searchRequest;
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -79,7 +80,12 @@ class _PharmRegistryState extends State<PharmRegistry> {
           backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
           selectedColor: Colors.white,
 //          notchedShape: null,
-//          onTabSelected: _onTapped,
+          onTabSelected: (value) {
+            final routes = ["/home", "/menuEapo", "/menuInvents", "/menuDesigns", "/pharma"];
+            _currentIndex = value;
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                routes[value], (route) => false);
+          },
           items: [
             CustomBottomAppBarItem(iconData: MyFlutterApp.home),
             CustomBottomAppBarItem(iconData: MyFlutterApp.eye),

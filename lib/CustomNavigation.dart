@@ -6,10 +6,6 @@ import 'package:eapo_mobile_app/presentation/icons.dart';
 import 'package:flutter/material.dart';
 
 class CustomNavigation extends StatefulWidget {
-  int index = 0;
-  CustomNavigation(int i){
-    this.index = i;
-  }
 
   @override
   _CustomNavigationState createState() => _CustomNavigationState();
@@ -65,7 +61,6 @@ class _CustomNavigationState extends State<CustomNavigation> {
         break;
     }
     setState(() {
-      tabIndex = widget.index;
       _currentTabIndex = tabIndex;
     });
   }

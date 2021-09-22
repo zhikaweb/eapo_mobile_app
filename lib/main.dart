@@ -26,6 +26,7 @@ class MyApp extends StatelessWidget {
       title: 'EAPO-mobile',
       home: HomePage(),
       routes: <String, WidgetBuilder>{
+        '/home': (BuildContext context) => new HomePage(),
         '/menuEapo': (BuildContext context) => new MenuEAPVScreen(),
         '/menuInvents': (BuildContext context) => new MenuInvents(),
         '/menuDesigns': (BuildContext context) => new MenuDesigns(),

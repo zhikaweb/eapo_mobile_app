@@ -8,10 +8,9 @@ import '../inner_menu/menuGetPatent.dart';
 
 class MenuEAPVScreen extends StatelessWidget {
 
-
-
   @override
   Widget build(BuildContext context) {
+    int _currentIndex = 0;
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -140,7 +139,12 @@ class MenuEAPVScreen extends StatelessWidget {
           backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
           selectedColor: Colors.white,
          notchedShape: CircularNotchedRectangle(),
-         // onTabSelected: _onTapped(),
+          onTabSelected: (value) {
+            final routes = ["/home", "/menuEapo", "/menuInvents", "/menuDesigns", "/pharma"];
+            _currentIndex = value;
+            Navigator.of(context).pushNamedAndRemoveUntil(
+                routes[value], (route) => false);
+          },
           items: [
             CustomBottomAppBarItem(iconData: MyFlutterApp.home),
             CustomBottomAppBarItem(iconData: MyFlutterApp.eye),
