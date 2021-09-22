@@ -30,7 +30,7 @@ class _MenuInventsState extends State<MenuInvents> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Изобретения'),
+            title: Text('ИЗОБРЕТЕНИЯ'),
           ),
           body: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -58,11 +58,7 @@ class _MenuInventsState extends State<MenuInvents> {
                               foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                           ),
                           onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                                  return InventDocs();
-                                })
-                            );
+                            Navigator.of(context).pushNamed('/inventDocs');
                           },
                           child: Text('Нормативные правовые акты', textAlign: TextAlign.center)
                       ),
@@ -86,11 +82,7 @@ class _MenuInventsState extends State<MenuInvents> {
                             foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                         ),
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                                return InventBulletin();
-                              })
-                          );
+                          Navigator.of(context).pushNamed('/inventBull');
                         },
                         child: Text('Бюллетень', textAlign: TextAlign.center,)
                       ),
@@ -114,11 +106,7 @@ class _MenuInventsState extends State<MenuInvents> {
                             foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                         ),
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                                return SearchPubl();
-                              })
-                          );
+                          Navigator.of(context).pushNamed('/searchPubl');
                         },
                         child: Text('Поиск публикаций', textAlign: TextAlign.center)
                       ),
@@ -141,11 +129,7 @@ class _MenuInventsState extends State<MenuInvents> {
                             foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                         ),
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                                return PatentRegistry();
-                              })
-                          );
+                          Navigator.of(context).pushNamed('/patentRegistry');
                         },
                         child: Text('Реестр патентов', textAlign: TextAlign.center)
                       ),

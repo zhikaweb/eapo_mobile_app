@@ -5,13 +5,14 @@ import 'package:webview_flutter/webview_flutter.dart';
 
 import '../presentation/customBottomAppBar.dart';
 
-class PatentRegistry extends StatefulWidget {
+class SearchPublDesign extends StatefulWidget {
+
   @override
-  _PatentRegistryState createState() => _PatentRegistryState();
+  _SearchPublDesignState createState() => _SearchPublDesignState();
 }
 
-class _PatentRegistryState extends State<PatentRegistry> {
-  final _url = 'https://www.eapo.org/ru/mobile/reestr.php';
+class _SearchPublDesignState extends State<SearchPublDesign> {
+  final _url = 'https://www.eapo.org/ru/mobile/publicat.php';
 
   @override
   Widget build(BuildContext context) {
@@ -29,7 +30,7 @@ class _PatentRegistryState extends State<PatentRegistry> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: MyWebView(
-          title: "ИЗОБРЕТЕНИЯ",
+          title: "ПРОМОБРАЗЦЫ",
           selectedUrl: Uri.parse(_url).toString(),
         ),
         bottomNavigationBar: CustomBottomAppBar(

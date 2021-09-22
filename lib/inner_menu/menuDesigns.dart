@@ -1,5 +1,6 @@
 import 'package:eapo_mobile_app/designPages/designBulletin.dart';
 import 'package:eapo_mobile_app/designPages/designDocs.dart';
+import 'package:eapo_mobile_app/designPages/searchPublDesign.dart';
 import 'package:eapo_mobile_app/inventPages/searchPubl.dart';
 import 'package:flutter/material.dart';
 import '../staticPages/about.dart';
@@ -29,7 +30,7 @@ class _MenuDesignsState extends State<MenuDesigns> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Промобразцы'),
+            title: Text('ПРОМОБРАЗЦЫ'),
           ),
           body: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -57,11 +58,7 @@ class _MenuDesignsState extends State<MenuDesigns> {
                               foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                           ),
                           onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                                  return DesignDocs();
-                                })
-                            );
+                            Navigator.of(context).pushNamed('/designDocs');
                           },
                           child: Text('Нормативные правовые акты', textAlign: TextAlign.center)
                       ),
@@ -85,11 +82,7 @@ class _MenuDesignsState extends State<MenuDesigns> {
                             foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                         ),
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                                return DesignBulletin();
-                              })
-                          );
+                          Navigator.of(context).pushNamed('/designBull');
                         },
                         child: Text('Бюллетень', textAlign: TextAlign.center,)
                       ),
@@ -112,11 +105,7 @@ class _MenuDesignsState extends State<MenuDesigns> {
                             foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                         ),
                         onPressed: () {
-                          Navigator.push(context,
-                              MaterialPageRoute(builder: (context) {
-                                return SearchPubl();
-                              })
-                          );
+                          Navigator.of(context).pushNamed('/searchPublDesign');
                         },
                         child: Text('Поиск публикаций', textAlign: TextAlign.center)
                       ),

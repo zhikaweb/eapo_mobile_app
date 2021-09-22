@@ -55,13 +55,13 @@ class _CustomNavigationState extends State<CustomNavigation> {
   _onTap(int tabIndex) {
     switch (tabIndex) {
       case 0:
-        _navigatorKey.currentState!.pushReplacementNamed("About");
+        _navigatorKey.currentState!.pushReplacementNamed("menuEapo");
         break;
       case 1:
-        _navigatorKey.currentState!.pushReplacementNamed("Invents");
+        _navigatorKey.currentState!.pushReplacementNamed("menuInvents");
         break;
       case 2:
-        _navigatorKey.currentState!.pushReplacementNamed("Designs");
+        _navigatorKey.currentState!.pushReplacementNamed("menuDesigns");
         break;
     }
     setState(() {
@@ -72,11 +72,11 @@ class _CustomNavigationState extends State<CustomNavigation> {
 
   Route<dynamic> generateRoute(RouteSettings settings) {
     switch (settings.name) {
-      case "About":
+      case "menuEapo":
         return MaterialPageRoute(builder: (context) => MenuEAPVScreen());
-      case "Invents":
+      case "menuInvents":
         return MaterialPageRoute(builder: (context) => MenuInvents());
-      case "Designs":
+      case "menuDesigns":
         return MaterialPageRoute(builder: (context) => MenuDesigns());
       default:
         return MaterialPageRoute(builder: (context) => PharmRegistry());

@@ -1,10 +1,5 @@
-import 'package:eapo_mobile_app/CustomNavigation.dart';
-import 'package:eapo_mobile_app/pharma/PharmRegistry.dart';
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
-import 'inner_menu/menuDesigns.dart';
-import 'inner_menu/menuEapv.dart';
-import 'inner_menu/menuInvents.dart';
 
 class HomePage extends StatefulWidget {
   @override
@@ -74,11 +69,7 @@ class _HomePageState extends State<HomePage> {
                       children: <Widget>[
                         TextButton(
                           onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                                  return MenuEAPVScreen();
-                                })
-                            );
+                            Navigator.of(context).pushNamed('/menuEapo');
                           },
                           child: Image(
                               image: AssetImage('assets/images/o_eapv.png'),
@@ -102,11 +93,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return MenuInvents();
-                                        })
-                                    );
+                                    Navigator.of(context).pushNamed('/menuInvents');
                                   },
                                   child: Image(
                                       image: AssetImage('assets/images/izobretenie.png'),
@@ -122,11 +109,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return MenuDesigns();
-                                        })
-                                    );
+                                    Navigator.of(context).pushNamed('/menuDesigns');
                                   },
                                   child: Image(
                                       image: AssetImage('assets/images/promobrazcy.png'),
@@ -146,11 +129,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return PharmRegistry();
-                                        })
-                                    );
+                                    Navigator.of(context).pushNamed('/pharma');
                                   },
                                   child: Image(
                                       image: AssetImage('assets/images/farmreestr.png'),
@@ -265,7 +244,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  // iPhone 12
+  // iPhone 12 pro
   Widget _buildWideContainers() {
     return Container(
       decoration: BoxDecoration(
@@ -308,11 +287,7 @@ class _HomePageState extends State<HomePage> {
                       children: <Widget>[
                         TextButton(
                           onPressed: () {
-                            Navigator.push(context,
-                                MaterialPageRoute(builder: (context) {
-                                  return CustomNavigation(0);
-                                })
-                            );
+                            Navigator.of(context).pushNamed('/menuEapo');
                           },
                           child: Image(
                               image: AssetImage('assets/images/o_eapv.png'),
@@ -336,11 +311,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return MenuInvents();
-                                        })
-                                    );
+                                    Navigator.of(context).pushNamed('/menuInvents');
                                   },
                                   child: Image(
                                       image: AssetImage('assets/images/izobretenie.png'),
@@ -356,11 +327,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return MenuDesigns();
-                                        })
-                                    );
+                                    Navigator.of(context).pushNamed('/menuDesigns');
                                   },
                                   child: Image(
                                       image: AssetImage('assets/images/promobrazcy.png'),
@@ -380,11 +347,7 @@ class _HomePageState extends State<HomePage> {
                               children: [
                                 TextButton(
                                   onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return PharmRegistry();
-                                        })
-                                    );
+                                    Navigator.of(context).pushNamed('/pharma');
                                   },
                                   child: Image(
                                       image: AssetImage('assets/images/farmreestr.png'),
@@ -399,13 +362,7 @@ class _HomePageState extends State<HomePage> {
                           child: Row(
                               children: [
                                 TextButton(
-                                  onPressed: () {
-                                    Navigator.push(context,
-                                        MaterialPageRoute(builder: (context) {
-                                          return PharmRegistry();
-                                        })
-                                    );
-                                  },
+                                  onPressed: () {},
                                   child: Image(
                                       image: AssetImage('assets/images/lichny_cab.png'),
                                       fit: BoxFit.fitWidth

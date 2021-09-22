@@ -30,7 +30,7 @@ class _InventBulletinState extends State<InventBulletin> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: MyWebView(
-          title: "Изобретения",
+          title: "ИЗОБРЕТЕНИЯ",
           selectedUrl: Uri.parse(_url).toString(),
         ),
         bottomNavigationBar: CustomBottomAppBar(

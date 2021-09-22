@@ -31,7 +31,7 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-            title: Text('Получение патента'),
+            title: Text('ПОЛУЧЕНИЕ ПАТЕНТА'),
           ),
           body: Row(
             mainAxisAlignment: MainAxisAlignment.center,

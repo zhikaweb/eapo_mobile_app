@@ -30,7 +30,7 @@ class _DesignDocsState extends State<DesignDocs> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: MyWebView(
-          title: "Промобразцы",
+          title: "ПРОМОБРАЗЦЫ",
           selectedUrl: Uri.parse(_url).toString(),
         ),
         bottomNavigationBar: CustomBottomAppBar(

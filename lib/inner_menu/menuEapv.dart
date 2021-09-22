@@ -54,11 +54,7 @@ class MenuEAPVScreen extends StatelessWidget {
                              foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                          ),
                             onPressed: () {
-                                  Navigator.push(context,
-                                      MaterialPageRoute(builder: (context) {
-                                        return About();
-                                      })
-                                  );
+                              Navigator.of(context).pushNamed('/about');
                                 },
                           child: Text('О ведомстве')
                       ),
@@ -82,11 +78,7 @@ class MenuEAPVScreen extends StatelessWidget {
                           foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                       ),
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                              return MenuGetPatent();
-                            })
-                        );
+                        Navigator.of(context).pushNamed('/getPatent');
                       },
                       child: Text('Процедура получения патента', textAlign: TextAlign.center,)
                     ),
@@ -110,11 +102,7 @@ class MenuEAPVScreen extends StatelessWidget {
                           foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                       ),
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                              return Accounts();
-                            })
-                        );
+                        Navigator.of(context).pushNamed('/accounts');
                       },
                       child: Text('Банковские реквизиты')
                     ),
@@ -137,11 +125,7 @@ class MenuEAPVScreen extends StatelessWidget {
                           foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
                       ),
                       onPressed: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (context) {
-                              return Contacts();
-                            })
-                        );
+                        Navigator.of(context).pushNamed('/contacts');
                       },
                       child: Text('Контакты')
                     ),

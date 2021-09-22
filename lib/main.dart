@@ -1,3 +1,17 @@
+import 'package:eapo_mobile_app/designPages/designBulletin.dart';
+import 'package:eapo_mobile_app/designPages/designDocs.dart';
+import 'package:eapo_mobile_app/designPages/searchPublDesign.dart';
+import 'package:eapo_mobile_app/inner_menu/menuDesigns.dart';
+import 'package:eapo_mobile_app/inner_menu/menuEapv.dart';
+import 'package:eapo_mobile_app/inner_menu/menuInvents.dart';
+import 'package:eapo_mobile_app/inventPages/inventBulletin.dart';
+import 'package:eapo_mobile_app/inventPages/inventDocs.dart';
+import 'package:eapo_mobile_app/inventPages/patentRegistry.dart';
+import 'package:eapo_mobile_app/inventPages/searchPubl.dart';
+import 'package:eapo_mobile_app/pharma/PharmRegistry.dart';
+import 'package:eapo_mobile_app/staticPages/about.dart';
+import 'package:eapo_mobile_app/staticPages/accounts.dart';
+import 'package:eapo_mobile_app/staticPages/contacts.dart';
 import 'package:flutter/material.dart';
 import 'homePage.dart';
 
@@ -10,7 +24,24 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primaryColor: new Color.fromRGBO(30, 111, 165, 1.0)),
       debugShowCheckedModeBanner: false,
       title: 'EAPO-mobile',
-      home: HomePage()
+      home: HomePage(),
+      routes: <String, WidgetBuilder>{
+        '/menuEapo': (BuildContext context) => new MenuEAPVScreen(),
+        '/menuInvents': (BuildContext context) => new MenuInvents(),
+        '/menuDesigns': (BuildContext context) => new MenuDesigns(),
+        '/pharma': (BuildContext context) => new PharmRegistry(),
+        '/about': (BuildContext context) => new About(),
+        '/getPatent': (BuildContext context) => new About(),
+        '/accounts': (BuildContext context) => new Accounts(),
+        '/contacts': (BuildContext context) => new Contacts(),
+        '/inventDocs': (BuildContext context) => new InventDocs(),
+        '/inventBull': (BuildContext context) => new InventBulletin(),
+        '/patentRegistry': (BuildContext context) => new PatentRegistry(),
+        '/searchPubl': (BuildContext context) => new SearchPubl(),
+        '/designDocs': (BuildContext context) => new DesignDocs(),
+        '/designBull': (BuildContext context) => new DesignBulletin(),
+        '/searchPublDesign': (BuildContext context) => new SearchPublDesign(),
+      },
     );
   }
 }
