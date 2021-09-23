@@ -16,7 +16,17 @@ class MyWebView extends StatelessWidget {
 
 
   final Completer<WebViewController> _controller = Completer<WebViewController>();
-  // late WebViewController _controller;
+  late WebViewController controllerGlobal;
+
+  Future<bool> _exitApp(BuildContext context) async{
+    if (await controllerGlobal.canGoBack()) {
+      print('goBack');
+      controllerGlobal.goBack();
+      return Future.value(false);
+    } else {
+      return Future.value(true);
+    }
+  }
 
   MyWebView({
     required this.title,
@@ -25,24 +35,29 @@ class MyWebView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-        appBar: AppBar(
-          title: Text(title),
+    return WillPopScope(
+        child: Scaffold(
+            appBar: AppBar(
+              title: Text(title),
+            ),
+            body: WebView(
+              initialUrl: selectedUrl,
+              javascriptMode: JavascriptMode.unrestricted,
+              onWebViewCreated: (WebViewController webViewController) {
+                // _controller.complete(webViewController);
+                controllerGlobal = webViewController;
+              },
+              userAgent: userAgent,
+              onPageStarted: (String url) {
+                print('Page started loading: $url');
+              },
+              onPageFinished: (String url) {
+                print('Page finished loading: $url');
+              },
+            )
         ),
-        body: WebView(
-          initialUrl: selectedUrl,
-          javascriptMode: JavascriptMode.unrestricted,
-          onWebViewCreated: (WebViewController webViewController) {
-            _controller.complete(webViewController);
-          },
-          userAgent: userAgent,
-          onPageStarted: (String url) {
-            print('Page started loading: $url');
-          },
-          onPageFinished: (String url) {
-            print('Page finished loading: $url');
-          },
-        )
+        onWillPop: () =>
+          _exitApp(context),
     );
   }
 }

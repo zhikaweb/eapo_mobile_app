@@ -51,9 +51,9 @@ class _InventDocsState extends State<InventDocs> {
             if (value == 1){
               Navigator.of(context).pushNamed('/menuEapo');
             }
-            // if (value == 2){
-            //   Navigator.of(context).pushNamed('/menuInvents');
-            // }
+            if (value == 2){
+              Navigator.of(context).pushNamed('/menuInvents');
+            }
             if (value == 3){
               Navigator.of(context).pushNamed('/menuDesigns');
             }

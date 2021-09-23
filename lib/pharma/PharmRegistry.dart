@@ -2,6 +2,7 @@ import 'dart:io';
 
 import 'package:eapo_mobile_app/presentation/icons.dart';
 import 'package:eapo_mobile_app/utils/myWebview.dart';
+import 'package:eapo_mobile_app/utils/webViewPharm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
@@ -34,7 +35,7 @@ class _PharmRegistryState extends State<PharmRegistry> {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
-          title: Text('Фармреестр'),
+          title: Text('ФАРМРЕЕСТР'),
           // leading: IconButton(
           //   icon: Icon(Icons.arrow_back_ios),
           //   onPressed: () { Navigator.of(context).popAndPushNamed('/home'); },
@@ -71,10 +72,9 @@ class _PharmRegistryState extends State<PharmRegistry> {
               new SizedBox(
                 height: 400.0,
                 width: 400.0,
-                child:
-                InAppWebView(
-                  initialUrlRequest: URLRequest(url: Uri.parse(_url)),
-                ),
+                child: WebViewPharm(
+                  selectedUrl: Uri.encodeFull(_url),
+              ),
               )
             ],
           ),

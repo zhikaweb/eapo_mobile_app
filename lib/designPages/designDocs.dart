@@ -54,9 +54,9 @@ class _DesignDocsState extends State<DesignDocs> {
             if (value == 2){
               Navigator.of(context).pushNamed('/menuInvents');
             }
-            // if (value == 3){
-            //   Navigator.of(context).pushNamed('/menuDesigns');
-            // }
+            if (value == 3){
+              Navigator.of(context).pushNamed('/menuDesigns');
+            }
             if (value == 4){
               Navigator.of(context).pushNamed('/pharma');
             }

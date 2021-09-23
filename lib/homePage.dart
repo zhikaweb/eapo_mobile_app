@@ -52,7 +52,8 @@ class _HomePageState extends State<HomePage> {
                     fit: BoxFit.fill
                 ),
               ),
-              backgroundColor: new Color.fromRGBO(30, 111, 165, 1.0)
+              backgroundColor: new Color.fromRGBO(30, 111, 165, 1.0),
+              automaticallyImplyLeading: false,
           ),
           body: Center(
               child: Padding(

@@ -3,6 +3,7 @@ import 'package:eapo_mobile_app/designPages/designDocs.dart';
 import 'package:eapo_mobile_app/designPages/searchPublDesign.dart';
 import 'package:eapo_mobile_app/inner_menu/menuDesigns.dart';
 import 'package:eapo_mobile_app/inner_menu/menuEapv.dart';
+import 'package:eapo_mobile_app/inner_menu/menuGetPatent.dart';
 import 'package:eapo_mobile_app/inner_menu/menuInvents.dart';
 import 'package:eapo_mobile_app/inventPages/inventBulletin.dart';
 import 'package:eapo_mobile_app/inventPages/inventDocs.dart';
@@ -32,7 +33,7 @@ class MyApp extends StatelessWidget {
         '/menuDesigns': (BuildContext context) => new MenuDesigns(),
         '/pharma': (BuildContext context) => new PharmRegistry(),
         '/about': (BuildContext context) => new About(),
-        '/getPatent': (BuildContext context) => new About(),
+        '/getPatent': (BuildContext context) => new MenuGetPatent(),
         '/accounts': (BuildContext context) => new Accounts(),
         '/contacts': (BuildContext context) => new Contacts(),
         '/inventDocs': (BuildContext context) => new InventDocs(),
