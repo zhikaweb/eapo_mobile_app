@@ -26,6 +26,10 @@ class MenuEAPVScreen extends StatelessWidget {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text('О ЕАПВ'),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () { Navigator.of(context).popAndPushNamed('/home'); },
+          ),
         ),
         body: Row(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -142,8 +146,22 @@ class MenuEAPVScreen extends StatelessWidget {
           onTabSelected: (value) {
             final routes = ["/home", "/menuEapo", "/menuInvents", "/menuDesigns", "/pharma"];
             _currentIndex = value;
-            Navigator.of(context).pushNamedAndRemoveUntil(
-                routes[value], (route) => false);
+            // Navigator.of(context).pushNamedAndRemoveUntil(
+            //     routes[value], (route) => false);
+            if (value == 0){
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  routes[value], (route) => false);
+            }
+            if (value == 2){
+              Navigator.of(context).pushNamed('/menuInvents');
+            }
+            if (value == 3){
+              Navigator.of(context).pushNamed('/menuDesigns');
+            }
+            if (value == 4){
+              Navigator.of(context).pushNamed('/pharma');
+            }
+
           },
           items: [
             CustomBottomAppBarItem(iconData: MyFlutterApp.home),

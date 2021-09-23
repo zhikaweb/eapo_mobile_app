@@ -33,6 +33,10 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
             title: Text('ПОЛУЧЕНИЕ ПАТЕНТА'),
+            // leading: IconButton(
+            //   icon: Icon(Icons.arrow_back_ios),
+            //   onPressed: () { Navigator.of(context).popAndPushNamed('/home'); },
+            // ),
           ),
           body: Row(
             mainAxisAlignment: MainAxisAlignment.center,
@@ -176,8 +180,22 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
             onTabSelected: (value) {
               final routes = ["/home", "/menuEapo", "/menuInvents", "/menuDesigns", "/pharma"];
               _currentIndex = value;
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  routes[value], (route) => false);
+              if (value == 0){
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    routes[value], (route) => false);
+              }
+              if (value == 1){
+                Navigator.of(context).pushNamed('/menuEapo');
+              }
+              if (value == 2){
+                Navigator.of(context).pushNamed('/menuInvents');
+              }
+              if (value == 3){
+                Navigator.of(context).pushNamed('/menuDesigns');
+              }
+              if (value == 4){
+                Navigator.of(context).pushNamed('/pharma');
+              }
             },
             items: [
               CustomBottomAppBarItem(iconData: MyFlutterApp.home),

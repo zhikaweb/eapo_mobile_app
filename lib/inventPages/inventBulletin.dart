@@ -13,6 +13,7 @@ class InventBulletin extends StatefulWidget {
 
 class _InventBulletinState extends State<InventBulletin> {
   final _url = 'https://www.eapo.org/ru/?publs=bulletin&amp;mode=m';
+  int _currentIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -37,8 +38,29 @@ class _InventBulletinState extends State<InventBulletin> {
           color: Colors.white,
           backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
           selectedColor: Colors.white,
-//          notchedShape: null,
-//          onTabSelected: _onTapped,
+          notchedShape: CircularNotchedRectangle(),
+          onTabSelected: (value) {
+            final routes = ["/home", "/menuEapo", "/menuInvents", "/menuDesigns", "/pharma"];
+            _currentIndex = value;
+            // Navigator.of(context).pushNamedAndRemoveUntil(
+            //     routes[value], (route) => false);
+            if (value == 0){
+              Navigator.of(context).pushNamedAndRemoveUntil(
+                  routes[value], (route) => false);
+            }
+            if (value == 1){
+              Navigator.of(context).pushNamed('/menuEapo');
+            }
+            // if (value == 2){
+            //   Navigator.of(context).pushNamed('/menuInvents');
+            // }
+            if (value == 3){
+              Navigator.of(context).pushNamed('/menuDesigns');
+            }
+            if (value == 4){
+              Navigator.of(context).pushNamed('/pharma');
+            }
+          },
           items: [
             CustomBottomAppBarItem(iconData: MyFlutterApp.home),
             CustomBottomAppBarItem(iconData: MyFlutterApp.eye),

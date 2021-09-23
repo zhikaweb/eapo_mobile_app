@@ -30,11 +30,7 @@ class MyWebView extends StatelessWidget {
           title: Text(title),
         ),
         body: WebView(
-          // initialUrl: "https://www.eapo.org/ru",
-          // initialUrl: "https://www.google.com",
-          // initialUrl: Uri.parse(selectedUrl).toString(),
           initialUrl: selectedUrl,
-          // debuggingEnabled: true,
           javascriptMode: JavascriptMode.unrestricted,
           onWebViewCreated: (WebViewController webViewController) {
             _controller.complete(webViewController);
