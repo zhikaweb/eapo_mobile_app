@@ -14,6 +14,7 @@ import 'package:eapo_mobile_app/staticPages/about.dart';
 import 'package:eapo_mobile_app/staticPages/accounts.dart';
 import 'package:eapo_mobile_app/staticPages/contacts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'homePage.dart';
 
 void main() => runApp(MyApp());
@@ -21,6 +22,9 @@ void main() => runApp(MyApp());
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.portraitUp, DeviceOrientation.portraitDown
+    ]);
     return MaterialApp(
       theme: ThemeData(primaryColor: new Color.fromRGBO(30, 111, 165, 1.0)),
       debugShowCheckedModeBanner: false,
