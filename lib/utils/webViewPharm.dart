@@ -24,7 +24,7 @@ class WebViewPharm extends StatelessWidget {
   }
 
   WebViewPharm({
-    required this.selectedUrl,
+    required this.selectedUrl
   });
 
   @override

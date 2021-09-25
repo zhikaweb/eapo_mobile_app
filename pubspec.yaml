@@ -32,6 +32,8 @@ dependencies:
   url_launcher: ^6.0.9
   flutter_webview_plugin: ^0.4.0
   flutter_inappwebview: ^5.3.2
+  windows1251: ^0.0.3
+  enough_convert: ^1.4.0
 
 dev_dependencies:
   flutter_test:

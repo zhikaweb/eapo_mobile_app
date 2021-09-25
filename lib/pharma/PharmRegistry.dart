@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 
 import 'package:eapo_mobile_app/presentation/icons.dart';
@@ -6,6 +7,8 @@ import 'package:eapo_mobile_app/utils/webViewPharm.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:webview_flutter/webview_flutter.dart';
+// import 'package:windows1251/windows1251.dart';
+import 'package:enough_convert/enough_convert.dart';
 
 import '../presentation/customBottomAppBar.dart';
 
@@ -15,9 +18,25 @@ class PharmRegistry extends StatefulWidget {
 }
 
 class _PharmRegistryState extends State<PharmRegistry> {
-  final _url = 'https://www.eapo.org/ru/mobile/sfarma.php';
+  String _url = 'https://www.eapo.org/ru/mobile/sfarma.php';
+  String _urlSearch = 'https://www.eapo.org/ru/mobile/sfarma.php?SEARCH%5Bfarma%5D=';
   late String _searchRequest;
   int _currentIndex = 0;
+  TextEditingController _textEditingController = TextEditingController();
+  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+
+  late InAppWebViewController _controller;
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
+  @override
+  void dispose() {
+    _textEditingController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -41,65 +60,100 @@ class _PharmRegistryState extends State<PharmRegistry> {
           //   onPressed: () { Navigator.of(context).popAndPushNamed('/home'); },
           // ),
         ),
-        body: Container(
-          height: 600,
-          child: Column(
+        body: Column(
             children: [
-              Form(
-                child: Container(
-                  height: 100,
-                  child: Column(
-                    children: [
-                      TextFormField(
-                        onSaved: (value) {
-                          this._searchRequest = value!;
-                          print(this._searchRequest);
-                        },
-                        decoration: InputDecoration(
-                          hintText: 'VAR'
+              Column(
+                children: [
+                  Container(
+                      child: Form(
+                        key: _globalKey,
+                        child: Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 0,
+                                right: 0,
+                                top: 10,
+                                bottom: 10,
+                              ),
+                              child: SizedBox(
+                                width: 200,
+                                height: 40,
+                                child: TextFormField(
+                                  controller: _textEditingController,
+                                  decoration: InputDecoration(
+                                    border: OutlineInputBorder(),
+                                  ),
+                                  showCursor: true,
+                                  onSaved: (value) {
+                                    _searchRequest = value!;
+                                  },
+                                ),
+                              ),
+                            ),
+                            Padding(
+                              padding: EdgeInsets.only(
+                                left: 0,
+                                right: 0,
+                                top: 10,
+                                bottom: 10,
+                              ),
+                              child: SizedBox(
+                                width: 100,
+                                child: ElevatedButton(
+                                    child: Text('Поиск'),
+                                    onPressed: () {
+                                      _search();
+                                    }
+                                ),
+                              ),
+                            )
+                          ],
                         ),
-                      ),
-                      ElevatedButton(
-                        child: Text('Поиск'),
-                        onPressed: () {
-                          print('valid');
-                        }
-                      ),
-                    ],
+                      )
                   ),
-                )
+                  Container(
+                    height: 500,
+                    padding: EdgeInsets.all(5),
+                    child: InAppWebView(
+                      initialUrlRequest: URLRequest(url: Uri.parse(_url)),
+                      onWebViewCreated: (controller) {
+                        _controller = controller;
+                      },
+                    ),
+                  )
+                ],
               ),
-              new SizedBox(
-                height: 400.0,
-                width: 400.0,
-                child: WebViewPharm(
-                  selectedUrl: Uri.encodeFull(_url),
-              ),
-              )
-            ],
-          ),
+            ]
         ),
         bottomNavigationBar: CustomBottomAppBar(
           color: Colors.white,
           backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
           selectedColor: Colors.white,
-//          notchedShape: null,
+          notchedShape: CircularNotchedRectangle(),
           onTabSelected: (value) {
-            final routes = ["/home", "/menuEapo", "/menuInvents", "/menuDesigns", "/pharma"];
+            final routes = [
+              "/home",
+              "/menuEapo",
+              "/menuInvents",
+              "/menuDesigns",
+              "/pharma"
+            ];
             _currentIndex = value;
             // Navigator.of(context).pushNamedAndRemoveUntil(
             //     routes[value], (route) => false);
-            if (value == 0){
+            if (value == 0) {
               Navigator.of(context).pushNamedAndRemoveUntil(
                   routes[value], (route) => false);
             }
-            if (value == 1){
+            if (value == 1) {
               Navigator.of(context).pushNamed('/menuEapo');
             }
-            if (value == 2){
+            if (value == 2) {
               Navigator.of(context).pushNamed('/menuInvents');
             }
-            if (value == 3){
+            if (value == 3) {
               Navigator.of(context).pushNamed('/menuDesigns');
             }
             // if (value == 4){
@@ -118,4 +172,24 @@ class _PharmRegistryState extends State<PharmRegistry> {
       ),
     );
   }
+
+  void _search() {
+    if (_globalKey.currentState!.validate()) {
+      _globalKey.currentState!.save();
+      // print(_searchRequest);
+      final codec = const Windows1251Codec(allowInvalid: false);
+      final encoded = codec.encode(_searchRequest);
+      // print(encoded);
+      // print(Uri.dataFromBytes(encoded, mimeType: '', percentEncoded: true));
+
+      var data = Uri.dataFromBytes(encoded, mimeType: '', percentEncoded: true);
+      print(data.data!.contentText);
+      var encodedData = data.data!.contentText;
+
+      _controller.loadUrl(
+          urlRequest: URLRequest(url: Uri.parse(_urlSearch + encodedData)));
+      print(Uri.parse(_urlSearch + encodedData));
+    }
+  }
+
 }
