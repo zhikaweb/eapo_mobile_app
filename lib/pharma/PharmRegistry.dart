@@ -188,7 +188,7 @@ class _PharmRegistryState extends State<PharmRegistry> {
 
       _controller.loadUrl(
           urlRequest: URLRequest(url: Uri.parse(_urlSearch + encodedData)));
-      print(Uri.parse(_urlSearch + encodedData));
+      // print(Uri.parse(_urlSearch + encodedData));
     }
   }
 
