@@ -15,6 +15,7 @@ import 'package:eapo_mobile_app/staticPages/accounts.dart';
 import 'package:eapo_mobile_app/staticPages/contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'HomePage2.dart';
 import 'homePage.dart';
 
 void main() => runApp(MyApp());

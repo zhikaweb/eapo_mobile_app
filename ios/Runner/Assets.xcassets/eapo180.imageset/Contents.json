@@ -1,14 +1,17 @@
 {
   "images" : [
     {
+      "filename" : "eapo180.png",
       "idiom" : "universal",
       "scale" : "1x"
     },
     {
+      "filename" : "eapo180-1.png",
       "idiom" : "universal",
       "scale" : "2x"
     },
     {
+      "filename" : "eapo180-2.png",
       "idiom" : "universal",
       "scale" : "3x"
     }

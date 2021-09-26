@@ -34,6 +34,7 @@ dependencies:
   flutter_inappwebview: ^5.3.2
   windows1251: ^0.0.3
   enough_convert: ^1.4.0
+  flutter_svg : ^0.22.0
 
 dev_dependencies:
   flutter_test:
@@ -53,6 +54,7 @@ flutter:
   # To add assets to your application, add an assets section, like this:
   assets:
     - assets/images/
+    - assets/images/logo_main.svg
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -55,10 +55,12 @@ class _PharmRegistryState extends State<PharmRegistry> {
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text('ФАРМРЕЕСТР'),
-          // leading: IconButton(
-          //   icon: Icon(Icons.arrow_back_ios),
-          //   onPressed: () { Navigator.of(context).popAndPushNamed('/home'); },
-          // ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () {
+              Navigator.of(context).popAndPushNamed('/home');
+            },
+          ),
         ),
         body: Column(
             children: [
