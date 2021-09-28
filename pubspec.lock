@@ -156,11 +156,25 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.0.1"
+  sizer_mod:
+    dependency: "direct main"
+    description:
+      name: sizer_mod
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.0.1"
   sky_engine:
     dependency: transitive
     description: flutter
     source: sdk
     version: "0.0.99"
+  smooth_page_indicator:
+    dependency: transitive
+    description:
+      name: smooth_page_indicator
+      url: "https://pub.dartlang.org"
+    source: hosted
+    version: "0.2.3"
   source_span:
     dependency: transitive
     description:

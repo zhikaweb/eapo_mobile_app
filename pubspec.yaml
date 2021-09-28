@@ -35,6 +35,7 @@ dependencies:
   windows1251: ^0.0.3
   enough_convert: ^1.4.0
   flutter_svg : ^0.22.0
+  sizer_mod: ^0.0.1
 
 dev_dependencies:
   flutter_test:
