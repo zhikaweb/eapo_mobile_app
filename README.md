@@ -1,16 +1,16 @@
 # eapo_mobile_app
-
-EAPO-mobile application
-
-## Getting Started
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://flutter.dev/docs/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://flutter.dev/docs/cookbook)
-
-For help getting started with Flutter, view our
-[online documentation](https://flutter.dev/docs), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Гайд по сборке IOS-модуля.
+1. Открыть IOS-модуль в XCode (правая кнопка -> Flutter -> open IOS module in XCode)
+2. В левой части окна XCode выбираем Runner (корневая папка).
+3. Во вкладке General установить номер версии и номер сборки, остальные настройки не трогать
+4. В верхнем меню выбрать Product -> Archive. Запустится компилятор,
+его состояние можно отследить в верхнем поле status bar.
+5. После того, как сборка окончена, появится окно с версиями сборок, в нем будет автоматически выбрана последняя.
+Нажать Validate App и по мере появления - Next, Next, Next.
+6. После того, как появится сообщение, что сборка успешно провалидирована,
+нажать Distribute App и далее - Next, Next, Next, Upload.
+7. После подтверждения, что приложение успешно загружено, его можно посмотреть в AppStoreConnect, в TestFlight.
+8. После проверки сборки в TestFlight нужно подтвердить,
+что оно соответствует экспертным требованиям и нажать "Начать внутреннее тестирование".
+После этого приложение становится доступно всем внутренним разработчикам, приходит push-уведомление.
+Далее приложение можно публиковать в AppStore.
