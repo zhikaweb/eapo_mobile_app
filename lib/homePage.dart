@@ -443,13 +443,13 @@ class _HomePageState extends State<HomePage> {
                                 top: 568,
                                 left: 91,
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow : [BoxShadow(
-                                        color: Color.fromRGBO(255, 255, 255, 0.4000000059604645),
-                                        offset: Offset(0,0),
-                                        blurRadius: 16
-                                    )],
-                                  ),
+                                  // decoration: BoxDecoration(
+                                  //   boxShadow : [BoxShadow(
+                                  //       color: Color.fromRGBO(255, 255, 255, 0.4000000059604645),
+                                  //       offset: Offset(0,0),
+                                  //       blurRadius: 16
+                                  //   )],
+                                  // ),
                                   padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -962,13 +962,13 @@ class _HomePageState extends State<HomePage> {
                                 top: 628,
                                 left: 111,
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow : [BoxShadow(
-                                        color: Color.fromRGBO(255, 255, 255, 0.4000000059604645),
-                                        offset: Offset(0,0),
-                                        blurRadius: 16
-                                    )],
-                                  ),
+                                  // decoration: BoxDecoration(
+                                  //   boxShadow : [BoxShadow(
+                                  //       color: Color.fromRGBO(255, 255, 255, 0.4000000059604645),
+                                  //       offset: Offset(0,0),
+                                  //       blurRadius: 16
+                                  //   )],
+                                  // ),
                                   padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -1481,13 +1481,13 @@ class _HomePageState extends State<HomePage> {
                                 top: 688,
                                 left: 91,
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow : [BoxShadow(
-                                        color: Color.fromRGBO(255, 255, 255, 0.4000000059604645),
-                                        offset: Offset(0,0),
-                                        blurRadius: 16
-                                    )],
-                                  ),
+                                  // decoration: BoxDecoration(
+                                  //   boxShadow : [BoxShadow(
+                                  //       color: Color.fromRGBO(255, 255, 255, 0.4000000059604645),
+                                  //       offset: Offset(0,0),
+                                  //       blurRadius: 16
+                                  //   )],
+                                  // ),
                                   padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -2000,13 +2000,13 @@ class _HomePageState extends State<HomePage> {
                                 top: 718,
                                 left: 91,
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow : [BoxShadow(
-                                        color: Color.fromRGBO(255, 255, 255, 0.4000000059604645),
-                                        offset: Offset(0,0),
-                                        blurRadius: 16
-                                    )],
-                                  ),
+                                  // decoration: BoxDecoration(
+                                  //   boxShadow : [BoxShadow(
+                                  //       color: Color.fromRGBO(255, 255, 255, 0.4000000059604645),
+                                  //       offset: Offset(0,0),
+                                  //       blurRadius: 16
+                                  //   )],
+                                  // ),
                                   padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -2519,13 +2519,13 @@ class _HomePageState extends State<HomePage> {
                                 top: 748,
                                 left: 91,
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow : [BoxShadow(
-                                        color: Color.fromRGBO(255, 255, 255, 0.4000000059604645),
-                                        offset: Offset(0,0),
-                                        blurRadius: 16
-                                    )],
-                                  ),
+                                  // decoration: BoxDecoration(
+                                  //   boxShadow : [BoxShadow(
+                                  //       color: Color.fromRGBO(255, 255, 255, 0.4000000059604645),
+                                  //       offset: Offset(0,0),
+                                  //       blurRadius: 16
+                                  //   )],
+                                  // ),
                                   padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
                                   child: Row(
                                     mainAxisSize: MainAxisSize.min,
@@ -3066,15 +3066,15 @@ class _HomePageState extends State<HomePage> {
                                 top: 748,
                                 left: 321,
                                 child: Container(
-                                  decoration: BoxDecoration(
-                                    boxShadow: [BoxShadow(
-                                        color: Color.fromRGBO(
-                                            255, 255, 255, 0.4000000059604645),
-                                        offset: Offset(0, 0),
-                                        blurRadius: 16
-                                    )
-                                    ],
-                                  ),
+                                  // decoration: BoxDecoration(
+                                  //   boxShadow: [BoxShadow(
+                                  //       color: Color.fromRGBO(
+                                  //           255, 255, 255, 0.4000000059604645),
+                                  //       offset: Offset(0, 0),
+                                  //       blurRadius: 16
+                                  //   )
+                                  //   ],
+                                  // ),
                                   padding: EdgeInsets.symmetric(
                                       horizontal: 0, vertical: 0),
                                   child: Row(
@@ -3085,7 +3085,7 @@ class _HomePageState extends State<HomePage> {
                                           width: 48,
                                           height: 48,
                                           decoration: BoxDecoration(
-                                            color: Colors.transparent,
+                                            // color: Colors.transparent,
                                           ),
                                           child: Stack(
                                               children: <Widget>[
@@ -3110,7 +3110,7 @@ class _HomePageState extends State<HomePage> {
                                           width: 48,
                                           height: 48,
                                           decoration: BoxDecoration(
-                                            color: Colors.transparent,
+                                            // color: Colors.transparent,
                                           ),
                                           child: Stack(
                                               children: <Widget>[
@@ -3135,7 +3135,7 @@ class _HomePageState extends State<HomePage> {
                                           width: 48,
                                           height: 48,
                                           decoration: BoxDecoration(
-                                            color: Colors.transparent,
+                                            // color: Colors.transparent,
                                           ),
                                           child: Stack(
                                               children: <Widget>[
