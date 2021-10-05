@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 
 class CustomBottomAppBarItem {
-  CustomBottomAppBarItem({this.iconData, this.text});
-  IconData? iconData;
+  CustomBottomAppBarItem({required this.iconData, this.text});
+  Widget iconData;
   String? text;
 }
 
@@ -84,7 +84,7 @@ class CustomBottomAppBarState extends State<CustomBottomAppBar> {
               mainAxisSize: MainAxisSize.min,
               mainAxisAlignment: MainAxisAlignment.center,
               children: <Widget>[
-                Icon(item!.iconData, color: color, size: widget.iconSize),
+                item!.iconData,
               ],
             ),
           ),

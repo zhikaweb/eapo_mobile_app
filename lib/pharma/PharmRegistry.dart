@@ -21,7 +21,7 @@ class _PharmRegistryState extends State<PharmRegistry> {
   String _url = 'https://www.eapo.org/ru/mobile/sfarma.php';
   String _urlSearch = 'https://www.eapo.org/ru/mobile/sfarma.php?SEARCH%5Bfarma%5D=';
   late String _searchRequest;
-  int _currentIndex = 0;
+  int _currentIndex = 4;
   TextEditingController _textEditingController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
@@ -129,48 +129,70 @@ class _PharmRegistryState extends State<PharmRegistry> {
               ),
             ]
         ),
-        bottomNavigationBar: CustomBottomAppBar(
-          color: Colors.white,
-          backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
-          selectedColor: Colors.white,
-          notchedShape: CircularNotchedRectangle(),
-          onTabSelected: (value) {
-            final routes = [
-              "/home",
-              "/menuEapo",
-              "/menuInvents",
-              "/menuDesigns",
-              "/pharma"
-            ];
-            _currentIndex = value;
-            // Navigator.of(context).pushNamedAndRemoveUntil(
-            //     routes[value], (route) => false);
-            if (value == 0) {
-              Navigator.of(context).pushNamedAndRemoveUntil(
-                  routes[value], (route) => false);
-            }
-            if (value == 1) {
-              Navigator.of(context).pushNamed('/menuEapo');
-            }
-            if (value == 2) {
-              Navigator.of(context).pushNamed('/menuInvents');
-            }
-            if (value == 3) {
-              Navigator.of(context).pushNamed('/menuDesigns');
-            }
-            // if (value == 4){
-            //   Navigator.of(context).pushNamed('/pharma');
-            // }
-          },
-          items: [
-            CustomBottomAppBarItem(iconData: MyFlutterApp.home),
-            CustomBottomAppBarItem(iconData: MyFlutterApp.eye),
-            CustomBottomAppBarItem(iconData: MyFlutterApp.invents),
-            CustomBottomAppBarItem(iconData: MyFlutterApp.designs),
-            CustomBottomAppBarItem(iconData: MyFlutterApp.pharma),
-            CustomBottomAppBarItem(iconData: MyFlutterApp.key)
-          ],
-        ),
+        bottomNavigationBar: ClipRRect(
+          borderRadius: BorderRadius.only(
+            topLeft: Radius.circular(16.0),
+            topRight: Radius.circular(16.0)
+            ),
+          child: CustomBottomAppBar(
+            color: Colors.white,
+            backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
+            selectedColor: Colors.white,
+            notchedShape: CircularNotchedRectangle(),
+            onTabSelected: (value) {
+              final routes = [
+                "/home",
+                "/menuEapo",
+                "/menuInvents",
+                "/menuDesigns",
+                "/pharma"
+              ];
+              _currentIndex = value;
+              // Navigator.of(context).pushNamedAndRemoveUntil(
+              //     routes[value], (route) => false);
+              if (value == 0) {
+                Navigator.of(context).pushNamedAndRemoveUntil(
+                    routes[value], (route) => false);
+              }
+              if (value == 1) {
+                Navigator.of(context).pushNamed('/menuEapo');
+              }
+              if (value == 2) {
+                Navigator.of(context).pushNamed('/menuInvents');
+              }
+              if (value == 3) {
+                Navigator.of(context).pushNamed('/menuDesigns');
+              }
+              // if (value == 4){
+              //   Navigator.of(context).pushNamed('/pharma');
+              // }
+            },
+            items: [
+              CustomBottomAppBarItem(iconData: _currentIndex == 0 ? Image(
+                image: AssetImage("assets/images/home_active.png"),
+              ) :   Image(
+                image: AssetImage("assets/images/home.png"),
+              )),
+              CustomBottomAppBarItem(iconData: Image(
+                image: AssetImage("assets/images/eye.png"),
+              )),
+              CustomBottomAppBarItem(iconData: Image(
+                image: AssetImage("assets/images/atom.png"),
+              )),
+              CustomBottomAppBarItem(iconData: Image(
+                image: AssetImage("assets/images/game.png"),
+              )),
+              CustomBottomAppBarItem(iconData: _currentIndex == 4 ? Image(
+                image: AssetImage("assets/images/pill_active.png"),
+              ) :  Image(
+                image: AssetImage("assets/images/pill.png"),
+              )),
+              CustomBottomAppBarItem(iconData: Image(
+                image: AssetImage("assets/images/key.png"),
+              ))
+            ],
+          ),
+        )
       ),
     );
   }
