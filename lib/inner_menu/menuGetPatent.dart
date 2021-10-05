@@ -49,13 +49,13 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                   Container(
                     margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
                     child: SizedBox (
-                      width: 232,
-                      height: 56,
+                      width: MediaQuery.of(context).size.width - 32,
+                      height: 60,
                       child: ElevatedButton(
                         style: ButtonStyle(
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)
+                                  borderRadius: BorderRadius.circular(8)
                               )
                           ),
                           backgroundColor: MaterialStateProperty.all(
@@ -66,7 +66,7 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                           onPressed: () {
                             _launchUrl(listUrl[0]);
                           },
-                          child: Text('Патентовать или не патентовать', textAlign: TextAlign.center),
+                          child: Text('Патентовать или не патентовать', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
                           // textColor: Color.fromRGBO(30, 111, 165, 1.0)
                       ),
                     ),
@@ -74,13 +74,13 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                   Container(
                     margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
                     child: SizedBox (
-                      width: 232,
-                      height: 56,
+                      width: MediaQuery.of(context).size.width - 32,
+                      height: 60,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4)
+                                    borderRadius: BorderRadius.circular(8)
                                 )
                             ),
                             backgroundColor: MaterialStateProperty.all(
@@ -91,20 +91,20 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                         onPressed: () {
                           _launchUrl(listUrl[1]);
                         },
-                        child: Text('Пять шагов к Евразийскому патенту', textAlign: TextAlign.center,),
+                        child: Text('Пять шагов к Евразийскому патенту', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
                       ),
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
                     child: SizedBox (
-                      width: 232,
-                      height: 56,
+                      width: MediaQuery.of(context).size.width - 32,
+                      height: 60,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4)
+                                    borderRadius: BorderRadius.circular(8)
                                 )
                             ),
                             backgroundColor: MaterialStateProperty.all(
@@ -115,20 +115,20 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                         onPressed: () {
                           _launchUrl(listUrl[2]);
                         },
-                        child: Text('Как получить Евразийский патент', textAlign: TextAlign.center),
+                        child: Text('Как получить Евразийский патент', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
                       ),
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
                     child: SizedBox (
-                      width: 232,
-                      height: 56,
+                      width: MediaQuery.of(context).size.width - 32,
+                      height: 60,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4)
+                                    borderRadius: BorderRadius.circular(8)
                                 )
                             ),
                             backgroundColor: MaterialStateProperty.all(
@@ -140,19 +140,19 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                           _launchUrl(listUrl[3]);
                         },
                         child: Text('Получение Евразийского патента по процедуре РСТ',
-                            textAlign: TextAlign.center),
+                            textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
                       ),
                     ),
                   ),
                   Container(
                     child: SizedBox (
-                      width: 232,
-                      height: 56,
+                      width: MediaQuery.of(context).size.width - 32,
+                      height: 60,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4)
+                                    borderRadius: BorderRadius.circular(8)
                                 )
                             ),
                             backgroundColor: MaterialStateProperty.all(
@@ -164,7 +164,7 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                           _launchUrl(listUrl[4]);
                         },
                         child: Text('Как подать евразийскую заявку',
-                            textAlign: TextAlign.center),
+                            textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
                       ),
                     ),
                   ),

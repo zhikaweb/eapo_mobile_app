@@ -46,15 +46,15 @@ class _MenuDesignsState extends State<MenuDesigns> {
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
+                    padding: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
                     child: SizedBox (
-                      width: 232,
-                      height: 56,
+                      width: MediaQuery.of(context).size.width - 32,
+                      height: 60,
                       child: ElevatedButton(
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4)
+                                      borderRadius: BorderRadius.circular(8)
                                   )
                               ),
                               backgroundColor: MaterialStateProperty.all(
@@ -65,20 +65,20 @@ class _MenuDesignsState extends State<MenuDesigns> {
                           onPressed: () {
                             Navigator.of(context).pushNamed('/designDocs');
                           },
-                          child: Text('Нормативные правовые акты', textAlign: TextAlign.center)
+                          child: Text('Нормативные правовые акты', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
                       ),
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
                     child: SizedBox (
-                      width: 232,
-                      height: 56,
+                      width: MediaQuery.of(context).size.width - 32,
+                      height: 60,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4)
+                                    borderRadius: BorderRadius.circular(8)
                                 )
                             ),
                             backgroundColor: MaterialStateProperty.all(
@@ -89,19 +89,19 @@ class _MenuDesignsState extends State<MenuDesigns> {
                         onPressed: () {
                           Navigator.of(context).pushNamed('/designBull');
                         },
-                        child: Text('Бюллетень', textAlign: TextAlign.center,)
+                        child: Text('Бюллетень', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
                       ),
                     ),
                   ),
                   Container(
                     child: SizedBox (
-                      width: 232,
-                      height: 56,
+                      width: MediaQuery.of(context).size.width - 32,
+                      height: 60,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4)
+                                    borderRadius: BorderRadius.circular(8)
                                 )
                             ),
                             backgroundColor: MaterialStateProperty.all(
@@ -112,7 +112,7 @@ class _MenuDesignsState extends State<MenuDesigns> {
                         onPressed: () {
                           Navigator.of(context).pushNamed('/searchPublDesign');
                         },
-                        child: Text('Поиск публикаций', textAlign: TextAlign.center)
+                        child: Text('Поиск публикаций', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
                       ),
                     ),
                   ),

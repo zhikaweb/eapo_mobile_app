@@ -41,15 +41,15 @@ class MenuEAPVScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
+                  padding: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
                    child: SizedBox (
-                      width: 232,
-                      height: 56,
+                     width: MediaQuery.of(context).size.width - 32,
+                      height: 60,
                      child: ElevatedButton(
                          style: ButtonStyle(
                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                  RoundedRectangleBorder(
-                                     borderRadius: BorderRadius.circular(4)
+                                     borderRadius: BorderRadius.circular(8)
                                  )
                              ),
                              backgroundColor: MaterialStateProperty.all(
@@ -60,20 +60,20 @@ class MenuEAPVScreen extends StatelessWidget {
                             onPressed: () {
                               Navigator.of(context).pushNamed('/about');
                                 },
-                          child: Text('О ведомстве')
+                          child: Text('О ведомстве', style: TextStyle(fontSize: 20),)
                       ),
                     ),
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
                   child: SizedBox (
-                    width: 232,
-                    height: 56,
+                    width: MediaQuery.of(context).size.width - 32,
+                    height: 60,
                     child: ElevatedButton(
                       style: ButtonStyle(
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)
+                                  borderRadius: BorderRadius.circular(8)
                               )
                           ),
                           backgroundColor: MaterialStateProperty.all(
@@ -84,20 +84,20 @@ class MenuEAPVScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).pushNamed('/getPatent');
                       },
-                      child: Text('Процедура получения патента', textAlign: TextAlign.center,)
+                      child: Text('Процедура получения патента', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
                     ),
                   ),
                 ),
                 Container(
                   margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
                   child: SizedBox (
-                    width: 232,
-                    height: 56,
+                    width: MediaQuery.of(context).size.width - 32,
+                    height: 60,
                     child: ElevatedButton(
                       style: ButtonStyle(
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)
+                                  borderRadius: BorderRadius.circular(8)
                               )
                           ),
                           backgroundColor: MaterialStateProperty.all(
@@ -108,19 +108,19 @@ class MenuEAPVScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).pushNamed('/accounts');
                       },
-                      child: Text('Банковские реквизиты')
+                      child: Text('Банковские реквизиты', style: TextStyle(fontSize: 20),)
                     ),
                   ),
                 ),
                 Container(
                   child: SizedBox (
-                    width: 232,
-                    height: 56,
+                    width: MediaQuery.of(context).size.width - 32,
+                    height: 60,
                     child: ElevatedButton(
                       style: ButtonStyle(
                           shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                               RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(4)
+                                  borderRadius: BorderRadius.circular(8)
                               )
                           ),
                           backgroundColor: MaterialStateProperty.all(
@@ -131,7 +131,7 @@ class MenuEAPVScreen extends StatelessWidget {
                       onPressed: () {
                         Navigator.of(context).pushNamed('/contacts');
                       },
-                      child: Text('Контакты')
+                      child: Text('Контакты', style: TextStyle(fontSize: 20),)
                     ),
                   ),
                 ),

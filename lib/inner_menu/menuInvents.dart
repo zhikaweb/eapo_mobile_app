@@ -48,13 +48,13 @@ class _MenuInventsState extends State<MenuInvents> {
                   Container(
                     margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
                     child: SizedBox (
-                      width: 232,
-                      height: 56,
+                      width: MediaQuery.of(context).size.width - 32,
+                      height: 60,
                       child: ElevatedButton(
                           style: ButtonStyle(
                               shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                   RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(4)
+                                      borderRadius: BorderRadius.circular(8)
                                   )
                               ),
                               backgroundColor: MaterialStateProperty.all(
@@ -65,20 +65,20 @@ class _MenuInventsState extends State<MenuInvents> {
                           onPressed: () {
                             Navigator.of(context).pushNamed('/inventDocs');
                           },
-                          child: Text('Нормативные правовые акты', textAlign: TextAlign.center)
+                          child: Text('Нормативные правовые акты', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
                       ),
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
                     child: SizedBox (
-                      width: 232,
-                      height: 56,
+                      width: MediaQuery.of(context).size.width - 32,
+                      height: 60,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4)
+                                    borderRadius: BorderRadius.circular(8)
                                 )
                             ),
                             backgroundColor: MaterialStateProperty.all(
@@ -89,20 +89,20 @@ class _MenuInventsState extends State<MenuInvents> {
                         onPressed: () {
                           Navigator.of(context).pushNamed('/inventBull');
                         },
-                        child: Text('Бюллетень', textAlign: TextAlign.center,)
+                        child: Text('Бюллетень', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
                       ),
                     ),
                   ),
                   Container(
                     margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
                     child: SizedBox (
-                      width: 232,
-                      height: 56,
+                      width: MediaQuery.of(context).size.width - 32,
+                      height: 60,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4)
+                                    borderRadius: BorderRadius.circular(8)
                                 )
                             ),
                             backgroundColor: MaterialStateProperty.all(
@@ -113,19 +113,19 @@ class _MenuInventsState extends State<MenuInvents> {
                         onPressed: () {
                           Navigator.of(context).pushNamed('/searchPubl');
                         },
-                        child: Text('Поиск публикаций', textAlign: TextAlign.center)
+                        child: Text('Поиск публикаций', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
                       ),
                     ),
                   ),
                   Container(
                     child: SizedBox (
-                      width: 232,
-                      height: 56,
+                      width: MediaQuery.of(context).size.width - 32,
+                      height: 60,
                       child: ElevatedButton(
                         style: ButtonStyle(
                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
                                 RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(4)
+                                    borderRadius: BorderRadius.circular(8)
                                 )
                             ),
                             backgroundColor: MaterialStateProperty.all(
@@ -136,7 +136,7 @@ class _MenuInventsState extends State<MenuInvents> {
                         onPressed: () {
                           Navigator.of(context).pushNamed('/patentRegistry');
                         },
-                        child: Text('Реестр патентов', textAlign: TextAlign.center)
+                        child: Text('Реестр патентов', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
                       ),
                     ),
                   ),
