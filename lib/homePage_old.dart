@@ -135,9 +135,7 @@ class _HomePageState extends State<HomePage> {
                                                         onPressed: () {
                                                           Navigator.of(context).pushNamed('/menuEapo');
                                                         },
-                                                        child: Image(
-                                                          image: AssetImage('assets/images/o_eapv.png'),
-                                                        ),
+                                                        child: Image.asset('assets/images/o_eapv.png')
                                                       ),
                                                     ),
                                                   ]

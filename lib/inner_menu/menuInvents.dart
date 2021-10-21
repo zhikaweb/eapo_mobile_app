@@ -1,12 +1,5 @@
-import 'package:eapo_mobile_app/inventPages/inventBulletin.dart';
-import 'package:eapo_mobile_app/inventPages/inventDocs.dart';
-import 'package:eapo_mobile_app/inventPages/patentRegistry.dart';
-import 'package:eapo_mobile_app/inventPages/searchPubl.dart';
 import 'package:flutter/material.dart';
-import '../staticPages/about.dart';
 import '../presentation/customBottomAppBar.dart';
-import '../presentation/icons.dart';
-import '../inner_menu/menuGetPatent.dart';
 
 class MenuInvents extends StatefulWidget {
   @override
