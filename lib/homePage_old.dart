@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 
-class HomePage extends StatefulWidget {
+class HomePageOld extends StatefulWidget {
   @override
-  _HomePageState createState() => _HomePageState();
+  _HomePageOldState createState() => _HomePageOldState();
 }
 
-class _HomePageState extends State<HomePage> {
+class _HomePageOldState extends State<HomePageOld> {
   List listUrl = ['https://www.facebook.com/eapo.official',
     'https://www.youtube.com/channel/UCPzUFvo897pAnXjU1H06POA',
     'https://twitter.com/EAPO_official'];

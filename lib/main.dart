@@ -1,3 +1,4 @@
+import 'package:eapo_mobile_app/homePage.dart';
 import 'package:eapo_mobile_app/designPages/designBulletin.dart';
 import 'package:eapo_mobile_app/designPages/designDocs.dart';
 import 'package:eapo_mobile_app/designPages/searchPublDesign.dart';
@@ -15,8 +16,6 @@ import 'package:eapo_mobile_app/staticPages/accounts.dart';
 import 'package:eapo_mobile_app/staticPages/contacts.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'HomePage.dart';
-import 'homePage_old.dart';
 
 void main() => runApp(MyApp());
 
@@ -30,7 +29,7 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(primaryColor: new Color.fromRGBO(30, 111, 165, 1.0)),
       debugShowCheckedModeBanner: false,
       title: 'EAPO-mobile',
-      home: HomePage2(),
+      home: HomePage(),
       routes: <String, WidgetBuilder>{
         '/home': (BuildContext context) => new HomePage(),
         '/menuEapo': (BuildContext context) => new MenuEAPVScreen(),
