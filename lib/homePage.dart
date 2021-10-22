@@ -171,17 +171,6 @@ class _HomePageState extends State<HomePage> {
         child: Stack(
             children: <Widget>[
               Positioned(
-                  top: 810,
-                  left: 0,
-                  child: Container(
-                      width: globalContainerWidth,
-                      height: 34,
-                      decoration: BoxDecoration(
-                        color : Color.fromRGBO(209, 231, 243, 1),
-                      )
-                  )
-              ),
-              Positioned(
                   top: 34,
                   left: 0,
                   child: Container(
@@ -348,7 +337,7 @@ class _HomePageState extends State<HomePage> {
                   top: 0,
                   left: 0,
                   child: Container(
-                      width: 430,
+                      width: globalContainerWidth,
                       height: 44,
                       decoration: BoxDecoration(
                         color : Color.fromRGBO(30, 111, 165, 1),
