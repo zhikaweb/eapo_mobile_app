@@ -24,6 +24,7 @@ class _MenuInventsState extends State<MenuInvents> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
+            backgroundColor: Color.fromRGBO(30, 111, 165, 1.0),
             title: Text('ИЗОБРЕТЕНИЯ'),
             leading: IconButton(
               icon: Icon(Icons.arrow_back_ios),

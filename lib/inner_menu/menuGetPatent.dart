@@ -32,6 +32,7 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
+            backgroundColor: Color.fromRGBO(30, 111, 165, 1.0),
             title: Text('ПОЛУЧЕНИЕ ПАТЕНТА'),
             // leading: IconButton(
             //   icon: Icon(Icons.arrow_back_ios),

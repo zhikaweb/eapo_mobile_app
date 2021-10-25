@@ -38,6 +38,7 @@ class MyWebView extends StatelessWidget {
     return WillPopScope(
         child: Scaffold(
             appBar: AppBar(
+              backgroundColor: Color.fromRGBO(30, 111, 165, 1.0),
               title: Text(title),
             ),
             body: WebView(

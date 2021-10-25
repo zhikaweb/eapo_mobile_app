@@ -26,6 +26,7 @@ class MenuEAPVScreen extends StatelessWidget {
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          backgroundColor: Color.fromRGBO(30, 111, 165, 1.0),
           title: Text('О ЕАПВ'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),

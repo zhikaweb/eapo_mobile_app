@@ -46,14 +46,15 @@ class _PharmRegistryState extends State<PharmRegistry> {
               begin: Alignment.topLeft,
               end: Alignment.bottomRight,
               colors: [
-                Color.fromRGBO(209, 231, 243, 1.0),
-                Color.fromRGBO(209, 231, 243, 1.0)
+                Color.fromRGBO(189, 218, 234, 1.0),
+                Color.fromRGBO(189, 218, 234, 1.0)
               ]
           )
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
+          backgroundColor: Color.fromRGBO(30, 111, 165, 1.0),
           title: Text('ФАРМРЕЕСТР'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
@@ -62,72 +63,72 @@ class _PharmRegistryState extends State<PharmRegistry> {
             },
           ),
         ),
-        body: Column(
-            children: [
-              Column(
-                children: [
-                  Container(
-                      child: Form(
-                        key: _globalKey,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: 0,
-                                right: 0,
-                                top: 10,
-                                bottom: 10,
-                              ),
-                              child: SizedBox(
-                                width: 200,
-                                height: 40,
-                                child: TextFormField(
-                                  controller: _textEditingController,
-                                  decoration: InputDecoration(
-                                    border: OutlineInputBorder(),
-                                  ),
-                                  showCursor: true,
-                                  onSaved: (value) {
-                                    _searchRequest = value!;
-                                  },
-                                ),
-                              ),
-                            ),
-                            Padding(
-                              padding: EdgeInsets.only(
-                                left: 0,
-                                right: 0,
-                                top: 10,
-                                bottom: 10,
-                              ),
-                              child: SizedBox(
-                                width: 100,
-                                child: ElevatedButton(
-                                    child: Text('Поиск'),
-                                    onPressed: () {
-                                      _search();
-                                    }
-                                ),
-                              ),
-                            )
-                          ],
+        body: Stack(
+          children: <Widget>[
+            Container(
+              child: Form(
+                key: _globalKey,
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 0,
+                        right: 0,
+                        top: 10,
+                        bottom: 10,
+                      ),
+                      child: SizedBox(
+                        width: 200,
+                        height: 40,
+                        child: TextFormField(
+                          controller: _textEditingController,
+                          decoration: InputDecoration(
+                            border: OutlineInputBorder(),
+                          ),
+                          showCursor: true,
+                          onSaved: (value) {
+                            _searchRequest = value!;
+                          },
                         ),
-                      )
-                  ),
-                  Container(
-                    height: 500,
-                    padding: EdgeInsets.all(5),
-                    child: InAppWebView(
-                      initialUrlRequest: URLRequest(url: Uri.parse(_url)),
-                      onWebViewCreated: (controller) {
-                        _controller = controller;
-                      },
+                      ),
                     ),
-                  )
-                ],
-              ),
-            ]
+                    Padding(
+                      padding: EdgeInsets.only(
+                        left: 0,
+                        right: 0,
+                        top: 10,
+                        bottom: 10,
+                      ),
+                      child: SizedBox(
+                        width: 100,
+                        child: ElevatedButton(
+                            child: Text('Поиск'),
+                            onPressed: () {
+                              _search();
+                            }
+                        ),
+                      ),
+                    )
+                  ],
+                ),
+              )
+            ),
+            Stack(
+              clipBehavior: Clip.none,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(bottom: 0, top: 65, left: 0, right: 0),
+                  child: InAppWebView(
+                    initialUrlRequest: URLRequest(url: Uri.parse(_url)),
+                    onWebViewCreated: (controller) {
+                      _controller = controller;
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ],
         ),
         bottomNavigationBar: ClipRRect(
           borderRadius: BorderRadius.only(
