@@ -1,12 +1,6 @@
-import 'package:eapo_mobile_app/designPages/designBulletin.dart';
-import 'package:eapo_mobile_app/designPages/designDocs.dart';
-import 'package:eapo_mobile_app/designPages/searchPublDesign.dart';
-import 'package:eapo_mobile_app/inventPages/searchPubl.dart';
+import 'package:eapo_mobile_app/presentation/customElevatedButton.dart';
 import 'package:flutter/material.dart';
-import '../staticPages/about.dart';
 import '../presentation/customBottomAppBar.dart';
-import '../presentation/icons.dart';
-import '../inner_menu/menuGetPatent.dart';
 
 class MenuDesigns extends StatefulWidget {
   @override
@@ -15,6 +9,7 @@ class MenuDesigns extends StatefulWidget {
 
 class _MenuDesignsState extends State<MenuDesigns> {
   int _currentIndex = 3;
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -51,23 +46,7 @@ class _MenuDesignsState extends State<MenuDesigns> {
                     child: SizedBox (
                       width: MediaQuery.of(context).size.width - 32,
                       height: 60,
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8)
-                                  )
-                              ),
-                              backgroundColor: MaterialStateProperty.all(
-                                  Color.fromRGBO(233, 241, 245, 1.0)
-                              ),
-                              foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pushNamed('/designDocs');
-                          },
-                          child: Text('Нормативные правовые акты', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
-                      ),
+                      child: CustomElevatedButton(title: 'Нормативные правовые акты', route: '/designDocs'),
                     ),
                   ),
                   Container(
@@ -75,46 +54,14 @@ class _MenuDesignsState extends State<MenuDesigns> {
                     child: SizedBox (
                       width: MediaQuery.of(context).size.width - 32,
                       height: 60,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)
-                                )
-                            ),
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromRGBO(233, 241, 245, 1.0)
-                            ),
-                            foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/designBull');
-                        },
-                        child: Text('Бюллетень', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
-                      ),
+                      child: CustomElevatedButton(title: 'Бюллетень', route: '/designBull'),
                     ),
                   ),
                   Container(
                     child: SizedBox (
                       width: MediaQuery.of(context).size.width - 32,
                       height: 60,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)
-                                )
-                            ),
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromRGBO(233, 241, 245, 1.0)
-                            ),
-                            foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/searchPublDesign');
-                        },
-                        child: Text('Поиск публикаций', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
-                      ),
+                      child: CustomElevatedButton(title: 'Поиск публикаций', route: '/searchPublDesign'),
                     ),
                   ),
                 ],

@@ -1,3 +1,4 @@
+import 'package:eapo_mobile_app/presentation/customElevatedButton.dart';
 import 'package:flutter/material.dart';
 import '../presentation/customBottomAppBar.dart';
 
@@ -44,23 +45,7 @@ class _MenuInventsState extends State<MenuInvents> {
                     child: SizedBox (
                       width: MediaQuery.of(context).size.width - 32,
                       height: 60,
-                      child: ElevatedButton(
-                          style: ButtonStyle(
-                              shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                  RoundedRectangleBorder(
-                                      borderRadius: BorderRadius.circular(8)
-                                  )
-                              ),
-                              backgroundColor: MaterialStateProperty.all(
-                                  Color.fromRGBO(233, 241, 245, 1.0)
-                              ),
-                              foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                          ),
-                          onPressed: () {
-                            Navigator.of(context).pushNamed('/inventDocs');
-                          },
-                          child: Text('Нормативные правовые акты', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
-                      ),
+                      child: CustomElevatedButton(title: 'Нормативные правовые акты', route: '/inventDocs'),
                     ),
                   ),
                   Container(
@@ -68,23 +53,7 @@ class _MenuInventsState extends State<MenuInvents> {
                     child: SizedBox (
                       width: MediaQuery.of(context).size.width - 32,
                       height: 60,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)
-                                )
-                            ),
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromRGBO(233, 241, 245, 1.0)
-                            ),
-                            foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/inventBull');
-                        },
-                        child: Text('Бюллетень', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
-                      ),
+                      child: CustomElevatedButton(title: 'Бюллетень', route: '/inventBull'),
                     ),
                   ),
                   Container(
@@ -92,46 +61,14 @@ class _MenuInventsState extends State<MenuInvents> {
                     child: SizedBox (
                       width: MediaQuery.of(context).size.width - 32,
                       height: 60,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)
-                                )
-                            ),
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromRGBO(233, 241, 245, 1.0)
-                            ),
-                            foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/searchPubl');
-                        },
-                        child: Text('Поиск публикаций', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
-                      ),
+                      child: CustomElevatedButton(title: 'Поиск публикаций', route: '/searchPubl'),
                     ),
                   ),
                   Container(
                     child: SizedBox (
                       width: MediaQuery.of(context).size.width - 32,
                       height: 60,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)
-                                )
-                            ),
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromRGBO(233, 241, 245, 1.0)
-                            ),
-                            foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                        ),
-                        onPressed: () {
-                          Navigator.of(context).pushNamed('/patentRegistry');
-                        },
-                        child: Text('Реестр патентов', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
-                      ),
+                      child: CustomElevatedButton(title: 'Реестр патентов', route: '/patentRegistry'),
                     ),
                   ),
                 ],

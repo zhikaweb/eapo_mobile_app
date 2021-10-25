@@ -1,3 +1,4 @@
+import 'package:eapo_mobile_app/presentation/customElevatedButton.dart';
 import 'package:eapo_mobile_app/staticPages/contacts.dart';
 import 'package:flutter/material.dart';
 import '../staticPages/about.dart';
@@ -46,23 +47,7 @@ class MenuEAPVScreen extends StatelessWidget {
                    child: SizedBox (
                      width: MediaQuery.of(context).size.width - 32,
                       height: 60,
-                     child: ElevatedButton(
-                         style: ButtonStyle(
-                             shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                 RoundedRectangleBorder(
-                                     borderRadius: BorderRadius.circular(8)
-                                 )
-                             ),
-                             backgroundColor: MaterialStateProperty.all(
-                                 Color.fromRGBO(233, 241, 245, 1.0)
-                             ),
-                             foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                         ),
-                            onPressed: () {
-                              Navigator.of(context).pushNamed('/about');
-                                },
-                          child: Text('О ведомстве', style: TextStyle(fontSize: 20),)
-                      ),
+                     child: CustomElevatedButton(title: 'О ведомстве', route: '/about'),
                     ),
                 ),
                 Container(
@@ -70,23 +55,7 @@ class MenuEAPVScreen extends StatelessWidget {
                   child: SizedBox (
                     width: MediaQuery.of(context).size.width - 32,
                     height: 60,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)
-                              )
-                          ),
-                          backgroundColor: MaterialStateProperty.all(
-                              Color.fromRGBO(233, 241, 245, 1.0)
-                          ),
-                          foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/getPatent');
-                      },
-                      child: Text('Процедура получения патента', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),)
-                    ),
+                    child: CustomElevatedButton(title: 'Процедура получения патента', route: '/getPatent'),
                   ),
                 ),
                 Container(
@@ -94,46 +63,14 @@ class MenuEAPVScreen extends StatelessWidget {
                   child: SizedBox (
                     width: MediaQuery.of(context).size.width - 32,
                     height: 60,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)
-                              )
-                          ),
-                          backgroundColor: MaterialStateProperty.all(
-                              Color.fromRGBO(233, 241, 245, 1.0)
-                          ),
-                          foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/accounts');
-                      },
-                      child: Text('Банковские реквизиты', style: TextStyle(fontSize: 20),)
-                    ),
+                    child: CustomElevatedButton(title: 'Банковские реквизиты', route: '/accounts'),
                   ),
                 ),
                 Container(
                   child: SizedBox (
                     width: MediaQuery.of(context).size.width - 32,
                     height: 60,
-                    child: ElevatedButton(
-                      style: ButtonStyle(
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)
-                              )
-                          ),
-                          backgroundColor: MaterialStateProperty.all(
-                              Color.fromRGBO(233, 241, 245, 1.0)
-                          ),
-                          foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                      ),
-                      onPressed: () {
-                        Navigator.of(context).pushNamed('/contacts');
-                      },
-                      child: Text('Контакты', style: TextStyle(fontSize: 20),)
-                    ),
+                    child: CustomElevatedButton(title: 'Контакты', route: '/contacts'),
                   ),
                 ),
               ],
