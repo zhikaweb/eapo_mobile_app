@@ -1,5 +1,6 @@
-import 'package:eapo_mobile_app/presentation/customElevatedButton.dart';
+import 'package:eapo_mobile_app/presentation/customBtnMainMenu.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import '../presentation/customBottomAppBar.dart';
 
 class MenuInvents extends StatefulWidget {
@@ -32,46 +33,52 @@ class _MenuInventsState extends State<MenuInvents> {
               onPressed: () { Navigator.of(context).popAndPushNamed('/home'); },
             ),
           ),
-          body: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          body: Stack(
             children: <Widget>[
+              Container(
+                alignment: Alignment.topRight,
+                child: SvgPicture.asset('assets/images/eg_lg_top_r.svg'),
+              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
+                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
                     child: SizedBox (
                       width: MediaQuery.of(context).size.width - 32,
                       height: 60,
-                      child: CustomElevatedButton(title: 'Нормативные правовые акты', route: '/inventDocs'),
+                      child: CustomBtnMainMenu(title: 'Нормативные правовые акты', route: '/inventDocs'),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
+                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
                     child: SizedBox (
                       width: MediaQuery.of(context).size.width - 32,
                       height: 60,
-                      child: CustomElevatedButton(title: 'Бюллетень', route: '/inventBull'),
+                      child: CustomBtnMainMenu(title: 'Бюллетень', route: '/inventBull'),
                     ),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
+                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
                     child: SizedBox (
                       width: MediaQuery.of(context).size.width - 32,
                       height: 60,
-                      child: CustomElevatedButton(title: 'Поиск публикаций', route: '/searchPubl'),
+                      child: CustomBtnMainMenu(title: 'Поиск публикаций', route: '/searchPubl'),
                     ),
                   ),
                   Container(
                     child: SizedBox (
                       width: MediaQuery.of(context).size.width - 32,
                       height: 60,
-                      child: CustomElevatedButton(title: 'Реестр патентов', route: '/patentRegistry'),
+                      child: CustomBtnMainMenu(title: 'Реестр патентов', route: '/patentRegistry'),
                     ),
                   ),
                 ],
+              ),
+              Container(
+                alignment: Alignment.bottomLeft,
+                child: SvgPicture.asset('assets/images/eg_sm_bottomleft.svg'),
               ),
             ],
           ),
@@ -108,26 +115,14 @@ class _MenuInventsState extends State<MenuInvents> {
                 }
               },
               items: [
-                CustomBottomAppBarItem(iconData: Image(
-                  image: AssetImage("assets/images/home.png"),
-                )),
-                CustomBottomAppBarItem(iconData: Image(
-                  image: AssetImage("assets/images/eye.png"),
-                )),
-                CustomBottomAppBarItem(iconData: _currentIndex == 2 ? Image(
-                  image: AssetImage("assets/images/atom_active.png"),
-                ) : Image(
-                  image: AssetImage("assets/images/atom.png"),
-                )),
-                CustomBottomAppBarItem(iconData: Image(
-                  image: AssetImage("assets/images/game.png"),
-                )),
-                CustomBottomAppBarItem(iconData: Image(
-                  image: AssetImage("assets/images/pill.png"),
-                )),
-                CustomBottomAppBarItem(iconData: Image(
-                  image: AssetImage("assets/images/key.png"),
-                ))
+                CustomBottomAppBarItem(iconData: SvgPicture.asset('assets/images/home.svg')),
+                CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/eye.svg")),
+                CustomBottomAppBarItem(iconData: _currentIndex == 2
+                    ? SvgPicture.asset("assets/images/atom_active.svg")
+                    : SvgPicture.asset("assets/images/atom.svg")),
+                CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/game.svg")),
+                CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/pill.svg")),
+                CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/key.svg"))
               ],
             ),
           )

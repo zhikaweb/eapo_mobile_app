@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
 import '../presentation/customBottomAppBar.dart';
 import '../presentation/icons.dart';
@@ -24,8 +25,8 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                 begin: Alignment.topLeft,
                 end: Alignment.bottomRight,
                 colors: [
-                  Color.fromRGBO(209, 231, 243, 1.0),
-                  Color.fromRGBO(209, 231, 243, 1.0)
+                  Color.fromRGBO(189, 218, 234, 1.0),
+                  Color.fromRGBO(189, 218, 234, 1.0)
                 ]
             )
         ),
@@ -39,135 +40,39 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
             //   onPressed: () { Navigator.of(context).popAndPushNamed('/home'); },
             // ),
           ),
-          body: Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
+          body: Stack(
             children: <Widget>[
+              Container(
+                alignment: Alignment.center,
+                child: SvgPicture.asset('assets/images/eg_xl.svg'),
+              ),
+              Container(
+                alignment: Alignment.bottomRight,
+                child: SvgPicture.asset('assets/images/eg_sm_bottomright.svg'),
+              ),
               Column(
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
-                    child: SizedBox (
-                      width: MediaQuery.of(context).size.width - 32,
-                      height: 60,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                          shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                              RoundedRectangleBorder(
-                                  borderRadius: BorderRadius.circular(8)
-                              )
-                          ),
-                          backgroundColor: MaterialStateProperty.all(
-                              Color.fromRGBO(233, 241, 245, 1.0)
-                          ),
-                          foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                        ),
-                          onPressed: () {
-                            _launchUrl(listUrl[0]);
-                          },
-                          child: Text('Патентовать или не патентовать', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
-                          // textColor: Color.fromRGBO(30, 111, 165, 1.0)
-                      ),
-                    ),
+                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
+                    child: sizedBoxWithBtn('Патентовать или не патентовать', listUrl[0]),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
-                    child: SizedBox (
-                      width: MediaQuery.of(context).size.width - 32,
-                      height: 60,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)
-                                )
-                            ),
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromRGBO(233, 241, 245, 1.0)
-                            ),
-                            foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                        ),
-                        onPressed: () {
-                          _launchUrl(listUrl[1]);
-                        },
-                        child: Text('Пять шагов к Евразийскому патенту', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
-                      ),
-                    ),
+                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
+                    child: sizedBoxWithBtn('Пять шагов к Евразийскому патенту', listUrl[1]),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
-                    child: SizedBox (
-                      width: MediaQuery.of(context).size.width - 32,
-                      height: 60,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)
-                                )
-                            ),
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromRGBO(233, 241, 245, 1.0)
-                            ),
-                            foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                        ),
-                        onPressed: () {
-                          _launchUrl(listUrl[2]);
-                        },
-                        child: Text('Как получить Евразийский патент', textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
-                      ),
-                    ),
+                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
+                    child: sizedBoxWithBtn('Как получить Евразийский патент', listUrl[2]),
                   ),
                   Container(
-                    margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
-                    child: SizedBox (
-                      width: MediaQuery.of(context).size.width - 32,
-                      height: 60,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)
-                                )
-                            ),
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromRGBO(233, 241, 245, 1.0)
-                            ),
-                            foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                        ),
-                        onPressed: () {
-                          _launchUrl(listUrl[3]);
-                        },
-                        child: Text('Получение Евразийского патента по процедуре РСТ',
-                            textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
-                      ),
-                    ),
+                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
+                    child: sizedBoxWithBtn('Получение Евразийского патента по процедуре РСТ', listUrl[3]),
                   ),
                   Container(
-                    child: SizedBox (
-                      width: MediaQuery.of(context).size.width - 32,
-                      height: 60,
-                      child: ElevatedButton(
-                        style: ButtonStyle(
-                            shape: MaterialStateProperty.all<RoundedRectangleBorder>(
-                                RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8)
-                                )
-                            ),
-                            backgroundColor: MaterialStateProperty.all(
-                                Color.fromRGBO(233, 241, 245, 1.0)
-                            ),
-                            foregroundColor: MaterialStateProperty.all(Color.fromRGBO(30, 111, 165, 1.0))
-                        ),
-                        onPressed: () {
-                          _launchUrl(listUrl[4]);
-                        },
-                        child: Text('Как подать евразийскую заявку',
-                            textAlign: TextAlign.center, style: TextStyle(fontSize: 20),),
-                      ),
-                    ),
+                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 0),
+                    child: sizedBoxWithBtn('Как подать евразийскую заявку', listUrl[4]),
                   ),
                 ],
               ),
@@ -204,28 +109,36 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
 
                 },
                 items: [
-                  CustomBottomAppBarItem(iconData: Image(
-                    image: AssetImage("assets/images/home.png"),
-                  )),
-                  CustomBottomAppBarItem(iconData: _currentIndex == 1 ? Image(
-                    image: AssetImage("assets/images/eye_active.png"),
-                  ) : Image(
-                    image: AssetImage("assets/images/eye.png"),
-                  )),
-                  CustomBottomAppBarItem(iconData: Image(
-                    image: AssetImage("assets/images/atom.png"),
-                  )),
-                  CustomBottomAppBarItem(iconData: Image(
-                    image: AssetImage("assets/images/game.png"),
-                  )),
-                  CustomBottomAppBarItem(iconData: Image(
-                    image: AssetImage("assets/images/pill.png"),
-                  )),
-                  CustomBottomAppBarItem(iconData: Image(
-                    image: AssetImage("assets/images/key.png"),
-                  ))
+                  CustomBottomAppBarItem(iconData: SvgPicture.asset('assets/images/home.svg')),
+                  CustomBottomAppBarItem(iconData: _currentIndex == 1
+                      ? SvgPicture.asset("assets/images/eye_active.svg")
+                      : SvgPicture.asset("assets/images/eye.svg")),
+                  CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/atom.svg")),
+                  CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/game.svg")),
+                  CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/pill.svg")),
+                  CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/key.svg"))
                 ],
               ),
+            )
+        )
+    );
+  }
+
+  Widget sizedBoxWithBtn(String title, String route){
+    return Material(
+        elevation: 5.0,
+        borderRadius: BorderRadius.circular(8.0),
+        color: Color.fromRGBO(233, 241, 245, 1.0),
+        child: MaterialButton(
+            minWidth: MediaQuery.of(context).size.width,
+            height: 60,
+            onPressed: () {
+              _launchUrl(route);
+            },
+            child: Text(
+              title,
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20, color: Color.fromRGBO(30, 111, 165, 1.0)),
             )
         )
     );

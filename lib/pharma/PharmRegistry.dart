@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:enough_convert/enough_convert.dart';
+import 'package:flutter_svg/svg.dart';
 
 import '../presentation/customBottomAppBar.dart';
 
@@ -161,28 +162,14 @@ class _PharmRegistryState extends State<PharmRegistry> {
               // }
             },
             items: [
-              CustomBottomAppBarItem(iconData: _currentIndex == 0 ? Image(
-                image: AssetImage("assets/images/home_active.png"),
-              ) :   Image(
-                image: AssetImage("assets/images/home.png"),
-              )),
-              CustomBottomAppBarItem(iconData: Image(
-                image: AssetImage("assets/images/eye.png"),
-              )),
-              CustomBottomAppBarItem(iconData: Image(
-                image: AssetImage("assets/images/atom.png"),
-              )),
-              CustomBottomAppBarItem(iconData: Image(
-                image: AssetImage("assets/images/game.png"),
-              )),
-              CustomBottomAppBarItem(iconData: _currentIndex == 4 ? Image(
-                image: AssetImage("assets/images/pill_active.png"),
-              ) :  Image(
-                image: AssetImage("assets/images/pill.png"),
-              )),
-              CustomBottomAppBarItem(iconData: Image(
-                image: AssetImage("assets/images/key.png"),
-              ))
+              CustomBottomAppBarItem(iconData: SvgPicture.asset('assets/images/home.svg')),
+              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/eye.svg")),
+              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/atom.svg")),
+              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/game.svg")),
+              CustomBottomAppBarItem(iconData: _currentIndex == 4
+                  ? SvgPicture.asset("assets/images/pill_active.svg")
+                  : SvgPicture.asset("assets/images/pill.svg")),
+              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/key.svg"))
             ],
           ),
         )

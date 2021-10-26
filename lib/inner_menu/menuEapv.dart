@@ -1,6 +1,8 @@
-import 'package:eapo_mobile_app/presentation/customElevatedButton.dart';
+import 'package:eapo_mobile_app/presentation/customBtnMainMenu.dart';
 import 'package:eapo_mobile_app/staticPages/contacts.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_svg/parser.dart';
 import '../staticPages/about.dart';
 import '../staticPages/accounts.dart';
 import '../presentation/customBottomAppBar.dart';
@@ -13,6 +15,7 @@ class MenuEAPVScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     int _currentIndex = 1;
     int currentTab = 0;
+
     return Container(
       decoration: BoxDecoration(
           gradient: LinearGradient(
@@ -34,28 +37,23 @@ class MenuEAPVScreen extends StatelessWidget {
             onPressed: () { Navigator.of(context).popAndPushNamed('/home'); },
           ),
         ),
-        body: Row(
-          mainAxisAlignment: MainAxisAlignment.center,
-          crossAxisAlignment: CrossAxisAlignment.center,
+        body: Stack(
+          // alignment: Alignment.topRight,
           children: <Widget>[
+            Container(
+              alignment: Alignment.topRight,
+              child: SvgPicture.asset('assets/images/eg_lg_top_r.svg'),
+            ),
             Column(
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Container(
                   padding: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
-                   child: SizedBox (
-                     width: MediaQuery.of(context).size.width - 32,
-                      height: 60,
-                     child: CustomElevatedButton(title: 'О ведомстве', route: '/about'),
-                    ),
-                ),
-                Container(
-                  margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
                   child: SizedBox (
                     width: MediaQuery.of(context).size.width - 32,
                     height: 60,
-                    child: CustomElevatedButton(title: 'Процедура получения патента', route: '/getPatent'),
+                    child: CustomBtnMainMenu(title: 'О ведомстве', route: '/about'),
                   ),
                 ),
                 Container(
@@ -63,17 +61,29 @@ class MenuEAPVScreen extends StatelessWidget {
                   child: SizedBox (
                     width: MediaQuery.of(context).size.width - 32,
                     height: 60,
-                    child: CustomElevatedButton(title: 'Банковские реквизиты', route: '/accounts'),
+                    child: CustomBtnMainMenu(title: 'Процедура получения патента', route: '/getPatent'),
+                  ),
+                ),
+                Container(
+                  margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
+                  child: SizedBox (
+                    width: MediaQuery.of(context).size.width - 32,
+                    height: 60,
+                    child: CustomBtnMainMenu(title: 'Банковские реквизиты', route: '/accounts'),
                   ),
                 ),
                 Container(
                   child: SizedBox (
                     width: MediaQuery.of(context).size.width - 32,
                     height: 60,
-                    child: CustomElevatedButton(title: 'Контакты', route: '/contacts'),
+                    child: CustomBtnMainMenu(title: 'Контакты', route: '/contacts'),
                   ),
                 ),
               ],
+            ),
+            Container(
+              alignment: Alignment.bottomLeft,
+              child: SvgPicture.asset('assets/images/eg_sm_bottomleft.svg'),
             ),
           ],
         ),
@@ -108,26 +118,14 @@ class MenuEAPVScreen extends StatelessWidget {
 
             },
             items: [
-              CustomBottomAppBarItem(iconData: Image(
-                image: AssetImage("assets/images/home.png"),
-              )),
-              CustomBottomAppBarItem(iconData: _currentIndex == 1 ? Image(
-                image: AssetImage("assets/images/eye_active.png"),
-              ) : Image(
-                image: AssetImage("assets/images/eye.png"),
-              )),
-              CustomBottomAppBarItem(iconData: Image(
-                image: AssetImage("assets/images/atom.png"),
-              )),
-              CustomBottomAppBarItem(iconData: Image(
-                image: AssetImage("assets/images/game.png"),
-              )),
-              CustomBottomAppBarItem(iconData: Image(
-                image: AssetImage("assets/images/pill.png"),
-              )),
-              CustomBottomAppBarItem(iconData: Image(
-                image: AssetImage("assets/images/key.png"),
-              ))
+              CustomBottomAppBarItem(iconData: SvgPicture.asset('assets/images/home.svg')),
+              CustomBottomAppBarItem(iconData: _currentIndex == 1
+                  ? SvgPicture.asset("assets/images/eye_active.svg")
+                  : SvgPicture.asset("assets/images/eye.svg")),
+              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/atom.svg")),
+              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/game.svg")),
+              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/pill.svg")),
+              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/key.svg"))
             ],
           ),
         )

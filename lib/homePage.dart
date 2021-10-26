@@ -17,15 +17,15 @@ class _HomePageState extends State<HomePage> {
 
 
   List routeNames = ['/menuEapo', '/menuInvents', '/menuDesigns', '/pharma'];
-  List imagePaths = ['assets/images/emptygear.png',
-    'assets/images/o_eapv.png',
-    'assets/images/izobretenie.png',
-    'assets/images/promobrazcy.png',
-    'assets/images/farmreestr.png',
-    'assets/images/lichny_cab.png'];
+  List imagePaths = ['assets/images/emptygear.svg',
+    'assets/images/eapo.svg',
+    'assets/images/izo.svg',
+    'assets/images/promo.svg',
+    'assets/images/pharm.svg',
+    'assets/images/lk.svg'];
 
-  List socialIconsPaths = ['assets/images/facebook.png',
-    'assets/images/youtube.png', 'assets/images/twitter.png'];
+  List socialIconsPaths = ['assets/images/fb.svg',
+    'assets/images/ut.svg', 'assets/images/twt.svg'];
 
   ScreenResolution screenResolution = new ScreenResolution();
 
@@ -36,7 +36,7 @@ class _HomePageState extends State<HomePage> {
         builder: (BuildContext context, BoxConstraints constraints) {
           // iPhone 7 (375x667)
           if (constraints.maxWidth > 330 && constraints.maxWidth < 376 && constraints.maxHeight > 700 && constraints.maxHeight < 737) {
-            screenResolution.globalContainerWidth = 430;
+            screenResolution.globalContainerWidth = 375;
             screenResolution.globalContainerHeight = 815;
             screenResolution.topPositionGearContainer = 84;
             screenResolution.leftPositionGearContainer = -22;
@@ -73,7 +73,7 @@ class _HomePageState extends State<HomePage> {
             screenResolution.globalContainerWidth = 430;
             screenResolution.globalContainerHeight = 844;
             screenResolution.topPositionGearContainer = 134;
-            screenResolution.leftPositionGearContainer = -22;
+            screenResolution.leftPositionGearContainer = -32;
             screenResolution.topPositionSocialIconContainer = 688;
             screenResolution.leftPositionSocialIconContainer = 91;
             return _buildContainer(
@@ -269,9 +269,7 @@ class _HomePageState extends State<HomePage> {
                                                       Positioned(
                                                           top: -1,
                                                           left: -34,
-                                                          child: Image(
-                                                            image: AssetImage('assets/images/lichny_cab.png'),
-                                                          )
+                                                          child: SvgPicture.asset('assets/images/lk.svg'),
                                                       ),
                                                     ]
                                                 )
@@ -323,11 +321,9 @@ class _HomePageState extends State<HomePage> {
                                 )
                             ),
                             Positioned(
-                                top: -10,
-                                left: 0,
-                                child: Image(
-                                  image: AssetImage('assets/images/logo_main.png'),
-                                )
+                                top: 15,
+                                left: 10,
+                                child: SvgPicture.asset('assets/images/logo_main.svg'),
                             ),
                           ]
                       )
@@ -369,14 +365,12 @@ class _HomePageState extends State<HomePage> {
   }
 
   Widget socialBtn(String iconPath, String socialURL){
-    return FlatButton(
+    return MaterialButton(
       padding: EdgeInsets.all(0),
       onPressed: () {
         _launchUrl(socialURL);
       },
-      child: Image(
-        image: AssetImage(iconPath),
-      ),
+      child: SvgPicture.asset(iconPath),
     );
   }
 
@@ -397,9 +391,7 @@ class _HomePageState extends State<HomePage> {
               Positioned(
                   top: -1,
                   left: -34,
-                  child: Image(
-                    image: AssetImage(imageRoute),
-                  )
+                  child: SvgPicture.asset(imageRoute)
               ),
             ]
         )
@@ -425,15 +417,13 @@ class _HomePageState extends State<HomePage> {
 
 
   Widget gearBtn(String routeName, String imagePath){
-    return FlatButton(
+    return MaterialButton(
       padding: EdgeInsets.all(0),
       onPressed: () {
         Navigator.of(context).pushNamed(routeName);
       },
-      child: Image(
-        image: AssetImage(imagePath),
-      ),
-    );
+      child: SvgPicture.asset(imagePath)
+      );
   }
 
   void _launchUrl(String url) async =>
