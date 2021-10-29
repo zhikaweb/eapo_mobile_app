@@ -1,3 +1,4 @@
+import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:eapo_mobile_app/presentation/screenResolution.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -16,7 +17,7 @@ class _HomePageState extends State<HomePage> {
     'https://twitter.com/EAPO_official'];
 
 
-  List routeNames = ['/menuEapo', '/menuInvents', '/menuDesigns', '/pharma'];
+  List routeNames = ['/menuEapo', '/menuInvents', '/menuDesigns', '/pharma', '/login'];
   List imagePaths = ['assets/images/emptygear.svg',
     'assets/images/eapo.svg',
     'assets/images/izo.svg',
@@ -177,7 +178,7 @@ class _HomePageState extends State<HomePage> {
                       width: globalContainerWidth,
                       height: globalContainerHeight,
                       decoration: BoxDecoration(
-                        color : Color.fromRGBO(30, 111, 165, 1),
+                        color : MainColors().eapoColorMain,
                       ),
                       child: Stack(
                           children: <Widget>[
@@ -188,14 +189,7 @@ class _HomePageState extends State<HomePage> {
                                     width: globalContainerWidth,
                                     height: globalContainerHeight,
                                     decoration: BoxDecoration(
-                                      gradient : LinearGradient(
-                                          begin: Alignment.topCenter,
-                                          end: Alignment.bottomCenter,
-                                          colors: [
-                                            Color.fromRGBO(30, 111, 165, 1),
-                                            Color.fromRGBO(209, 231, 243, 1)
-                                          ]
-                                      ),
+                                      gradient : MainColors().mainLinearGradient,
                                     )
                                 )
                             ),
@@ -260,20 +254,7 @@ class _HomePageState extends State<HomePage> {
                                             SizedBox(width : 0),
                                             emptyConstrainedContainer(),
                                             SizedBox(width : 0),
-                                            Container(
-                                                width: 73.33333587646484,
-                                                height: 140,
-                                                child: Stack(
-                                                    clipBehavior: Clip.none,
-                                                    children: <Widget>[
-                                                      Positioned(
-                                                          top: -1,
-                                                          left: -34,
-                                                          child: SvgPicture.asset('assets/images/lk.svg'),
-                                                      ),
-                                                    ]
-                                                )
-                                            ),
+                                            constrainedContainerWithGearBtn(routeNames[4], imagePaths[5]),
                                             SizedBox(width : 0),
                                             emptyConstrainedContainer(),
                                           ],

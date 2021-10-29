@@ -1,3 +1,4 @@
+import 'package:eapo_mobile_app/account/loginPage.dart';
 import 'package:eapo_mobile_app/homePage.dart';
 import 'package:eapo_mobile_app/designPages/designBulletin.dart';
 import 'package:eapo_mobile_app/designPages/designDocs.dart';
@@ -11,9 +12,10 @@ import 'package:eapo_mobile_app/inventPages/inventDocs.dart';
 import 'package:eapo_mobile_app/inventPages/patentRegistry.dart';
 import 'package:eapo_mobile_app/inventPages/searchPubl.dart';
 import 'package:eapo_mobile_app/pharma/PharmRegistry.dart';
-import 'package:eapo_mobile_app/staticPages/about.dart';
-import 'package:eapo_mobile_app/staticPages/accounts.dart';
-import 'package:eapo_mobile_app/staticPages/contacts.dart';
+import 'package:eapo_mobile_app/eapoPages/about.dart';
+import 'package:eapo_mobile_app/eapoPages/accounts.dart';
+import 'package:eapo_mobile_app/eapoPages/contacts.dart';
+import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
@@ -26,7 +28,7 @@ class MyApp extends StatelessWidget {
       DeviceOrientation.portraitUp, DeviceOrientation.portraitDown
     ]);
     return MaterialApp(
-      theme: ThemeData(primaryColor: new Color.fromRGBO(30, 111, 165, 1.0)),
+      theme: ThemeData(primaryColor: new MainColors().eapoColorMain),
       debugShowCheckedModeBanner: false,
       title: 'EAPO-mobile',
       home: HomePage(),
@@ -47,6 +49,7 @@ class MyApp extends StatelessWidget {
         '/designDocs': (BuildContext context) => new DesignDocs(),
         '/designBull': (BuildContext context) => new DesignBulletin(),
         '/searchPublDesign': (BuildContext context) => new SearchPublDesign(),
+        '/login': (BuildContext context) => new LoginPage(),
       },
     );
   }

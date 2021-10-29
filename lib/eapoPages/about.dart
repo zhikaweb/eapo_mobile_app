@@ -1,39 +1,41 @@
+import 'dart:io';
+
 import 'package:eapo_mobile_app/presentation/icons.dart';
-import 'package:eapo_mobile_app/utils/myWebview.dart';
+import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
+
+import '../utils/myWebview.dart';
 import '../presentation/customBottomAppBar.dart';
 
-class Accounts extends StatefulWidget {
-
+class About extends StatefulWidget {
   @override
-  _AccountsState createState() => _AccountsState();
+  _AboutState createState() => _AboutState();
 }
 
-class _AccountsState extends State<Accounts> {
-  final _url = 'https://www.eapo.org/ru/accounts.html?mode=m';
+class _AboutState extends State<About> {
+  final _url = "https://www.eapo.org/ru/about.html?mode=m";
   int _currentIndex = 1;
+
+  @override
+  void initState() {
+    super.initState();
+    if (Platform.isAndroid) WebView.platform = SurfaceAndroidWebView();
+  }
 
   @override
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color.fromRGBO(209, 231, 243, 1.0),
-                Color.fromRGBO(209, 231, 243, 1.0)
-              ]
-          )
+          gradient: MainColors().innerPageGradient
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
         body: MyWebView(
           title: "О ЕАПВ",
-          selectedUrl: Uri.parse(_url).toString(),
+          selectedUrl: Uri.encodeFull(_url),
         ),
           bottomNavigationBar: ClipRRect(
             borderRadius: BorderRadius.only(
@@ -41,9 +43,7 @@ class _AccountsState extends State<Accounts> {
                 topRight: Radius.circular(16.0)
             ),
             child: CustomBottomAppBar(
-              color: Colors.black,
               backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
-              selectedColor: Colors.black,
               notchedShape: CircularNotchedRectangle(),
               onTabSelected: (value) {
                 final routes = ["/home", "/menuEapo", "/menuInvents", "/menuDesigns", "/pharma"];

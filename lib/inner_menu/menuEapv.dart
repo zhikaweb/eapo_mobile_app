@@ -1,13 +1,8 @@
 import 'package:eapo_mobile_app/presentation/customBtnMainMenu.dart';
-import 'package:eapo_mobile_app/staticPages/contacts.dart';
+import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:flutter_svg/parser.dart';
-import '../staticPages/about.dart';
-import '../staticPages/accounts.dart';
 import '../presentation/customBottomAppBar.dart';
-import '../presentation/icons.dart';
-import '../inner_menu/menuGetPatent.dart';
 
 class MenuEAPVScreen extends StatelessWidget {
 
@@ -18,14 +13,7 @@ class MenuEAPVScreen extends StatelessWidget {
 
     return Container(
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color.fromRGBO(30, 111, 165, 1.0),
-                Color.fromRGBO(209, 231, 243, 1.0)
-              ]
-          )
+          gradient: MainColors().mainLinearGradient,
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -48,36 +36,25 @@ class MenuEAPVScreen extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
-                Container(
-                  padding: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
-                  child: SizedBox (
-                    width: MediaQuery.of(context).size.width - 32,
-                    height: 60,
-                    child: CustomBtnMainMenu(title: 'О ведомстве', route: '/about'),
-                  ),
+                _containerBtn(
+                  context,
+                    EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 32),
+                    'О ведомстве', '/about'
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
-                  child: SizedBox (
-                    width: MediaQuery.of(context).size.width - 32,
-                    height: 60,
-                    child: CustomBtnMainMenu(title: 'Процедура получения патента', route: '/getPatent'),
-                  ),
+                _containerBtn(
+                    context,
+                    EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 32),
+                    'Процедура получения патента', '/getPatent'
                 ),
-                Container(
-                  margin: EdgeInsets.only(left: 0, top: 0, right: 0, bottom: 32),
-                  child: SizedBox (
-                    width: MediaQuery.of(context).size.width - 32,
-                    height: 60,
-                    child: CustomBtnMainMenu(title: 'Банковские реквизиты', route: '/accounts'),
-                  ),
+                _containerBtn(
+                    context,
+                    EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 32),
+                    'Банковские реквизиты', '/accounts'
                 ),
-                Container(
-                  child: SizedBox (
-                    width: MediaQuery.of(context).size.width - 32,
-                    height: 60,
-                    child: CustomBtnMainMenu(title: 'Контакты', route: '/contacts'),
-                  ),
+                _containerBtn(
+                    context,
+                    EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 0),
+                    'Контакты', '/contacts'
                 ),
               ],
             ),
@@ -98,13 +75,9 @@ class MenuEAPVScreen extends StatelessWidget {
             selectedColor: Colors.black,
             notchedShape: CircularNotchedRectangle(),
             onTabSelected: (value) {
-              final routes = ["/home", "/menuEapo", "/menuInvents", "/menuDesigns", "/pharma"];
               _currentIndex = value;
-              // Navigator.of(context).pushNamedAndRemoveUntil(
-              //     routes[value], (route) => false);
               if (value == 0){
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    routes[value], (route) => false);
+                Navigator.of(context).pushNamed('/home');
               }
               if (value == 2){
                 Navigator.of(context).pushNamed('/menuInvents');
@@ -131,6 +104,17 @@ class MenuEAPVScreen extends StatelessWidget {
         )
         )
       );
+  }
+
+  Widget _containerBtn(BuildContext context, EdgeInsetsGeometry? margin, String title, String route){
+    return Container(
+      margin: margin,
+      child: SizedBox (
+        width: MediaQuery.of(context).size.width - 32,
+        height: 60,
+        child: CustomBtnMainMenu(title: title, route: route),
+      ),
+    );
   }
 }
 

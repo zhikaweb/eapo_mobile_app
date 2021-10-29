@@ -1,4 +1,5 @@
 import 'package:eapo_mobile_app/presentation/icons.dart';
+import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:eapo_mobile_app/utils/myWebview.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -20,14 +21,7 @@ class _SearchPublDesignState extends State<SearchPublDesign> {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-          gradient: LinearGradient(
-              begin: Alignment.topLeft,
-              end: Alignment.bottomRight,
-              colors: [
-                Color.fromRGBO(209, 231, 243, 1.0),
-                Color.fromRGBO(209, 231, 243, 1.0)
-              ]
-          )
+          gradient: MainColors().innerPageGradient
       ),
       child: Scaffold(
         backgroundColor: Colors.transparent,
@@ -41,9 +35,7 @@ class _SearchPublDesignState extends State<SearchPublDesign> {
                 topRight: Radius.circular(16.0)
             ),
             child: CustomBottomAppBar(
-              color: Colors.white,
               backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
-              selectedColor: Colors.white,
               notchedShape: CircularNotchedRectangle(),
               onTabSelected: (value) {
                 final routes = ["/home", "/menuEapo", "/menuInvents", "/menuDesigns", "/pharma"];

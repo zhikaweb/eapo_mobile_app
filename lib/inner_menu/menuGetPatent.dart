@@ -1,3 +1,4 @@
+import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
@@ -21,14 +22,7 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromRGBO(189, 218, 234, 1.0),
-                  Color.fromRGBO(189, 218, 234, 1.0)
-                ]
-            )
+            gradient: MainColors().innerPageGradient,
         ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -84,9 +78,7 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                   topRight: Radius.circular(16.0)
               ),
               child: CustomBottomAppBar(
-                color: Colors.black,
                 backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
-                selectedColor: Colors.black,
                 notchedShape: CircularNotchedRectangle(),
                 onTabSelected: (value) {
                   final routes = ["/home", "/menuEapo", "/menuInvents", "/menuDesigns", "/pharma"];

@@ -1,4 +1,5 @@
 import 'package:eapo_mobile_app/presentation/customBtnMainMenu.dart';
+import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import '../presentation/customBottomAppBar.dart';
@@ -14,14 +15,7 @@ class _MenuInventsState extends State<MenuInvents> {
   Widget build(BuildContext context) {
     return Container(
         decoration: BoxDecoration(
-            gradient: LinearGradient(
-                begin: Alignment.topLeft,
-                end: Alignment.bottomRight,
-                colors: [
-                  Color.fromRGBO(30, 111, 165, 1.0),
-                  Color.fromRGBO(209, 231, 243, 1.0)
-                ]
-            )
+            gradient: MainColors().mainLinearGradient,
         ),
         child: Scaffold(
           backgroundColor: Colors.transparent,
@@ -43,36 +37,25 @@ class _MenuInventsState extends State<MenuInvents> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
-                    child: SizedBox (
-                      width: MediaQuery.of(context).size.width - 32,
-                      height: 60,
-                      child: CustomBtnMainMenu(title: 'Нормативные правовые акты', route: '/inventDocs'),
-                    ),
+                  _containerBtn(
+                      context,
+                      EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 32),
+                      'Нормативные правовые акты', '/inventDocs'
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
-                    child: SizedBox (
-                      width: MediaQuery.of(context).size.width - 32,
-                      height: 60,
-                      child: CustomBtnMainMenu(title: 'Бюллетень', route: '/inventBull'),
-                    ),
+                  _containerBtn(
+                      context,
+                      EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 32),
+                      'Бюллетень', '/inventBull'
                   ),
-                  Container(
-                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
-                    child: SizedBox (
-                      width: MediaQuery.of(context).size.width - 32,
-                      height: 60,
-                      child: CustomBtnMainMenu(title: 'Поиск публикаций', route: '/searchPubl'),
-                    ),
+                  _containerBtn(
+                      context,
+                      EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 32),
+                      'Поиск публикаций', '/searchPubl'
                   ),
-                  Container(
-                    child: SizedBox (
-                      width: MediaQuery.of(context).size.width - 32,
-                      height: 60,
-                      child: CustomBtnMainMenu(title: 'Реестр патентов', route: '/patentRegistry'),
-                    ),
+                  _containerBtn(
+                      context,
+                      EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 0),
+                      'Реестр патентов', '/patentRegistry'
                   ),
                 ],
               ),
@@ -127,6 +110,17 @@ class _MenuInventsState extends State<MenuInvents> {
             ),
           )
         )
+    );
+  }
+
+  Widget _containerBtn(BuildContext context, EdgeInsetsGeometry? margin, String title, String route){
+    return Container(
+      margin: margin,
+      child: SizedBox (
+        width: MediaQuery.of(context).size.width - 32,
+        height: 60,
+        child: CustomBtnMainMenu(title: title, route: route),
+      ),
     );
   }
 }
