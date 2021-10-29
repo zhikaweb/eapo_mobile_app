@@ -59,65 +59,14 @@ class _PharmRegistryState extends State<PharmRegistry> {
         body: Stack(
           children: <Widget>[
             Container(
-              child: Form(
-                key: _globalKey,
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceAround,
-                  children: [
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 0,
-                        right: 0,
-                        top: 10,
-                        bottom: 10,
-                      ),
-                      child: SizedBox(
-                        width: 200,
-                        height: 40,
-                        child: TextFormField(
-                          controller: _textEditingController,
-                          decoration: InputDecoration(
-                            border: OutlineInputBorder(),
-                          ),
-                          showCursor: true,
-                          onSaved: (value) {
-                            _searchRequest = value!;
-                          },
-                        ),
-                      ),
-                    ),
-                    Padding(
-                      padding: EdgeInsets.only(
-                        left: 0,
-                        right: 0,
-                        top: 10,
-                        bottom: 10,
-                      ),
-                      child: SizedBox(
-                        width: 100,
-                        child: ElevatedButton(
-                            child: Text('Поиск'),
-                            onPressed: () {
-                              _search();
-                            }
-                        ),
-                      ),
-                    )
-                  ],
-                ),
-              )
+              child: _form(),
             ),
             Stack(
               clipBehavior: Clip.none,
               children: <Widget>[
                 Container(
-                  margin: EdgeInsets.only(bottom: 0, top: 65, left: 0, right: 0),
-                  child: InAppWebView(
-                    initialUrlRequest: URLRequest(url: Uri.parse(_url)),
-                    onWebViewCreated: (controller) {
-                      _controller = controller;
-                    },
-                  ),
+                  margin: EdgeInsets.only(bottom: 0, top: 70, left: 0, right: 0),
+                  child: _webView(),
                 ),
               ],
             ),
@@ -128,50 +77,7 @@ class _PharmRegistryState extends State<PharmRegistry> {
             topLeft: Radius.circular(16.0),
             topRight: Radius.circular(16.0)
             ),
-          child: CustomBottomAppBar(
-            color: Colors.white,
-            backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
-            selectedColor: Colors.white,
-            notchedShape: CircularNotchedRectangle(),
-            onTabSelected: (value) {
-              final routes = [
-                "/home",
-                "/menuEapo",
-                "/menuInvents",
-                "/menuDesigns",
-                "/pharma"
-              ];
-              _currentIndex = value;
-              // Navigator.of(context).pushNamedAndRemoveUntil(
-              //     routes[value], (route) => false);
-              if (value == 0) {
-                Navigator.of(context).pushNamedAndRemoveUntil(
-                    routes[value], (route) => false);
-              }
-              if (value == 1) {
-                Navigator.of(context).pushNamed('/menuEapo');
-              }
-              if (value == 2) {
-                Navigator.of(context).pushNamed('/menuInvents');
-              }
-              if (value == 3) {
-                Navigator.of(context).pushNamed('/menuDesigns');
-              }
-              // if (value == 4){
-              //   Navigator.of(context).pushNamed('/pharma');
-              // }
-            },
-            items: [
-              CustomBottomAppBarItem(iconData: SvgPicture.asset('assets/images/home.svg')),
-              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/eye.svg")),
-              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/atom.svg")),
-              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/game.svg")),
-              CustomBottomAppBarItem(iconData: _currentIndex == 4
-                  ? SvgPicture.asset("assets/images/pill_active.svg")
-                  : SvgPicture.asset("assets/images/pill.svg")),
-              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/key.svg"))
-            ],
-          ),
+          child: _bottomAppBar(),
         )
       ),
     );
@@ -180,11 +86,8 @@ class _PharmRegistryState extends State<PharmRegistry> {
   void _search() {
     if (_globalKey.currentState!.validate()) {
       _globalKey.currentState!.save();
-      // print(_searchRequest);
       final codec = const Windows1251Codec(allowInvalid: false);
       final encoded = codec.encode(_searchRequest);
-      // print(encoded);
-      // print(Uri.dataFromBytes(encoded, mimeType: '', percentEncoded: true));
 
       var data = Uri.dataFromBytes(encoded, mimeType: '', percentEncoded: true);
       print(data.data!.contentText);
@@ -192,8 +95,106 @@ class _PharmRegistryState extends State<PharmRegistry> {
 
       _controller.loadUrl(
           urlRequest: URLRequest(url: Uri.parse(_urlSearch + encodedData)));
-      // print(Uri.parse(_urlSearch + encodedData));
     }
   }
 
+  Form _form() {
+    return Form(
+      key: _globalKey,
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceAround,
+        children: [
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+            child: SizedBox(
+              width: 200,
+              height: 50,
+              child: _materialTextFieldSearch(),
+            ),
+          ),
+          Padding(
+            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+            child: SizedBox(
+              width: 120,
+              child: _materialBtn(),
+            ),
+          )
+        ],
+      ),
+    );
+  }
+
+  Material _materialBtn(){
+    return Material(
+      elevation: 2.0,
+      borderRadius: BorderRadius.circular(8.0),
+      color: Color.fromRGBO(233, 241, 245, 1.0),
+      child: MaterialButton(
+          child: Text('Поиск'),
+          onPressed: () {
+            _search();
+          }
+      ),
+    );
+  }
+
+  Material _materialTextFieldSearch(){
+    return Material(
+      child: TextFormField(
+        controller: _textEditingController,
+        decoration: InputDecoration(
+          border: OutlineInputBorder(),
+        ),
+        showCursor: true,
+        onSaved: (value) {
+          _searchRequest = value!;
+        },
+      ),
+    );
+  }
+
+  Widget _webView(){
+    return InAppWebView(
+      initialUrlRequest: URLRequest(url: Uri.parse(_url)),
+      onWebViewCreated: (controller) {
+        _controller = controller;
+      },
+    );
+  }
+
+  CustomBottomAppBar _bottomAppBar(){
+    return CustomBottomAppBar(
+      color: Colors.white,
+      backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
+      selectedColor: Colors.white,
+      notchedShape: CircularNotchedRectangle(),
+      onTabSelected: (value) {
+        _currentIndex = value;
+        switch (value) {
+          case 0:
+            Navigator.of(context).pushNamed('/home');
+            break;
+          case 1:
+            Navigator.of(context).pushNamed('/menuEapo');
+            break;
+          case 2:
+            Navigator.of(context).pushNamed('/menuInvents');
+            break;
+          case 3:
+            Navigator.of(context).pushNamed('/menuDesigns');
+            break;
+        }
+      },
+      items: [
+        CustomBottomAppBarItem(iconData: SvgPicture.asset('assets/images/home.svg')),
+        CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/eye.svg")),
+        CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/atom.svg")),
+        CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/game.svg")),
+        CustomBottomAppBarItem(iconData: _currentIndex == 4
+            ? SvgPicture.asset("assets/images/pill_active.svg")
+            : SvgPicture.asset("assets/images/pill.svg")),
+        CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/key.svg"))
+      ],
+    );
+  }
 }
