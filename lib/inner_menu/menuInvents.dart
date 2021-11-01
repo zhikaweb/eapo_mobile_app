@@ -1,4 +1,4 @@
-import 'package:eapo_mobile_app/presentation/customBtnMainMenu.dart';
+import 'package:eapo_mobile_app/presentation/btnMainMenu.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -33,31 +33,21 @@ class _MenuInventsState extends State<MenuInvents> {
                 alignment: Alignment.topRight,
                 child: SvgPicture.asset('assets/images/eg_lg_top_r.svg'),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  _containerBtn(
-                      context,
-                      EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 32),
-                      'Нормативные правовые акты', '/inventDocs'
-                  ),
-                  _containerBtn(
-                      context,
-                      EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 32),
-                      'Бюллетень', '/inventBull'
-                  ),
-                  _containerBtn(
-                      context,
-                      EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 32),
-                      'Поиск публикаций', '/searchPubl'
-                  ),
-                  _containerBtn(
-                      context,
-                      EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 0),
-                      'Реестр патентов', '/patentRegistry'
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    _containerBtn('Нормативные правовые акты', '/inventDocs'),
+                    SizedBox(height: 32,),
+                    _containerBtn('Бюллетень', '/inventBull'),
+                    SizedBox(height: 32,),
+                    _containerBtn('Поиск публикаций', '/searchPubl'),
+                    SizedBox(height: 32,),
+                    _containerBtn('Реестр патентов', '/patentRegistry'),
+                  ],
+                ),
               ),
               Container(
                 alignment: Alignment.bottomLeft,
@@ -113,13 +103,11 @@ class _MenuInventsState extends State<MenuInvents> {
     );
   }
 
-  Widget _containerBtn(BuildContext context, EdgeInsetsGeometry? margin, String title, String route){
+  Widget _containerBtn(String title, String route){
     return Container(
-      margin: margin,
       child: SizedBox (
-        width: MediaQuery.of(context).size.width - 32,
         height: 60,
-        child: CustomBtnMainMenu(title: title, route: route),
+        child: BtnMainMenu(title: title, route: route),
       ),
     );
   }

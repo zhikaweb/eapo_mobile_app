@@ -1,5 +1,6 @@
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 
 class LoginPage extends StatefulWidget {
   // const LoginPage({Key? key}) : super(key: key);
@@ -9,6 +10,9 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+  TextEditingController _textEditingController = TextEditingController();
+  final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -27,6 +31,116 @@ class _LoginPageState extends State<LoginPage> {
                 },
               ),
             ),
-            body: null));
+            body: Stack(
+              children: <Widget>[
+                Container(
+                  alignment: Alignment.topRight,
+                  child: SvgPicture.asset('assets/images/eg_lg_top_r.svg'),
+                ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                  child: _loginForm(),
+                ),
+                Container(
+                  alignment: Alignment.bottomLeft,
+                  child: SvgPicture.asset('assets/images/eg_sm_bottomleft.svg'),
+                ),
+              ],
+            ),
+        )
+    );
+  }
+
+  Form _loginForm(){
+    return Form(
+        key: _globalKey,
+        child: Column(
+        mainAxisAlignment: MainAxisAlignment.center,
+        crossAxisAlignment: CrossAxisAlignment.center,
+        children: <Widget>[
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Text('Логин', style: TextStyle(color: Colors.white),),
+          ),
+          SizedBox(height: 60, child: _inputLogin(),),
+          SizedBox(height: 32,),
+          Align(
+            alignment: Alignment.bottomLeft,
+            child: Text('Пароль', style: TextStyle(color: Colors.white),),
+          ),
+          SizedBox(height: 60, child: _inputPassword(),),
+          SizedBox(height: 32,),
+          _btnSubmit(),
+          SizedBox(height: 32,),
+          SizedBox(width: 200, child: _divider(),),
+          SizedBox(height: 32,),
+          _btnNewUser(),
+        ],
+      ),
+    );
+  }
+
+  Material _inputLogin(){
+    return Material(
+      child: TextFormField(decoration: InputDecoration(
+        suffixIcon: Icon(Icons.clear_rounded),
+        border: OutlineInputBorder(borderSide: BorderSide.none),
+      ),),
+    );
+  }
+
+  Material _inputPassword(){
+    return Material(
+      child: TextFormField(decoration: InputDecoration(
+        suffixIcon: Icon(Icons.remove_red_eye_outlined),
+        border: OutlineInputBorder(borderSide: BorderSide.none),
+      ),),
+    );
+  }
+
+  Material _btnSubmit(){
+    return Material(
+        elevation: 5.0,
+        borderRadius: BorderRadius.circular(8.0),
+        color: MainColors().eapoColorMain,
+        child: MaterialButton(
+            minWidth: MediaQuery.of(context).size.width,
+            height: 60,
+            onPressed: () {
+            },
+            child: Text(
+              'Войти',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20, color: Colors.white),
+            )
+        )
+    );
+  }
+
+  Material _btnNewUser(){
+    return Material(
+        elevation: 5.0,
+        borderRadius: BorderRadius.circular(8.0),
+        color: MainColors().eapoColorMain,
+        child: MaterialButton(
+            minWidth: MediaQuery.of(context).size.width,
+            height: 60,
+            onPressed: () {
+            },
+            child: Text(
+              'Новый пользователь',
+              textAlign: TextAlign.center,
+              style: TextStyle(fontSize: 20, color: Colors.white),
+            )
+        )
+    );
+  }
+
+  Material _divider(){
+    return Material(
+      elevation: 1.0,
+      borderRadius: BorderRadius.circular(2.0),
+      child: Divider(color: Colors.white, height: 2,),
+    );
   }
 }

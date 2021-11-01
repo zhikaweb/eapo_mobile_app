@@ -1,16 +1,16 @@
 import 'package:flutter/material.dart';
 
-class CustomBtnMainMenu extends StatefulWidget {
+class BtnMainMenu extends StatefulWidget {
   final String title;
   final String route;
-  const CustomBtnMainMenu({ Key? key,
+  const BtnMainMenu({ Key? key,
     required this.title, required this.route}): super(key: key);
 
   @override
-  _CustomBtnMainMenuState createState() => _CustomBtnMainMenuState();
+  _BtnMainMenuState createState() => _BtnMainMenuState();
 }
 
-class _CustomBtnMainMenuState extends State<CustomBtnMainMenu> {
+class _BtnMainMenuState extends State<BtnMainMenu> {
   @override
   Widget build(BuildContext context) {
     return Material(

@@ -1,4 +1,4 @@
-import 'package:eapo_mobile_app/presentation/customBtnMainMenu.dart';
+import 'package:eapo_mobile_app/presentation/btnMainMenu.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -32,31 +32,21 @@ class MenuEAPVScreen extends StatelessWidget {
               alignment: Alignment.topRight,
               child: SvgPicture.asset('assets/images/eg_lg_top_r.svg'),
             ),
-            Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              crossAxisAlignment: CrossAxisAlignment.center,
-              children: <Widget>[
-                _containerBtn(
-                  context,
-                    EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 32),
-                    'О ведомстве', '/about'
-                ),
-                _containerBtn(
-                    context,
-                    EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 32),
-                    'Процедура получения патента', '/getPatent'
-                ),
-                _containerBtn(
-                    context,
-                    EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 32),
-                    'Банковские реквизиты', '/accounts'
-                ),
-                _containerBtn(
-                    context,
-                    EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 0),
-                    'Контакты', '/contacts'
-                ),
-              ],
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: <Widget>[
+                  _containerBtn('О ведомстве', '/about'),
+                  SizedBox(height: 32,),
+                  _containerBtn('Процедура получения патента', '/getPatent'),
+                  SizedBox(height: 32,),
+                  _containerBtn('Банковские реквизиты', '/accounts'),
+                  SizedBox(height: 32,),
+                  _containerBtn('Контакты', '/contacts'),
+                ],
+              ),
             ),
             Container(
               alignment: Alignment.bottomLeft,
@@ -106,13 +96,11 @@ class MenuEAPVScreen extends StatelessWidget {
       );
   }
 
-  Widget _containerBtn(BuildContext context, EdgeInsetsGeometry? margin, String title, String route){
+  Widget _containerBtn(String title, String route){
     return Container(
-      margin: margin,
       child: SizedBox (
-        width: MediaQuery.of(context).size.width - 32,
         height: 60,
-        child: CustomBtnMainMenu(title: title, route: route),
+        child: BtnMainMenu(title: title, route: route),
       ),
     );
   }

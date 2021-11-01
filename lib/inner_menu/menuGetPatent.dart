@@ -44,32 +44,24 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                 alignment: Alignment.bottomRight,
                 child: SvgPicture.asset('assets/images/eg_sm_bottomright.svg'),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  Container(
-                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
-                    child: sizedBoxWithBtn('Патентовать или не патентовать', listUrl[0]),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
-                    child: sizedBoxWithBtn('Пять шагов к Евразийскому патенту', listUrl[1]),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
-                    child: sizedBoxWithBtn('Как получить Евразийский патент', listUrl[2]),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 32),
-                    child: sizedBoxWithBtn('Получение Евразийского патента по процедуре РСТ', listUrl[3]),
-                  ),
-                  Container(
-                    margin: EdgeInsets.only(left: 16, top: 0, right: 16, bottom: 0),
-                    child: sizedBoxWithBtn('Как подать евразийскую заявку', listUrl[4]),
-                  ),
-                ],
-              ),
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    _btn('Патентовать или не патентовать', listUrl[0]),
+                    SizedBox(height: 32,),
+                    _btn('Пять шагов к Евразийскому патенту', listUrl[1]),
+                    SizedBox(height: 32,),
+                    _btn('Как получить Евразийский патент', listUrl[2]),
+                    SizedBox(height: 32,),
+                    _btn('Получение Евразийского патента по процедуре РСТ', listUrl[3]),
+                    SizedBox(height: 32,),
+                    _btn('Как подать евразийскую заявку', listUrl[4]),
+                  ],
+                ),
+              )
             ],
           ),
             bottomNavigationBar: ClipRRect(
@@ -116,7 +108,7 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
     );
   }
 
-  Widget sizedBoxWithBtn(String title, String route){
+  Widget _btn(String title, String route){
     return Material(
         elevation: 5.0,
         borderRadius: BorderRadius.circular(8.0),

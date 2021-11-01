@@ -1,4 +1,4 @@
-import 'package:eapo_mobile_app/presentation/customBtnMainMenu.dart';
+import 'package:eapo_mobile_app/presentation/btnMainMenu.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -35,26 +35,19 @@ class _MenuDesignsState extends State<MenuDesigns> {
                 alignment: Alignment.topRight,
                 child: SvgPicture.asset('assets/images/eg_lg_top_r.svg'),
               ),
-              Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                crossAxisAlignment: CrossAxisAlignment.center,
-                children: <Widget>[
-                  _containerBtn(
-                      context,
-                      EdgeInsets.only(left: 16, top: 0, right: 0, bottom:32),
-                      'Нормативные правовые акты', '/designDocs'
-                  ),
-                  _containerBtn(
-                      context,
-                      EdgeInsets.only(left: 16, top: 0, right: 0, bottom:32),
-                      'Бюллетень', '/designBull'
-                  ),
-                  _containerBtn(
-                      context,
-                      EdgeInsets.only(left: 16, top: 0, right: 0, bottom: 0),
-                      'Поиск публикаций', '/searchPublDesign'
-                  ),
-                ],
+              Padding(
+                padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    _containerBtn('Нормативные правовые акты', '/designDocs'),
+                    SizedBox(height: 32,),
+                    _containerBtn('Бюллетень', '/designBull'),
+                    SizedBox(height: 32,),
+                    _containerBtn('Поиск публикаций', '/searchPublDesign'),
+                  ],
+                ),
               ),
               Container(
                 alignment: Alignment.bottomLeft,
@@ -110,13 +103,11 @@ class _MenuDesignsState extends State<MenuDesigns> {
     );
   }
 
-  Widget _containerBtn(BuildContext context, EdgeInsetsGeometry? margin, String title, String route){
+  Widget _containerBtn(String title, String route){
     return Container(
-      margin: margin,
       child: SizedBox (
-        width: MediaQuery.of(context).size.width - 32,
         height: 60,
-        child: CustomBtnMainMenu(title: title, route: route),
+        child: BtnMainMenu(title: title, route: route),
       ),
     );
   }
