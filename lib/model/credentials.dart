@@ -13,6 +13,4 @@ class Credentials {
   set password(String value) {
     _password = value;
   }
-
-  Credentials(this._login, this._password);
 }

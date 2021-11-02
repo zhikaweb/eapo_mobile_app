@@ -1,3 +1,5 @@
+import 'package:eapo_mobile_app/account/accountMenu.dart';
+import 'package:eapo_mobile_app/model/credentials.dart';
 import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
@@ -11,8 +13,18 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
-  TextEditingController _textEditingController = TextEditingController();
+  final Credentials _credentials = new Credentials();
+  final TextEditingController _loginController = TextEditingController();
+  final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+  bool _hidePassword = true;
+
+  @override
+  void dispose() {
+    _loginController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -88,21 +100,57 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Material _inputLogin(){
-    return Material(
-      child: TextFormField(decoration: InputDecoration(
-        suffixIcon: Icon(Icons.clear_rounded),
+  TextFormField _inputLogin(){
+    return TextFormField(
+      controller: _loginController,
+      decoration: InputDecoration(
+        suffixIcon: IconButton(
+          icon: Icon(Icons.clear_outlined), onPressed: () {
+            _loginController.clear();
+          },
+        ),
         border: OutlineInputBorder(borderSide: BorderSide.none),
-      ),),
+        hintText: 'Имя пользователя',
+        hintStyle: TextStyle(fontSize: 18),
+        fillColor: Colors.white,
+        filled: true,
+      ),
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter login';
+        }
+        return null;
+      },
+      onSaved: (value) => _credentials.login = value!.trim(),
     );
   }
 
-  Material _inputPassword(){
-    return Material(
-      child: TextFormField(decoration: InputDecoration(
-        suffixIcon: Icon(Icons.remove_red_eye_outlined),
+  TextFormField _inputPassword(){
+    return TextFormField(
+      controller: _passwordController,
+      decoration: InputDecoration(
+        suffixIcon: IconButton(
+          icon: Icon(_hidePassword ? Icons.visibility : Icons.visibility_off),
+          onPressed: () {
+              setState(() {
+                _hidePassword = !_hidePassword;
+              });
+            },
+        ),
         border: OutlineInputBorder(borderSide: BorderSide.none),
-      ),),
+        hintText: 'Пароль',
+        hintStyle: TextStyle(fontSize: 18),
+        fillColor: Colors.white,
+        filled: true,
+      ),
+      obscureText: _hidePassword,
+      validator: (value) {
+        if (value == null || value.isEmpty) {
+          return 'Please enter password';
+        }
+        return null;
+      },
+      onSaved: (value) => _credentials.password = value!.trim(),
     );
   }
 
@@ -115,6 +163,7 @@ class _LoginPageState extends State<LoginPage> {
             minWidth: MediaQuery.of(context).size.width,
             height: 60,
             onPressed: () {
+              _submitForm();
             },
             child: Text(
               'Войти',
@@ -134,6 +183,7 @@ class _LoginPageState extends State<LoginPage> {
             minWidth: MediaQuery.of(context).size.width,
             height: 60,
             onPressed: () {
+              _showAlertDialog(context, 'Регистрация недоступна!', 'Обратитесь в ЕАПВ');
             },
             child: Text(
               'Новый пользователь',
@@ -160,4 +210,48 @@ class _LoginPageState extends State<LoginPage> {
       child: CustomBottomAppBarImpl(currentIndex: index,),
     );
   }
+
+  _submitForm() {
+    if (_globalKey.currentState!.validate()) {
+      print('Form is valid!');
+      _globalKey.currentState!.save();
+      print('Name: ${_credentials.login}');
+      print('Name: ${_credentials.password}');
+      Navigator.push(context, MaterialPageRoute(
+          builder: (context) => AccountMenu(credentials: _credentials,)
+        )
+      );
+    }
+    else {
+      print('Form is not valid!');
+    }
+  }
+
+  _showAlertDialog(BuildContext context, String title, String text) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text('OK'),
+      onPressed: () {
+        Navigator.of(context).pop();
+     },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(title),
+      content: Text(text),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 }
