@@ -1,9 +1,8 @@
+import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:url_launcher/url_launcher.dart';
-import '../presentation/customBottomAppBar.dart';
-import '../presentation/icons.dart';
 
 class MenuGetPatent extends StatefulWidget {
   @override
@@ -16,7 +15,6 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
   'https://www.eapo.org/ru/getpatent2018/',
     'https://www.eapo.org/ru/getpatentpct/',
   'https://www.eapo.org/ru/application2019/'];
-  int _currentIndex = 1;
 
   @override
   Widget build(BuildContext context) {
@@ -64,47 +62,17 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
               )
             ],
           ),
-            bottomNavigationBar: ClipRRect(
-              borderRadius: BorderRadius.only(
-                  topLeft: Radius.circular(16.0),
-                  topRight: Radius.circular(16.0)
-              ),
-              child: CustomBottomAppBar(
-                backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
-                notchedShape: CircularNotchedRectangle(),
-                onTabSelected: (value) {
-                  final routes = ["/home", "/menuEapo", "/menuInvents", "/menuDesigns", "/pharma"];
-                  _currentIndex = value;
-                  // Navigator.of(context).pushNamedAndRemoveUntil(
-                  //     routes[value], (route) => false);
-                  if (value == 0){
-                    Navigator.of(context).pushNamedAndRemoveUntil(
-                        routes[value], (route) => false);
-                  }
-                  if (value == 2){
-                    Navigator.of(context).pushNamed('/menuInvents');
-                  }
-                  if (value == 3){
-                    Navigator.of(context).pushNamed('/menuDesigns');
-                  }
-                  if (value == 4){
-                    Navigator.of(context).pushNamed('/pharma');
-                  }
-
-                },
-                items: [
-                  CustomBottomAppBarItem(iconData: SvgPicture.asset('assets/images/home.svg')),
-                  CustomBottomAppBarItem(iconData: _currentIndex == 1
-                      ? SvgPicture.asset("assets/images/eye_active.svg")
-                      : SvgPicture.asset("assets/images/eye.svg")),
-                  CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/atom.svg")),
-                  CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/game.svg")),
-                  CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/pill.svg")),
-                  CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/key.svg"))
-                ],
-              ),
-            )
+          bottomNavigationBar: _bottomBar(1),
         )
+    );
+  }
+
+  ClipRRect _bottomBar(int index){
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0)),
+      child: CustomBottomAppBarImpl(currentIndex: index,),
     );
   }
 

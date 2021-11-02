@@ -1,4 +1,5 @@
 import 'package:eapo_mobile_app/presentation/btnMainMenu.dart';
+import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,8 +9,6 @@ class MenuEAPVScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int _currentIndex = 1;
-    int currentTab = 0;
 
     return Container(
       decoration: BoxDecoration(
@@ -54,46 +53,18 @@ class MenuEAPVScreen extends StatelessWidget {
             ),
           ],
         ),
-        bottomNavigationBar: ClipRRect(
-          borderRadius: BorderRadius.only(
-              topLeft: Radius.circular(16.0),
-              topRight: Radius.circular(16.0)
-          ),
-          child: CustomBottomAppBar(
-            color: Colors.black,
-            backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
-            selectedColor: Colors.black,
-            notchedShape: CircularNotchedRectangle(),
-            onTabSelected: (value) {
-              _currentIndex = value;
-              if (value == 0){
-                Navigator.of(context).pushNamed('/home');
-              }
-              if (value == 2){
-                Navigator.of(context).pushNamed('/menuInvents');
-              }
-              if (value == 3){
-                Navigator.of(context).pushNamed('/menuDesigns');
-              }
-              if (value == 4){
-                Navigator.of(context).pushNamed('/pharma');
-              }
-
-            },
-            items: [
-              CustomBottomAppBarItem(iconData: SvgPicture.asset('assets/images/home.svg')),
-              CustomBottomAppBarItem(iconData: _currentIndex == 1
-                  ? SvgPicture.asset("assets/images/eye_active.svg")
-                  : SvgPicture.asset("assets/images/eye.svg")),
-              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/atom.svg")),
-              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/game.svg")),
-              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/pill.svg")),
-              CustomBottomAppBarItem(iconData: SvgPicture.asset("assets/images/key.svg"))
-            ],
-          ),
-        )
+        bottomNavigationBar: _bottomBar(1),
         )
       );
+  }
+
+  ClipRRect _bottomBar(int index){
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0)),
+      child: CustomBottomAppBarImpl(currentIndex: index,),
+    );
   }
 
   Widget _containerBtn(String title, String route){

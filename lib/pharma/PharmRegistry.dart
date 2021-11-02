@@ -1,10 +1,8 @@
+import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:enough_convert/enough_convert.dart';
-import 'package:flutter_svg/svg.dart';
-
-import '../presentation/customBottomAppBar.dart';
 
 class PharmRegistry extends StatefulWidget {
   @override
@@ -16,7 +14,7 @@ class _PharmRegistryState extends State<PharmRegistry> {
   String _urlSearch =
       'https://www.eapo.org/ru/mobile/sfarma.php?SEARCH%5Bfarma%5D=';
   late String _searchRequest;
-  int _currentIndex = 4;
+
   TextEditingController _textEditingController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
@@ -68,12 +66,8 @@ class _PharmRegistryState extends State<PharmRegistry> {
               ),
             ],
           ),
-          bottomNavigationBar: ClipRRect(
-            borderRadius: BorderRadius.only(
-                topLeft: Radius.circular(16.0),
-                topRight: Radius.circular(16.0)),
-            child: _bottomAppBar(),
-          )),
+          bottomNavigationBar: _bottomBar(4),
+      ),
     );
   }
 
@@ -140,43 +134,12 @@ class _PharmRegistryState extends State<PharmRegistry> {
     );
   }
 
-  CustomBottomAppBar _bottomAppBar() {
-    return CustomBottomAppBar(
-      backgroundColor: Color.fromRGBO(121, 175, 208, 1.0),
-      notchedShape: CircularNotchedRectangle(),
-      onTabSelected: (value) {
-        _currentIndex = value;
-        switch (value) {
-          case 0:
-            Navigator.of(context).pushNamed('/home');
-            break;
-          case 1:
-            Navigator.of(context).pushNamed('/menuEapo');
-            break;
-          case 2:
-            Navigator.of(context).pushNamed('/menuInvents');
-            break;
-          case 3:
-            Navigator.of(context).pushNamed('/menuDesigns');
-            break;
-        }
-      },
-      items: [
-        CustomBottomAppBarItem(
-            iconData: SvgPicture.asset('assets/images/home.svg')),
-        CustomBottomAppBarItem(
-            iconData: SvgPicture.asset("assets/images/eye.svg")),
-        CustomBottomAppBarItem(
-            iconData: SvgPicture.asset("assets/images/atom.svg")),
-        CustomBottomAppBarItem(
-            iconData: SvgPicture.asset("assets/images/game.svg")),
-        CustomBottomAppBarItem(
-            iconData: _currentIndex == 4
-                ? SvgPicture.asset("assets/images/pill_active.svg")
-                : SvgPicture.asset("assets/images/pill.svg")),
-        CustomBottomAppBarItem(
-            iconData: SvgPicture.asset("assets/images/key.svg"))
-      ],
+  ClipRRect _bottomBar(int index){
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0)),
+      child: CustomBottomAppBarImpl(currentIndex: index,),
     );
   }
 

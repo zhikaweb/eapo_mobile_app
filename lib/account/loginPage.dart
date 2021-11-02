@@ -1,3 +1,4 @@
+import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -37,16 +38,17 @@ class _LoginPageState extends State<LoginPage> {
                   alignment: Alignment.topRight,
                   child: SvgPicture.asset('assets/images/eg_lg_top_r.svg'),
                 ),
-                Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
-                  child: _loginForm(),
-                ),
                 Container(
                   alignment: Alignment.bottomLeft,
                   child: SvgPicture.asset('assets/images/eg_sm_bottomleft.svg'),
                 ),
+                Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+                  child: _loginForm(),
+                ),
               ],
             ),
+          bottomNavigationBar: _bottomBar(5),
         )
     );
   }
@@ -58,15 +60,21 @@ class _LoginPageState extends State<LoginPage> {
         mainAxisAlignment: MainAxisAlignment.center,
         crossAxisAlignment: CrossAxisAlignment.center,
         children: <Widget>[
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Text('Логин', style: TextStyle(color: Colors.white),),
+          Padding(
+            padding: EdgeInsets.only(left: 8, right: 0, top: 0, bottom: 8),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text('Логин', style: TextStyle(color: Colors.white, fontSize: 16),),
+            ),
           ),
           SizedBox(height: 60, child: _inputLogin(),),
           SizedBox(height: 32,),
-          Align(
-            alignment: Alignment.bottomLeft,
-            child: Text('Пароль', style: TextStyle(color: Colors.white),),
+          Padding(
+            padding: EdgeInsets.only(left: 8, right: 0, top: 0, bottom: 8),
+            child: Align(
+              alignment: Alignment.bottomLeft,
+              child: Text('Пароль', style: TextStyle(color: Colors.white, fontSize: 16),),
+            ),
           ),
           SizedBox(height: 60, child: _inputPassword(),),
           SizedBox(height: 32,),
@@ -141,6 +149,15 @@ class _LoginPageState extends State<LoginPage> {
       elevation: 1.0,
       borderRadius: BorderRadius.circular(2.0),
       child: Divider(color: Colors.white, height: 2,),
+    );
+  }
+
+  ClipRRect _bottomBar(int index){
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0)),
+      child: CustomBottomAppBarImpl(currentIndex: index,),
     );
   }
 }
