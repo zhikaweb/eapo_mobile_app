@@ -1,3 +1,4 @@
+import 'package:eapo_mobile_app/portalUser.dart';
 import 'package:eapo_mobile_app/model/credentials.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
@@ -12,6 +13,12 @@ class AccountMenu extends StatefulWidget {
 }
 
 class _AccountMenuState extends State<AccountMenu> {
+
+  @override
+  void initState() {
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -41,7 +48,7 @@ class _AccountMenuState extends State<AccountMenu> {
             Container(
               child: Column(
                 children: [
-                  Text('Username: ${widget.credentials.login}')
+                  Text('Username: ${widget.credentials.login}'),
                 ],
               ),
             ),

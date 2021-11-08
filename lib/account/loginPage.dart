@@ -1,9 +1,16 @@
+import 'dart:convert' as convert;
+import 'dart:io';
+
 import 'package:eapo_mobile_app/account/accountMenu.dart';
+import 'package:eapo_mobile_app/portalUser.dart';
 import 'package:eapo_mobile_app/model/credentials.dart';
 import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
+import 'package:eapo_mobile_app/utils/httpUtils.dart';
+import 'package:eapo_mobile_app/utils/networkService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:http/http.dart' as http;
 
 class LoginPage extends StatefulWidget {
   // const LoginPage({Key? key}) : super(key: key);
@@ -14,6 +21,7 @@ class LoginPage extends StatefulWidget {
 
 class _LoginPageState extends State<LoginPage> {
   final Credentials _credentials = new Credentials();
+  late PortalUser _portalUser;
   final TextEditingController _loginController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
@@ -215,16 +223,42 @@ class _LoginPageState extends State<LoginPage> {
     if (_globalKey.currentState!.validate()) {
       print('Form is valid!');
       _globalKey.currentState!.save();
-      print('Name: ${_credentials.login}');
-      print('Name: ${_credentials.password}');
-      Navigator.push(context, MaterialPageRoute(
-          builder: (context) => AccountMenu(credentials: _credentials,)
-        )
-      );
+      // print('Name: ${_credentials.login}');
+      // print('Name: ${_credentials.password}');
+      loadData();
     }
     else {
       print('Form is not valid!');
     }
+  }
+
+  void loadData() {
+      checkAuthentication().then((response) => {
+        if (response.statusCode == 200) {
+          print(response.body),
+          _portalUser = new PortalUser.fromJson(convert.json.decode(response.body)),
+          print(_portalUser.fullUserName),
+          Navigator.push(context, MaterialPageRoute(
+              builder: (context) => AccountMenu(credentials: _credentials,)
+            )
+          ),
+        } else {
+          print(response.statusCode),
+          _showAlertDialog(context, 'Ошибка входа', 'Неверный логин и/или пароль')
+        }
+      }).catchError((error) {
+        debugPrint(error.toString());
+      });
+  }
+
+  Future<http.Response> checkAuthentication() async {
+    var url = HttpUtils.mainUrl + 'mobile/login';
+
+    return await http.get(Uri.parse(url), headers: {
+        HttpHeaders.authorizationHeader: NetworkService(_credentials)
+            .calculateAuthentication(),
+      },
+    );
   }
 
   _showAlertDialog(BuildContext context, String title, String text) {
@@ -233,7 +267,7 @@ class _LoginPageState extends State<LoginPage> {
       child: Text('OK'),
       onPressed: () {
         Navigator.of(context).pop();
-     },
+      },
     );
 
     // set up the AlertDialog
@@ -253,5 +287,6 @@ class _LoginPageState extends State<LoginPage> {
       },
     );
   }
+
 
 }
