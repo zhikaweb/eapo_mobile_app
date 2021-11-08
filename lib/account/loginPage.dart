@@ -223,23 +223,20 @@ class _LoginPageState extends State<LoginPage> {
     if (_globalKey.currentState!.validate()) {
       print('Form is valid!');
       _globalKey.currentState!.save();
-      // print('Name: ${_credentials.login}');
-      // print('Name: ${_credentials.password}');
-      loadData();
+      _loadData();
     }
     else {
       print('Form is not valid!');
     }
   }
 
-  void loadData() {
-      checkAuthentication().then((response) => {
+  void _loadData() {
+    _checkAuthentication().then((response) => {
         if (response.statusCode == 200) {
           print(response.body),
           _portalUser = new PortalUser.fromJson(convert.json.decode(response.body)),
-          print(_portalUser.fullUserName),
           Navigator.push(context, MaterialPageRoute(
-              builder: (context) => AccountMenu(credentials: _credentials,)
+              builder: (context) => AccountMenu(portalUser: _portalUser,)
             )
           ),
         } else {
@@ -251,7 +248,7 @@ class _LoginPageState extends State<LoginPage> {
       });
   }
 
-  Future<http.Response> checkAuthentication() async {
+  Future<http.Response> _checkAuthentication() async {
     var url = HttpUtils.mainUrl + 'mobile/login';
 
     return await http.get(Uri.parse(url), headers: {

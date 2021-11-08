@@ -40,11 +40,11 @@ class _MenuDesignsState extends State<MenuDesigns> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    _containerBtn('Нормативные правовые акты', '/designDocs'),
+                    BtnMainMenu(title: 'Нормативные правовые акты', route: '/designDocs'),
                     SizedBox(height: 32,),
-                    _containerBtn('Бюллетень', '/designBull'),
+                    BtnMainMenu(title: 'Бюллетень', route: '/designBull'),
                     SizedBox(height: 32,),
-                    _containerBtn('Поиск публикаций', '/searchPublDesign'),
+                    BtnMainMenu(title: 'Поиск публикаций', route: '/searchPublDesign'),
                   ],
                 ),
               ),
@@ -65,15 +65,6 @@ class _MenuDesignsState extends State<MenuDesigns> {
           topLeft: Radius.circular(16.0),
           topRight: Radius.circular(16.0)),
       child: CustomBottomAppBarImpl(currentIndex: index,),
-    );
-  }
-
-  Widget _containerBtn(String title, String route){
-    return Container(
-      child: SizedBox (
-        height: 60,
-        child: BtnMainMenu(title: title, route: route),
-      ),
     );
   }
 }

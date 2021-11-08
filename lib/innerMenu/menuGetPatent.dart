@@ -1,3 +1,4 @@
+import 'package:eapo_mobile_app/presentation/btnInnerMenu.dart';
 import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
@@ -48,15 +49,15 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    _btn('Патентовать или не патентовать', listUrl[0]),
+                    BtnInnerMenu(title: 'Патентовать или не патентовать', route: listUrl[0],),
                     SizedBox(height: 32,),
-                    _btn('Пять шагов к Евразийскому патенту', listUrl[1]),
+                    BtnInnerMenu(title: 'Пять шагов к Евразийскому патенту', route: listUrl[1]),
                     SizedBox(height: 32,),
-                    _btn('Как получить Евразийский патент', listUrl[2]),
+                    BtnInnerMenu(title: 'Как получить Евразийский патент', route: listUrl[2]),
                     SizedBox(height: 32,),
-                    _btn('Получение Евразийского патента по процедуре РСТ', listUrl[3]),
+                    BtnInnerMenu(title: 'Получение Евразийского патента по процедуре РСТ', route: listUrl[3]),
                     SizedBox(height: 32,),
-                    _btn('Как подать евразийскую заявку', listUrl[4]),
+                    BtnInnerMenu(title: 'Как подать евразийскую заявку', route: listUrl[4]),
                   ],
                 ),
               )
@@ -75,28 +76,5 @@ class _MenuGetPatentState extends State<MenuGetPatent> {
       child: CustomBottomAppBarImpl(currentIndex: index,),
     );
   }
-
-  Widget _btn(String title, String route){
-    return Material(
-        elevation: 5.0,
-        borderRadius: BorderRadius.circular(8.0),
-        color: Color.fromRGBO(233, 241, 245, 1.0),
-        child: MaterialButton(
-            minWidth: MediaQuery.of(context).size.width,
-            height: 60,
-            onPressed: () {
-              _launchUrl(route);
-            },
-            child: Text(
-              title,
-              textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20, color: Color.fromRGBO(30, 111, 165, 1.0)),
-            )
-        )
-    );
-  }
-
-  void _launchUrl(String url) async =>
-      await canLaunch(Uri.encodeFull(url)) ? await launch(Uri.encodeFull(url)) : throw 'Could not launch $url';
 
 }

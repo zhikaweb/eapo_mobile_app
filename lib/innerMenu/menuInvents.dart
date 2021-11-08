@@ -39,13 +39,13 @@ class _MenuInventsState extends State<MenuInvents> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   crossAxisAlignment: CrossAxisAlignment.center,
                   children: <Widget>[
-                    _containerBtn('Нормативные правовые акты', '/inventDocs'),
+                    BtnMainMenu(title: 'Нормативные правовые акты', route: '/inventDocs'),
                     SizedBox(height: 32,),
-                    _containerBtn('Бюллетень', '/inventBull'),
+                    BtnMainMenu(title: 'Бюллетень', route: '/inventBull'),
                     SizedBox(height: 32,),
-                    _containerBtn('Поиск публикаций', '/searchPubl'),
+                    BtnMainMenu(title: 'Поиск публикаций', route: '/searchPubl'),
                     SizedBox(height: 32,),
-                    _containerBtn('Реестр патентов', '/patentRegistry'),
+                    BtnMainMenu(title: 'Реестр патентов', route: '/patentRegistry'),
                   ],
                 ),
               ),
@@ -66,15 +66,6 @@ class _MenuInventsState extends State<MenuInvents> {
           topLeft: Radius.circular(16.0),
           topRight: Radius.circular(16.0)),
       child: CustomBottomAppBarImpl(currentIndex: index,),
-    );
-  }
-
-  Widget _containerBtn(String title, String route){
-    return Container(
-      child: SizedBox (
-        height: 60,
-        child: BtnMainMenu(title: title, route: route),
-      ),
     );
   }
 }

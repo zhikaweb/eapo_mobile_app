@@ -37,13 +37,13 @@ class MenuEAPVScreen extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: <Widget>[
-                  _containerBtn('О ведомстве', '/about'),
+                  BtnMainMenu(title: 'О ведомстве', route: '/about'),
                   SizedBox(height: 32,),
-                  _containerBtn('Процедура получения патента', '/getPatent'),
+                  BtnMainMenu(title: 'Процедура получения патента', route: '/getPatent'),
                   SizedBox(height: 32,),
-                  _containerBtn('Банковские реквизиты', '/accounts'),
+                  BtnMainMenu(title: 'Банковские реквизиты', route: '/accounts'),
                   SizedBox(height: 32,),
-                  _containerBtn('Контакты', '/contacts'),
+                  BtnMainMenu(title: 'Контакты', route: '/contacts'),
                 ],
               ),
             ),
@@ -64,15 +64,6 @@ class MenuEAPVScreen extends StatelessWidget {
           topLeft: Radius.circular(16.0),
           topRight: Radius.circular(16.0)),
       child: CustomBottomAppBarImpl(currentIndex: index,),
-    );
-  }
-
-  Widget _containerBtn(String title, String route){
-    return Container(
-      child: SizedBox (
-        height: 60,
-        child: BtnMainMenu(title: title, route: route),
-      ),
     );
   }
 }
