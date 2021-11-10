@@ -33,6 +33,10 @@ class _MenuInventsState extends State<MenuInvents> {
                 alignment: Alignment.topRight,
                 child: SvgPicture.asset('assets/images/eg_lg_top_r.svg'),
               ),
+              Container(
+                alignment: Alignment.bottomLeft,
+                child: SvgPicture.asset('assets/images/eg_sm_bottomleft.svg'),
+              ),
               Padding(
                 padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
                 child: Column(
@@ -48,10 +52,6 @@ class _MenuInventsState extends State<MenuInvents> {
                     BtnMainMenu(title: 'Реестр патентов', route: '/patentRegistry'),
                   ],
                 ),
-              ),
-              Container(
-                alignment: Alignment.bottomLeft,
-                child: SvgPicture.asset('assets/images/eg_sm_bottomleft.svg'),
               ),
             ],
           ),

@@ -1,5 +1,6 @@
 import 'dart:convert' as convert;
 import 'dart:io';
+import 'dart:developer' as developer;
 
 import 'package:eapo_mobile_app/account/accountMenu.dart';
 import 'package:eapo_mobile_app/model/portalUser.dart';
@@ -221,7 +222,7 @@ class _LoginPageState extends State<LoginPage> {
 
   _submitForm() {
     if (_globalKey.currentState!.validate()) {
-      print('Form is valid!');
+      developer.log('Form is valid!');
       _globalKey.currentState!.save();
       _loadData();
     }
@@ -233,25 +234,25 @@ class _LoginPageState extends State<LoginPage> {
   void _loadData() {
     _checkAuthentication().then((response) => {
         if (response.statusCode == 200) {
-          print(response.body),
+          developer.log('response: ' + response.body),
           _portalUser = new PortalUser.fromJson(convert.json.decode(response.body)),
+          developer.log('portalUser: ' + _portalUser.fullUserName.toString()),
           Navigator.push(context, MaterialPageRoute(
               builder: (context) => AccountMenu(portalUser: _portalUser,)
             )
           ),
         } else {
-          print(response.statusCode),
+          developer.log(response.statusCode.toString()),
           _showAlertDialog(context, 'Ошибка входа', 'Неверный логин и/или пароль')
         }
       }).catchError((error) {
-        debugPrint(error.toString());
+        developer.log(error.toString());
       });
   }
 
   Future<http.Response> _checkAuthentication() async {
-    var url = HttpUtils.mainUrl + 'mobile/login';
 
-    return await http.get(Uri.parse(url), headers: {
+    return await http.get(Uri.parse(HttpUtils.urlLogin), headers: {
         HttpHeaders.authorizationHeader: NetworkService(_credentials)
             .calculateAuthentication(),
       },

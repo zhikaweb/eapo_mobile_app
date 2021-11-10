@@ -31,6 +31,10 @@ class MenuEAPVScreen extends StatelessWidget {
               alignment: Alignment.topRight,
               child: SvgPicture.asset('assets/images/eg_lg_top_r.svg'),
             ),
+            Container(
+              alignment: Alignment.bottomLeft,
+              child: SvgPicture.asset('assets/images/eg_sm_bottomleft.svg'),
+            ),
             Padding(
               padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
               child: Column(
@@ -46,10 +50,6 @@ class MenuEAPVScreen extends StatelessWidget {
                   BtnMainMenu(title: 'Контакты', route: '/contacts'),
                 ],
               ),
-            ),
-            Container(
-              alignment: Alignment.bottomLeft,
-              child: SvgPicture.asset('assets/images/eg_sm_bottomleft.svg'),
             ),
           ],
         ),

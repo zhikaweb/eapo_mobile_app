@@ -1,8 +1,10 @@
 import 'dart:io';
 import 'dart:convert' as convert;
+import 'dart:developer' as developer;
 
 import 'package:eapo_mobile_app/model/application.dart';
 import 'package:eapo_mobile_app/model/credentials.dart';
+import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:eapo_mobile_app/utils/httpUtils.dart';
 import 'package:eapo_mobile_app/utils/networkService.dart';
@@ -21,7 +23,7 @@ class ApplicationInfo extends StatefulWidget {
 
 class _ApplicationInfoState extends State<ApplicationInfo> {
 
-  Credentials credentials = new Credentials();
+  Credentials _credentials = new Credentials();
   late Application _application;
 
   @override
@@ -59,9 +61,21 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
               child: Text('Get data'),
             ),
           ]),
+          bottomNavigationBar: _bottomBar(5),
         )
     );
   }
+
+  ClipRRect _bottomBar(int index){
+    return ClipRRect(
+      borderRadius: BorderRadius.only(
+          topLeft: Radius.circular(16.0),
+          topRight: Radius.circular(16.0)),
+      child: CustomBottomAppBarImpl(currentIndex: index,),
+    );
+  }
+
+
 
   // Form _form(){
   //
@@ -70,23 +84,22 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
   void _getData(){
     _getDataFromBackend().then((response) => {
       if (response.statusCode == 200){
-        _createApplicationFromJson(convert.utf8.decode(response.body.codeUnits)),
-        print(_application.eapoRegNo),
-        print(_application.documents!.document!.first.description),
+          _createApplicationFromJson(convert.utf8.decode(response.body.codeUnits)),
+          developer.log('application: ' + _application.eapoRegNo.toString()),
       } else {
-        print(response.statusCode)
+        developer.log('код ответа сервера : ' + response.statusCode.toString()),
       }
+    }).catchError((error) {
+      developer.log(error.toString());
     });
   }
 
   Future<http.Response> _getDataFromBackend() async {
-    credentials.login = 'StalAN';
-    credentials.password = 'ADH563jk';
+    _credentials.login = 'StalAN';
+    _credentials.password = 'ADH563jk';
 
-    var url = HttpUtils.mainUrl + 'application/eapoRegNo/202090011';
-
-    return await http.get(Uri.parse(url), headers: {
-      HttpHeaders.authorizationHeader: NetworkService(credentials)
+    return await http.get(Uri.parse(HttpUtils.urlAppliInfo + '202090011'), headers: {
+      HttpHeaders.authorizationHeader: NetworkService(_credentials)
           .calculateAuthentication(),
       },
     );
@@ -94,12 +107,11 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
 
   Application _createApplicationFromJson(String response){
     Xml2Json xml2json = new Xml2Json();
-    var doc = XmlDocument.parse(response)
-        .getElement('application').toString();
-    print('doc ' + doc);
+    var doc = XmlDocument.parse(response).getElement('application').toString();
+    developer.log('XmlElement ' + doc);
     xml2json.parse(doc);
     var json = xml2json.toParker();
-    print('json: '+ json);
+    developer.log('json: '+ json);
     return _application = new Application.fromJson(convert.json.decode(json)['application']);
   }
 }
