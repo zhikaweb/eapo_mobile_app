@@ -1,3 +1,4 @@
+import 'package:eapo_mobile_app/account/applicationInfo.dart';
 import 'package:eapo_mobile_app/account/loginPage.dart';
 import 'package:eapo_mobile_app/homePage.dart';
 import 'package:eapo_mobile_app/designPages/designBulletin.dart';
@@ -33,23 +34,24 @@ class MyApp extends StatelessWidget {
       title: 'EAPO-mobile',
       home: HomePage(),
       routes: <String, WidgetBuilder>{
-        '/home': (BuildContext context) => new HomePage(),
-        '/menuEapo': (BuildContext context) => new MenuEAPVScreen(),
-        '/menuInvents': (BuildContext context) => new MenuInvents(),
-        '/menuDesigns': (BuildContext context) => new MenuDesigns(),
-        '/pharma': (BuildContext context) => new PharmRegistry(),
-        '/about': (BuildContext context) => new About(),
-        '/getPatent': (BuildContext context) => new MenuGetPatent(),
-        '/accounts': (BuildContext context) => new Accounts(),
-        '/contacts': (BuildContext context) => new Contacts(),
-        '/inventDocs': (BuildContext context) => new InventDocs(),
-        '/inventBull': (BuildContext context) => new InventBulletin(),
-        '/patentRegistry': (BuildContext context) => new PatentRegistry(),
-        '/searchPubl': (BuildContext context) => new SearchPubl(),
-        '/designDocs': (BuildContext context) => new DesignDocs(),
-        '/designBull': (BuildContext context) => new DesignBulletin(),
-        '/searchPublDesign': (BuildContext context) => new SearchPublDesign(),
-        '/login': (BuildContext context) => new LoginPage(),
+        '/home': (BuildContext context) => HomePage(),
+        '/menuEapo': (BuildContext context) => MenuEAPVScreen(),
+        '/menuInvents': (BuildContext context) => MenuInvents(),
+        '/menuDesigns': (BuildContext context) => MenuDesigns(),
+        '/pharma': (BuildContext context) => PharmRegistry(),
+        '/about': (BuildContext context) => About(),
+        '/getPatent': (BuildContext context) => MenuGetPatent(),
+        '/accounts': (BuildContext context) => Accounts(),
+        '/contacts': (BuildContext context) => Contacts(),
+        '/inventDocs': (BuildContext context) => InventDocs(),
+        '/inventBull': (BuildContext context) => InventBulletin(),
+        '/patentRegistry': (BuildContext context) => PatentRegistry(),
+        '/searchPubl': (BuildContext context) => SearchPubl(),
+        '/designDocs': (BuildContext context) => DesignDocs(),
+        '/designBull': (BuildContext context) => DesignBulletin(),
+        '/searchPublDesign': (BuildContext context) => SearchPublDesign(),
+        '/login': (BuildContext context) => LoginPage(),
+        '/applicationInfo': (BuildContext context) => ApplicationInfo(),
       },
     );
   }

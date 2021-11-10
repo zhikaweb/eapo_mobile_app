@@ -2,7 +2,7 @@ import 'dart:convert' as convert;
 import 'dart:io';
 
 import 'package:eapo_mobile_app/account/accountMenu.dart';
-import 'package:eapo_mobile_app/portalUser.dart';
+import 'package:eapo_mobile_app/model/portalUser.dart';
 import 'package:eapo_mobile_app/model/credentials.dart';
 import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
@@ -191,7 +191,7 @@ class _LoginPageState extends State<LoginPage> {
             minWidth: MediaQuery.of(context).size.width,
             height: 60,
             onPressed: () {
-              _showAlertDialog(context, 'Регистрация недоступна!', 'Обратитесь в ЕАПВ');
+              _showAlertDialog(context, 'Регистрация в приложении недоступна', 'Обратитесь в ЕАПВ');
             },
             child: Text(
               'Новый пользователь',

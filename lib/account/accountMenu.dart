@@ -1,4 +1,4 @@
-import 'package:eapo_mobile_app/portalUser.dart';
+import 'package:eapo_mobile_app/model/portalUser.dart';
 import 'package:eapo_mobile_app/model/credentials.dart';
 import 'package:eapo_mobile_app/presentation/btnMainMenu.dart';
 import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
@@ -66,7 +66,7 @@ class _AccountMenuState extends State<AccountMenu> {
                   SizedBox(height: 32,),
                   BtnFoo(title: 'Уведомления'),
                   SizedBox(height: 32,),
-                  BtnFoo(title: 'Информация по заявке'),
+                  BtnMainMenu(title: 'Информация по заявке', route: '/applicationInfo',),
                   SizedBox(height: 32,),
                   BtnFoo(title: 'Уплата ППС'),
                   SizedBox(height: 32,),
