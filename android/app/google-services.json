@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "711675992165",
+    "project_id": "eapo-mobile",
+    "storage_bucket": "eapo-mobile.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:711675992165:android:ca173aaae24250e75b0e8c",
+        "android_client_info": {
+          "package_name": "org.eapo.mobile_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "711675992165-2mobe44jp6bt1nj30ddf13jo93kapo5m.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDv3Xm7ArMJ6anc21P13Q0Lmpp4BGV5luU"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "711675992165-2mobe44jp6bt1nj30ddf13jo93kapo5m.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "711675992165-hgnh3qcs4efh6ksip8f4n2t67r6dn8hh.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "org.eapo.mobile",
+                "app_store_id": "1586974622"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
