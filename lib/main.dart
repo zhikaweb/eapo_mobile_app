@@ -1,5 +1,5 @@
-import 'package:eapo_mobile_app/account/applicationInfo.dart';
-import 'package:eapo_mobile_app/account/loginPage.dart';
+import 'package:eapo_mobile_app/accountPages/applicationInfo.dart';
+import 'package:eapo_mobile_app/accountPages/loginPage.dart';
 import 'package:eapo_mobile_app/homePage.dart';
 import 'package:eapo_mobile_app/designPages/designBulletin.dart';
 import 'package:eapo_mobile_app/designPages/designDocs.dart';

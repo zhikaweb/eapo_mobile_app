@@ -2,7 +2,7 @@ import 'dart:convert' as convert;
 import 'dart:io';
 import 'dart:developer' as developer;
 
-import 'package:eapo_mobile_app/account/accountMenu.dart';
+import 'package:eapo_mobile_app/accountPages/accountMenu.dart';
 import 'package:eapo_mobile_app/model/portalUser.dart';
 import 'package:eapo_mobile_app/model/credentials.dart';
 import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
@@ -88,7 +88,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Text('Логин', style: TextStyle(color: Colors.white, fontSize: 16),),
             ),
           ),
-          SizedBox(height: 60, child: _inputLogin(),),
+          _inputLogin(),
           SizedBox(height: 32,),
           Padding(
             padding: EdgeInsets.only(left: 8, right: 0, top: 0, bottom: 8),
@@ -97,7 +97,7 @@ class _LoginPageState extends State<LoginPage> {
               child: Text('Пароль', style: TextStyle(color: Colors.white, fontSize: 16),),
             ),
           ),
-          SizedBox(height: 60, child: _inputPassword(),),
+          _inputPassword(),
           SizedBox(height: 32,),
           _btnSubmit(),
           SizedBox(height: 32,),
@@ -159,7 +159,7 @@ class _LoginPageState extends State<LoginPage> {
         }
         return null;
       },
-      onSaved: (value) => _credentials.password = value!.trim(),
+      onSaved: (value) => _credentials.password = value!,
     );
   }
 

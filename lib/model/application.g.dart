@@ -26,23 +26,6 @@ Application _$ApplicationFromJson(Map<String, dynamic> json) => Application(
       json['statusName'] as String?,
       json['expert'] as String?,
       json['patentNumber'] as String?,
-      json['priorityClaims'] == null
-          ? null
-          : PriorityClaims.fromJson(
-              json['priorityClaims'] as Map<String, dynamic>),
-      json['classificationIpcrs'] == null
-          ? null
-          : ClassificationIpcrs.fromJson(
-              json['classificationIpcrs'] as Map<String, dynamic>),
-      json['applicants'] == null
-          ? null
-          : Applicants.fromJson(json['applicants'] as Map<String, dynamic>),
-      json['inventors'] == null
-          ? null
-          : Inventors.fromJson(json['inventors'] as Map<String, dynamic>),
-      json['agents'] == null
-          ? null
-          : Agents.fromJson(json['agents'] as Map<String, dynamic>),
       json['documents'] == null
           ? null
           : Documents.fromJson(json['documents'] as Map<String, dynamic>),
@@ -71,11 +54,6 @@ Map<String, dynamic> _$ApplicationToJson(Application instance) =>
       'statusName': instance.statusName,
       'expert': instance.expert,
       'patentNumber': instance.patentNumber,
-      'priorityClaims': instance.priorityClaims,
-      'classificationIpcrs': instance.classificationIpcrs,
-      'applicants': instance.applicants,
-      'inventors': instance.inventors,
-      'agents': instance.agents,
       'documents': instance.documents,
       'pctApplicationDate': instance.pctApplicationDate?.toIso8601String(),
       'pctApplicationNumber': instance.pctApplicationNumber,
