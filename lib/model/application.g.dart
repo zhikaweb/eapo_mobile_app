@@ -73,9 +73,7 @@ Map<String, dynamic> _$DocumentsToJson(Documents instance) => <String, dynamic>{
 
 Document _$DocumentFromJson(Map<String, dynamic> json) => Document(
       json['docCode'] as String?,
-      json['docDate'] == null
-          ? null
-          : DateTime.parse(json['docDate'] as String),
+      DateTime.parse(json['docDate'] as String),
       json['docType'] as String?,
       json['description'] as String?,
       json['docId'] as String?,
@@ -84,7 +82,7 @@ Document _$DocumentFromJson(Map<String, dynamic> json) => Document(
 
 Map<String, dynamic> _$DocumentToJson(Document instance) => <String, dynamic>{
       'docCode': instance.docCode,
-      'docDate': instance.docDate?.toIso8601String(),
+      'docDate': instance.docDate.toIso8601String(),
       'docType': instance.docType,
       'description': instance.description,
       'docId': instance.docId,

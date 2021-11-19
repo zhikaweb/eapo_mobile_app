@@ -5,6 +5,7 @@ import 'dart:developer' as developer;
 
 import 'package:eapo_mobile_app/model/application.dart';
 import 'package:eapo_mobile_app/model/credentials.dart';
+import 'package:eapo_mobile_app/presentation/applicationInfoView.dart';
 import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:eapo_mobile_app/utils/dateFormatter.dart';
@@ -12,11 +13,12 @@ import 'package:eapo_mobile_app/utils/httpUtils.dart';
 import 'package:eapo_mobile_app/utils/networkService.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:xml/xml.dart';
 import 'package:xml2json/xml2json.dart';
+
+import 'loadPdf.dart';
 
 class ApplicationInfo extends StatefulWidget {
   const ApplicationInfo({Key? key}) : super(key: key);
@@ -29,15 +31,11 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
 
   TextEditingController _textEditingController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
-
-  // late Future<Application> application;
-
   Credentials _credentials = new Credentials();
-
   Application _application = Application.a();
-  late Application application;
-
-  late String _appNum;
+  List<Document> docs = [];
+  var application;
+  var _appNum;
 
   @override
   void initState() {
@@ -71,83 +69,47 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
               child: SvgPicture.asset('assets/images/eg_sm_bottomright.svg'),
             ),
             Padding(
-              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 16),
+              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
               child: Column(
                 children: <Widget>[
                   _form(),
                   SizedBox(height: 10,),
-                  Row(
-                    children: [
-                      Text('Номер заявки'),
-                      SizedBox(width: 10,),
-                      Text(_application.eapoRegNo == null ? '' : _application.eapoRegNo.toString()),
-                    ],
-                  ),
-                  SizedBox(height: 10,),
-                  Row(
-                    children: [
-                      Text('Наименование', textAlign: TextAlign.start,),
-                      SizedBox(width: 10,),
-                      Expanded(
-                        child: Text(
-                          _application.name == null ? '' : _application.name.toString(),
-                          softWrap: true,
-                        ),
-                      )
-                    ],
-                  ),
-                  SizedBox(height: 10,),
-                  Row(
-                    children: [
-                      Text('Дата'),
-                      SizedBox(width: 10,),
-                      Text(
-                        _application.eapoRegDate == null ? ''
-                            : DateFormatter().formatDate(_application.eapoRegDate),
-                      ),
-                    ],
-                  ),
-                  SizedBox(height: 10,),
-                  Row(
-                    children: [
-                      Text('Эксперт'),
-                      SizedBox(width: 10,),
-                      Text(_application.expert == null ? ''
-                          : _application.expert.toString()),
-                    ],
-                  ),
-                  SizedBox(height: 10,),
-                  Row(
-                    children: [
-                      Text('Статус'),
-                      SizedBox(width: 10,),
-                      Expanded(
-                        child: Text(_application.statusName == null ? ''
-                            : _application.statusName.toString()),
-                      ),
-                    ],
-                  ),
+                  ApplicationInfoView(application: _application),
+                  SizedBox(height: 20,),
+                  Text(_application.documents == null ? '' : 'Документы'),
                 ],
               ),
             ),
-            // FutureBuilder<Application>(
-            //   future: _getData(),
-            //   builder: (context, snapshot){
-            //     if (snapshot.hasData){
-            //       return Text(snapshot.data!.eapoRegNo.toString());
-            //     } else if (snapshot.hasError){
-            //       return Text(snapshot.error.toString());
-            //     }
-            //     return Center(child: CircularProgressIndicator(),);
-            //   },
-            // ),
-            // MaterialButton(
-            //   color: MainColors().eapoColorMain,
-            //   onPressed: () {
-            //     _getData();
-            //   },
-            //   child: Text('Get data'),
-            // ),
+            Stack(
+              clipBehavior: Clip.none,
+              children: <Widget>[
+                Container(
+                  margin: EdgeInsets.only(top: 320, left: 8, right: 8, bottom: 0),
+                  child: ListView.builder(
+                      itemCount: _application.documents != null ? docs.length : 0,
+                      itemBuilder: (context, index){
+                        return Card(
+                          child: ListTile(
+                            title: Text(_application.documents != null
+                                ? '${docs[index].description}'
+                                : ''),
+                            subtitle: Text(_application.documents != null
+                                ? '${DateFormatter().formatDate(docs[index].docDate)}'
+                                : '', textAlign: TextAlign.end,
+                            ),
+                            leading: IconButton(
+                              onPressed: () {
+                                _showPdf(docs[index].docId, _application.eapoRegNo);
+                              },
+                              iconSize: 30,
+                              icon: Icon(Icons.description),
+                            ),
+                          ),
+                        );
+                      }),
+                ),
+              ],
+            )
           ]),
           bottomNavigationBar: _bottomBar(5),
         )
@@ -226,25 +188,25 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
   void _getData(){
     if (_globalKey.currentState!.validate()) {
       _globalKey.currentState!.save();
-      _credentials.login = 'StalAN';
-      _credentials.password = 'ADH563jk';
-      // return getApplication(_credentials, _appNum);
+
       _getDataFromBackend().then<String>((response) {
         if (response.statusCode == 200){
           _createApplicationFromJson(convert.utf8.decode(response.body.codeUnits));
           setState(() {
             _application = application;
+            docs = _application.documents!.document!
+                .where((element) => element.docType == 'OUT' && element.signed == '1')
+                .toList();
+            docs.sort((a,b) => b.docDate.compareTo(a.docDate));
           });
           developer.log('application: ' + _application.eapoRegNo.toString());
         } else {
           developer.log('код ответа сервера : ' + response.statusCode.toString());
         }
-        throw ('test');
+        throw new Exception(response.reasonPhrase);
       }).catchError((error) {
         developer.log(error.runtimeType.toString() + ' : ' + error.toString());
       });
-    // } else {
-    //   throw Exception('Cannot load data');
     }
   }
 
@@ -268,5 +230,12 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
     developer.log('json: '+ json);
 
     return application = new Application.fromJson(convert.json.decode(json)['application']);
+  }
+
+  _showPdf(String? docId, String? appNum) {
+      Navigator.push(context, MaterialPageRoute(
+          builder: (context) => LoadPdf(docId: docId, appNum: appNum)
+       )
+    );
   }
 }

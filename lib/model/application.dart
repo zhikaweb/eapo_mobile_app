@@ -89,7 +89,7 @@ class Documents {
 @JsonSerializable()
 class Document {
   final String? docCode;
-  final DateTime? docDate;
+  final DateTime docDate;
   final String? docType;
   final String? description;
   final String? docId;
@@ -264,29 +264,29 @@ class StatusType {
 
 }
 
-Future<Application> getApplication(Credentials credentials, String appNum) async {
-
-  var response = await http.get(Uri.parse(HttpUtils.urlAppliInfo + appNum), headers: {
-    HttpHeaders.authorizationHeader: NetworkService(credentials)
-        .calculateAuthentication(),
-  }, );
-  if (response.statusCode == 200){
-    return _createApplicationFromJson(convert.utf8.decode(response.body.codeUnits));
-  } else {
-    developer.log('код ответа сервера : ' + response.statusCode.toString());
-    throw Exception('Error: ${response.reasonPhrase}');
-  }
-}
-
-
-Application _createApplicationFromJson(String response){
-  Xml2Json xml2json = new Xml2Json();
-  var doc = XmlDocument.parse(response).getElement('application').toString();
-  developer.log('XmlElement ' + doc);
-  xml2json.parse(doc);
-  var json = xml2json.toParker();
-  developer.log('json: '+ json);
-  print(new Application.fromJson(convert.json.decode(json)['application']));
-
-  return new Application.fromJson(convert.json.decode(json)['application']);
-}
+// Future<Application> getApplication(Credentials credentials, String appNum) async {
+//
+//   var response = await http.get(Uri.parse(HttpUtils.urlAppliInfo + appNum), headers: {
+//     HttpHeaders.authorizationHeader: NetworkService(credentials)
+//         .calculateAuthentication(),
+//   }, );
+//   if (response.statusCode == 200){
+//     return _createApplicationFromJson(convert.utf8.decode(response.body.codeUnits));
+//   } else {
+//     developer.log('код ответа сервера : ' + response.statusCode.toString());
+//     throw Exception('Error: ${response.reasonPhrase}');
+//   }
+// }
+//
+//
+// Application _createApplicationFromJson(String response){
+//   Xml2Json xml2json = new Xml2Json();
+//   var doc = XmlDocument.parse(response).getElement('application').toString();
+//   developer.log('XmlElement ' + doc);
+//   xml2json.parse(doc);
+//   var json = xml2json.toParker();
+//   developer.log('json: '+ json);
+//   print(new Application.fromJson(convert.json.decode(json)['application']));
+//
+//   return new Application.fromJson(convert.json.decode(json)['application']);
+// }
