@@ -56,7 +56,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
         child: Scaffold(
           backgroundColor: Colors.transparent,
           appBar: AppBar(
-              backgroundColor: Color.fromRGBO(30, 111, 165, 1.0),
+              backgroundColor: MainColors().eapoColorMain,
               title: Text('ИНФОРМАЦИЯ ПО ЗАЯВКЕ'),
               leading: IconButton(
                 icon: Icon(Icons.arrow_back_ios),
@@ -72,61 +72,71 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
               alignment: Alignment.bottomRight,
               child: SvgPicture.asset('assets/images/eg_sm_bottomright.svg'),
             ),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
-              child: Column(
-                children: <Widget>[
-                  _form(),
-                  SizedBox(height: 10,),
-                  ApplicationInfoView(application: _application),
-                  SizedBox(height: 20,),
-                  Text(_application.documents == null ? '' : 'Документы'),
-                ],
-              ),
-            ),
-            Stack(
-              clipBehavior: Clip.none,
-              children: <Widget>[
-                Container(
-                  margin: EdgeInsets.only(top: 320, left: 8, right: 8, bottom: 0),
-                  child: ListView.builder(
-                      itemCount: _application.documents != null ? docs.length : 0,
-                      itemBuilder: (context, index){
-                        return Card(
-                          child: ListTile(
-                            title: Text(_application.documents != null
-                                ? '${docs[index].description}'
-                                : ''),
-                            subtitle: Text(_application.documents != null
-                                ? '${DateFormatter().formatDate(docs[index].docDate)}'
-                                : '', textAlign: TextAlign.end,
-                            ),
-                            leading: IconButton(
-                              onPressed: () {
-                                createFileOfPdfUrl(docs[index].docId, _application.eapoRegNo).then((f) {
-                                  setState(() {
-                                    remotePDFpath = f.path;
-                                  });
-                                  if (remotePDFpath.isNotEmpty) {
-                                    Navigator.push(
-                                      context,
-                                      MaterialPageRoute(
-                                        builder: (context) => PDFScreen(path: remotePDFpath),
-                                      ),
-                                    );
-                                  }
-                                });
-                                // _showPdf(docs[index].docId, _application.eapoRegNo);
-                              },
-                              iconSize: 30,
-                              icon: Icon(Icons.description),
-                            ),
+            Flex(
+              direction: Axis.vertical,
+              children: [
+                Expanded(
+                  flex: 0,
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+                    child: Column(
+                      children: <Widget>[
+                        _form(),
+                        SizedBox(height: 10,),
+                        ApplicationInfoView(application: _application),
+                        SizedBox(height: 20,),
+                        Text(_application.documents == null ? '' : 'Документы',
+                          style: TextStyle(
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold,
+                            color: MainColors().eapoColorMain,
                           ),
-                        );
-                      }),
+                        ),
+                        SizedBox(height: 20,),
+                      ],
+                    ),
+                  ),
+                ),
+                Expanded(
+                  child: ListView.builder(
+                    itemCount: _application.documents != null ? docs.length : 0,
+                    itemBuilder: (context, index){
+                      return Card(
+                        child: ListTile(
+                          title: Text(_application.documents != null
+                              ? '${docs[index].description}'
+                              : ''
+                          ),
+                          subtitle: Text(_application.documents != null
+                              ? '${DateFormatter().formatDate(docs[index].docDate)}'
+                              : '', textAlign: TextAlign.end,
+                          ),
+                          leading: IconButton(
+                            onPressed: () {
+                              createFileOfPdfUrl(docs[index].docId, _application.eapoRegNo).then((f) {
+                                setState(() {
+                                  remotePDFpath = f.path;
+                                });
+                                if (remotePDFpath.isNotEmpty) {
+                                  Navigator.push(
+                                    context,
+                                    MaterialPageRoute(
+                                      builder: (context) => PDFScreen(path: remotePDFpath),
+                                    ),
+                                  );
+                                }
+                              });
+                            },
+                            iconSize: 30,
+                            icon: Icon(Icons.description),
+                          ),
+                        ),
+                      );
+                    }),
                 ),
               ],
-            )
+            ),
+
           ]),
           bottomNavigationBar: _bottomBar(5),
         )
@@ -152,6 +162,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
             padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
             child: SizedBox(
               width: 200,
+              height: 50,
               child: _materialTextField(),
             ),
           ),
@@ -218,7 +229,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
           });
           developer.log('application: ' + _application.eapoRegNo.toString());
         } else {
-          developer.log('код ответа сервера : ' + response.statusCode.toString());
+          developer.log('status code : ' + response.statusCode.toString());
         }
         throw new Exception(response.reasonPhrase);
       }).catchError((error) {
@@ -254,7 +265,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
     Completer<File> completer = Completer();
     _credentials.login = 'StalAN';
     _credentials.password = 'ADH563jk';
-    print("Start download pdf");
+    developer.log("Start download pdf");
     try {
       final url = HttpUtils.mainUrl + 'signed/eapoRegNo/' + appNum! + '/docId/' + docId!;
       final filename = url.substring(url.lastIndexOf("/") + 1);
@@ -262,11 +273,11 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
       request.headers.add(HttpHeaders.authorizationHeader, NetworkService(_credentials)
           .calculateAuthentication());
       var response = await request.close();
-      print(response.statusCode);
+      developer.log(response.statusCode.toString());
       var bytes = await consolidateHttpClientResponseBytes(response);
       var dir = await getApplicationDocumentsDirectory();
-      print("Download files");
-      print("${dir.path}/$filename");
+      developer.log("Download files");
+      developer.log("${dir.path}/$filename");
       File file = File("${dir.path}/$filename");
 
       await file.writeAsBytes(bytes, flush: true);

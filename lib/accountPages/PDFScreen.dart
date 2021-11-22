@@ -1,7 +1,9 @@
 import 'dart:async';
+import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_pdfview/flutter_pdfview.dart';
 import 'package:flutter/material.dart';
+import 'dart:developer' as developer;
 
 class PDFScreen extends StatefulWidget {
   final String? path;
@@ -24,7 +26,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
     return Scaffold(
       backgroundColor: Colors.transparent,
       appBar: AppBar(
-          backgroundColor: Color.fromRGBO(30, 111, 165, 1.0),
+          backgroundColor: MainColors().eapoColorMain,
           title: Text('ИНФОРМАЦИЯ ПО ЗАЯВКЕ'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
@@ -54,22 +56,22 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
               setState(() {
                 errorMessage = error.toString();
               });
-              print(error.toString());
+              developer.log(error.toString());
             },
             onPageError: (page, error) {
               setState(() {
                 errorMessage = '$page: ${error.toString()}';
               });
-              print('$page: ${error.toString()}');
+              developer.log('$page: ${error.toString()}');
             },
             onViewCreated: (PDFViewController pdfViewController) {
               _controller.complete(pdfViewController);
             },
             onLinkHandler: (String? uri) {
-              print('goto uri: $uri');
+              developer.log('goto uri: $uri');
             },
             onPageChanged: (int? page, int? total) {
-              print('page change: $page/$total');
+              developer.log('page change: $page/$total');
               setState(() {
                 currentPage = page;
               });
