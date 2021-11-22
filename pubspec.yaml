@@ -68,6 +68,8 @@ dependencies:
   # Add BLoC dependency
   flutter_bloc: ^7.3.3
 
+  flutter_pdfview: ^1.2.1
+
 dev_dependencies:
   flutter_test:
     sdk: flutter

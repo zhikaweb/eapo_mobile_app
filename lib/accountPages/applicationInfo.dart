@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:collection';
 import 'dart:io';
 import 'dart:convert' as convert;
@@ -12,13 +13,15 @@ import 'package:eapo_mobile_app/utils/dateFormatter.dart';
 import 'package:eapo_mobile_app/utils/httpUtils.dart';
 import 'package:eapo_mobile_app/utils/networkService.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:path_provider/path_provider.dart';
 import 'package:xml/xml.dart';
 import 'package:xml2json/xml2json.dart';
 
-import 'loadPdf.dart';
+import 'PDFScreen.dart';
 
 class ApplicationInfo extends StatefulWidget {
   const ApplicationInfo({Key? key}) : super(key: key);
@@ -36,6 +39,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
   List<Document> docs = [];
   var application;
   var _appNum;
+  String remotePDFpath = '';
 
   @override
   void initState() {
@@ -99,7 +103,20 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
                             ),
                             leading: IconButton(
                               onPressed: () {
-                                _showPdf(docs[index].docId, _application.eapoRegNo);
+                                createFileOfPdfUrl(docs[index].docId, _application.eapoRegNo).then((f) {
+                                  setState(() {
+                                    remotePDFpath = f.path;
+                                  });
+                                  if (remotePDFpath.isNotEmpty) {
+                                    Navigator.push(
+                                      context,
+                                      MaterialPageRoute(
+                                        builder: (context) => PDFScreen(path: remotePDFpath),
+                                      ),
+                                    );
+                                  }
+                                });
+                                // _showPdf(docs[index].docId, _application.eapoRegNo);
                               },
                               iconSize: 30,
                               icon: Icon(Icons.description),
@@ -232,10 +249,32 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
     return application = new Application.fromJson(convert.json.decode(json)['application']);
   }
 
-  _showPdf(String? docId, String? appNum) {
-      Navigator.push(context, MaterialPageRoute(
-          builder: (context) => LoadPdf(docId: docId, appNum: appNum)
-       )
-    );
+
+  Future<File> createFileOfPdfUrl(String? docId, String? appNum) async {
+    Completer<File> completer = Completer();
+    _credentials.login = 'StalAN';
+    _credentials.password = 'ADH563jk';
+    print("Start download pdf");
+    try {
+      final url = HttpUtils.mainUrl + 'signed/eapoRegNo/' + appNum! + '/docId/' + docId!;
+      final filename = url.substring(url.lastIndexOf("/") + 1);
+      var request = await HttpClient().getUrl(Uri.parse(url));
+      request.headers.add(HttpHeaders.authorizationHeader, NetworkService(_credentials)
+          .calculateAuthentication());
+      var response = await request.close();
+      print(response.statusCode);
+      var bytes = await consolidateHttpClientResponseBytes(response);
+      var dir = await getApplicationDocumentsDirectory();
+      print("Download files");
+      print("${dir.path}/$filename");
+      File file = File("${dir.path}/$filename");
+
+      await file.writeAsBytes(bytes, flush: true);
+      completer.complete(file);
+    } catch (e) {
+      throw Exception(e);
+    }
+
+    return completer.future;
   }
 }
