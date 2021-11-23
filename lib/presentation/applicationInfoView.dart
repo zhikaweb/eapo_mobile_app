@@ -27,7 +27,7 @@ class _ApplicationInfoViewState extends State<ApplicationInfoView> {
             children: [
               SizedBox(
                 width: 100,
-                child: Text(widget.application.eapoRegNo == null ? '' : 'Номер',
+                child: Text(widget.application.eapoRegNo == null ? '' : '№ заявки',
                   style: fontStyle(),
                 ),
               ),

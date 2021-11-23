@@ -33,7 +33,7 @@ class _AccountMenuState extends State<AccountMenu> {
           title: Text('ЛИЧНЫЙ КАБИНЕТ'),
           leading: IconButton(
             icon: Icon(Icons.arrow_back_ios),
-            onPressed: () { Navigator.of(context).popAndPushNamed('/login'); },
+            onPressed: () { Navigator.of(context).popAndPushNamed('/home'); },
           ),
         ),
         body: Stack(

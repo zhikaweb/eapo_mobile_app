@@ -2,7 +2,10 @@ import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:eapo_mobile_app/presentation/screenResolution.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+
+import 'accountPages/accountMenu.dart';
 
 class HomePage extends StatefulWidget {
   // const HomePage2({Key key}) : super(key: key);
@@ -27,6 +30,9 @@ class _HomePageState extends State<HomePage> {
 
   List socialIconsPaths = ['assets/images/fb.svg',
     'assets/images/ut.svg', 'assets/images/twt.svg'];
+
+  late String _login;
+  late String _userName;
 
   ScreenResolution screenResolution = new ScreenResolution();
 
@@ -400,8 +406,23 @@ class _HomePageState extends State<HomePage> {
   Widget gearBtn(String routeName, String imagePath){
     return MaterialButton(
       padding: EdgeInsets.all(0),
-      onPressed: () {
-        Navigator.of(context).pushNamed(routeName);
+      onPressed: () async {
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        setState(() {
+          this._login = (prefs.getString('login') ?? '');
+          this._userName = (prefs.getString('portalUserName') ?? '');
+        });
+        if (routeName.startsWith('/login')){
+          if (this._login.isNotEmpty && this._userName.isNotEmpty){
+            Navigator.push(context, MaterialPageRoute(
+                builder: (context) => AccountMenu(portalUsername: this._userName,)
+            ));
+          } else{
+            Navigator.of(context).pushNamed(routeName);
+          }
+        } else {
+          Navigator.of(context).pushNamed(routeName);
+        }
       },
       child: SvgPicture.asset(imagePath)
       );

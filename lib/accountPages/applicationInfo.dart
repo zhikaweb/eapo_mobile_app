@@ -237,7 +237,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
         // maxLength: 9,
         style: TextStyle(
             fontWeight: FontWeight.bold,
-          fontSize: 20
+          fontSize: 22
         ),
         validator: (value) {
           if (value == null || value.isEmpty){
