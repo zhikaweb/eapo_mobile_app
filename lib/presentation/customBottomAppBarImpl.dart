@@ -1,5 +1,7 @@
+import 'package:eapo_mobile_app/accountPages/accountMenu.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 import 'customBottomAppBar.dart';
 
@@ -14,6 +16,8 @@ class CustomBottomAppBarImpl extends StatefulWidget {
 }
 
 class _CustomBottomAppBarImplState extends State<CustomBottomAppBarImpl> {
+  late String _login;
+  late String _portalUserName;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +44,8 @@ class _CustomBottomAppBarImplState extends State<CustomBottomAppBarImpl> {
             Navigator.of(context).pushNamed('/pharma');
             break;
           case 5:
-            Navigator.of(context).pushNamed('/login');
+            checkLogin();
+            // Navigator.of(context).pushNamed('/login');
             break;
         }
       },
@@ -71,6 +76,23 @@ class _CustomBottomAppBarImplState extends State<CustomBottomAppBarImpl> {
                 : SvgPicture.asset("assets/images/key.svg")),
       ],
     );
+  }
+
+  Future<void> checkLogin() async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      this._login = (prefs.getString('login') ?? '');
+      this._portalUserName = (prefs.getString('portalUserName') ?? '');
+    });
+    print(this._login);
+    if (this._login.isNotEmpty && this._portalUserName.isNotEmpty) {
+      Navigator.push(context, MaterialPageRoute(
+          builder: (context) => AccountMenu(portalUsername: this._portalUserName,)
+      ));
+    } else {
+      Navigator.of(context).pushNamed('/login');
+    }
   }
 }
 

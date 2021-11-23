@@ -1,5 +1,3 @@
-import 'package:eapo_mobile_app/model/portalUser.dart';
-import 'package:eapo_mobile_app/model/credentials.dart';
 import 'package:eapo_mobile_app/presentation/btnMainMenu.dart';
 import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
@@ -7,9 +5,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
 class AccountMenu extends StatefulWidget {
-  // final Credentials credentials;
-  final PortalUser portalUser;
-  const AccountMenu({Key? key, required this.portalUser}) : super(key: key);
+
+  final String portalUsername;
+  const AccountMenu({Key? key, required this.portalUsername}) : super(key: key);
 
   @override
   _AccountMenuState createState() => _AccountMenuState();
@@ -33,10 +31,10 @@ class _AccountMenuState extends State<AccountMenu> {
         appBar: AppBar(
           backgroundColor: Color.fromRGBO(30, 111, 165, 1.0),
           title: Text('ЛИЧНЫЙ КАБИНЕТ'),
-          // leading: IconButton(
-          //   icon: Icon(Icons.arrow_back_ios),
-          //   onPressed: () { Navigator.of(context).popAndPushNamed('/home'); },
-          // ),
+          leading: IconButton(
+            icon: Icon(Icons.arrow_back_ios),
+            onPressed: () { Navigator.of(context).popAndPushNamed('/login'); },
+          ),
         ),
         body: Stack(
           children: <Widget>[
@@ -54,7 +52,7 @@ class _AccountMenuState extends State<AccountMenu> {
                 mainAxisAlignment: MainAxisAlignment.center,
                 crossAxisAlignment: CrossAxisAlignment.center,
                 children: [
-                  Text('${widget.portalUser.fullUserName!.toUpperCase()}',
+                  Text('${widget.portalUsername.toUpperCase()}',
                       style: TextStyle(
                       color: MainColors().eapoColorMain,
                       fontSize: 20,

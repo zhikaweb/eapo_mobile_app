@@ -18,9 +18,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
 import 'package:path_provider/path_provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xml/xml.dart';
 import 'package:xml2json/xml2json.dart';
 
+import '../main.dart';
 import 'PDFScreen.dart';
 
 class ApplicationInfo extends StatefulWidget {
@@ -239,10 +241,16 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
   }
 
   Future<http.Response> _getDataFromBackend() async {
-    _credentials.login = 'StalAN';
-    _credentials.password = 'ADH563jk';
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _credentials.login = (prefs.getString('login') ?? '');
+      _credentials.password = (prefs.getString('pass') ?? '');
+    });
+    print(_credentials.login);
 
-    return await http.get(Uri.parse(HttpUtils.urlAppliInfo + _appNum), headers: {
+    String url = HttpUtils.mainUrl + 'application/eapoRegNo/';
+
+    return await http.get(Uri.parse(url + _appNum), headers: {
       HttpHeaders.authorizationHeader: NetworkService(_credentials)
           .calculateAuthentication(),
       },

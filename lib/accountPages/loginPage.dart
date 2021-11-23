@@ -3,6 +3,7 @@ import 'dart:io';
 import 'dart:developer' as developer;
 
 import 'package:eapo_mobile_app/accountPages/accountMenu.dart';
+import 'package:eapo_mobile_app/main.dart';
 import 'package:eapo_mobile_app/model/portalUser.dart';
 import 'package:eapo_mobile_app/model/credentials.dart';
 import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
@@ -12,6 +13,7 @@ import 'package:eapo_mobile_app/utils/networkService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
+import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
   // const LoginPage({Key? key}) : super(key: key);
@@ -21,6 +23,7 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+
   final Credentials _credentials = new Credentials();
   late PortalUser _portalUser;
   final TextEditingController _loginController = TextEditingController();
@@ -130,7 +133,13 @@ class _LoginPageState extends State<LoginPage> {
         }
         return null;
       },
-      onSaved: (value) => _credentials.login = value!.trim(),
+      onSaved: (value) async {
+        _credentials.login = value!.trim();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        setState(() {
+          prefs.setString('login', _credentials.login);
+        });
+      }
     );
   }
 
@@ -154,12 +163,18 @@ class _LoginPageState extends State<LoginPage> {
       ),
       obscureText: _hidePassword,
       validator: (value) {
-        if (value == null || value.isEmpty) {
+        if (value!.isEmpty) {
           return 'Please enter password';
         }
         return null;
       },
-      onSaved: (value) => _credentials.password = value!,
+      onSaved: (value) async {
+        _credentials.password = value!.trim();
+        SharedPreferences prefs = await SharedPreferences.getInstance();
+        setState(() {
+          prefs.setString('pass', _credentials.password);
+        });
+      }
     );
   }
 
@@ -171,7 +186,7 @@ class _LoginPageState extends State<LoginPage> {
         child: MaterialButton(
             minWidth: MediaQuery.of(context).size.width,
             height: 60,
-            onPressed: () {
+            onPressed: () async {
               _submitForm();
             },
             child: Text(
@@ -231,16 +246,13 @@ class _LoginPageState extends State<LoginPage> {
     }
   }
 
-  void _loadData() {
+  void _loadData() async{
     _checkAuthentication().then((response) => {
         if (response.statusCode == 200) {
           developer.log('response: ' + response.body),
           _portalUser = new PortalUser.fromJson(convert.json.decode(response.body)),
           developer.log('portalUser: ' + _portalUser.fullUserName.toString()),
-          Navigator.push(context, MaterialPageRoute(
-              builder: (context) => AccountMenu(portalUser: _portalUser,)
-            )
-          ),
+          saveUser(_portalUser.fullUserName.toString()),
         } else {
           developer.log(response.statusCode.toString()),
           _showAlertDialog(context, 'Ошибка входа', 'Неверный логин и/или пароль')
@@ -251,11 +263,24 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   Future<http.Response> _checkAuthentication() async {
+    String url = HttpUtils.mainUrl + 'mobile/login';
 
-    return await http.get(Uri.parse(HttpUtils.urlLogin), headers: {
+    return await http.get(Uri.parse(url), headers: {
         HttpHeaders.authorizationHeader: NetworkService(_credentials)
             .calculateAuthentication(),
       },
+    );
+  }
+
+  Future<void> saveUser(String portalUsername) async {
+    WidgetsFlutterBinding.ensureInitialized();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      prefs.setString('portalUserName', portalUsername);
+    });
+    Navigator.push(context, MaterialPageRoute(
+        builder: (context) => AccountMenu(portalUsername: portalUsername,)
+      )
     );
   }
 
