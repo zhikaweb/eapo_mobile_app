@@ -49,7 +49,7 @@ class _BtnFooState extends State<BtnFoo> {
     return Material(
         elevation: 5.0,
         borderRadius: BorderRadius.circular(8.0),
-        color: Color.fromRGBO(232, 232, 232, 0.9),
+        color: Color.fromRGBO(225, 229, 232, 0.9019607843137255),
         child: MaterialButton(
             minWidth: MediaQuery.of(context).size.width,
             height: 60,
