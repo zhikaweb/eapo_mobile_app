@@ -49,7 +49,7 @@ class _BtnFooState extends State<BtnFoo> {
     return Material(
         elevation: 5.0,
         borderRadius: BorderRadius.circular(8.0),
-        color: Color.fromRGBO(233, 241, 245, 1.0),
+        color: Color.fromRGBO(232, 232, 232, 0.9),
         child: MaterialButton(
             minWidth: MediaQuery.of(context).size.width,
             height: 60,
@@ -58,7 +58,7 @@ class _BtnFooState extends State<BtnFoo> {
             child: Text(
               widget.title,
               textAlign: TextAlign.center,
-              style: TextStyle(fontSize: 20, color: Color.fromRGBO(30, 111, 165, 1.0)),
+              style: TextStyle(fontSize: 20, color: Colors.black26),
             )
         )
     );

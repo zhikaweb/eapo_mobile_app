@@ -26,31 +26,25 @@ class _ApplicationInfoViewState extends State<ApplicationInfoView> {
           Row(
             children: [
               SizedBox(
-                width: 120,
-                child: Text('Номер заявки',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: MainColors().eapoColorMain,
-                  ),),
+                width: 100,
+                child: Text(widget.application.eapoRegNo == null ? '' : 'Номер',
+                  style: fontStyle(),
+                ),
               ),
               SizedBox(width: 10,),
               Text(widget.application.eapoRegNo == null ? '' : widget.application.eapoRegNo.toString(),
-                style: TextStyle(
-                    fontSize: 16,
-                    color: MainColors().eapoColorMain
-                ),),
+                style: fontStyle(),
+              ),
             ],
           ),
           SizedBox(height: 10,),
           Row(
             children: [
               SizedBox(
-                width: 120,
-                child: Text('Наименование',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: MainColors().eapoColorMain,
-                  ),),
+                width: 100,
+                child: Text(widget.application.name == null ? '' : 'Название',
+                  style: fontStyle(),
+                ),
               ),
               SizedBox(width: 10,),
               // expandableText(widget.application.name),
@@ -66,10 +60,7 @@ class _ApplicationInfoViewState extends State<ApplicationInfoView> {
                     overflow: TextOverflow.ellipsis,
                     softWrap: true,
                     maxLines: _isExpanded ? 1 : maxLines,
-                    style: TextStyle(
-                      fontSize: 16,
-                      color: MainColors().eapoColorMain,
-                    ),
+                    style: fontStyle(),
                   ),
                 )
               )
@@ -79,21 +70,17 @@ class _ApplicationInfoViewState extends State<ApplicationInfoView> {
           Row(
             children: [
               SizedBox(
-                width: 120,
-                child: Text('Дата',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: MainColors().eapoColorMain,
-                  ),),
+                width: 100,
+                child: Text(widget.application.eapoRegDate == null ? ''
+                    : 'Получена',
+                  style: fontStyle(),
+                ),
               ),
               SizedBox(width: 10,),
               Text(
                 widget.application.eapoRegDate == null ? ''
                     : DateFormatter().formatDate(widget.application.eapoRegDate),
-                style: TextStyle(
-                    fontSize: 16,
-                    color: MainColors().eapoColorMain
-                ),
+                style: fontStyle(),
               ),
             ],
           ),
@@ -101,20 +88,16 @@ class _ApplicationInfoViewState extends State<ApplicationInfoView> {
           Row(
             children: [
               SizedBox(
-                width: 120,
-                child: Text('Эксперт',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: MainColors().eapoColorMain,
-                  ),),
+                width: 100,
+                child: Text(widget.application.expert == null ? ''
+                    : 'Эксперт',
+                  style: fontStyle(),
+                ),
               ),
               SizedBox(width: 10,),
               Text(widget.application.expert == null ? ''
                   : widget.application.expert.toString(),
-                style: TextStyle(
-                    fontSize: 16,
-                    color: MainColors().eapoColorMain
-                ),
+                style: fontStyle(),
               ),
             ],
           ),
@@ -122,27 +105,31 @@ class _ApplicationInfoViewState extends State<ApplicationInfoView> {
           Row(
             children: [
               SizedBox(
-                width: 120,
-                child: Text('Статус',
-                  style: TextStyle(
-                    fontSize: 16,
-                    color: MainColors().eapoColorMain,
-                  ),),
+                width: 100,
+                child: Text(widget.application.statusName == null ? ''
+                    : 'Статус',
+                  style: fontStyle(),
+                ),
               ),
               SizedBox(width: 10,),
               Expanded(
                 child: Text(widget.application.statusName == null ? ''
                     : widget.application.statusName.toString(),
-                  style: TextStyle(
-                      fontSize: 16,
-                      color: MainColors().eapoColorMain
-                  ),
+                  style: fontStyle(),
                 ),
               ),
             ],
           ),
         ],
       )
+    );
+  }
+
+  TextStyle fontStyle(){
+    return TextStyle(
+      fontSize: 16,
+      color: MainColors().eapoColorMain,
+      fontWeight: FontWeight.bold
     );
   }
 

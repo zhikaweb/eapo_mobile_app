@@ -106,7 +106,7 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(height: 32,),
           SizedBox(width: 200, child: _divider(),),
           SizedBox(height: 32,),
-          _btnNewUser(),
+          // _btnNewUser(),
         ],
       ),
     );

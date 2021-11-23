@@ -80,61 +80,77 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
                 Expanded(
                   flex: 0,
                   child: Padding(
-                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+                    padding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
                     child: Column(
                       children: <Widget>[
                         _form(),
                         SizedBox(height: 10,),
                         ApplicationInfoView(application: _application),
                         SizedBox(height: 20,),
-                        Text(_application.documents == null ? '' : 'Документы',
-                          style: TextStyle(
-                            fontSize: 18,
-                            fontWeight: FontWeight.bold,
-                            color: MainColors().eapoColorMain,
-                          ),
+                        Row(
+                          mainAxisAlignment: MainAxisAlignment.spaceAround,
+                          children: [
+                            Text(_application.documents == null ? '' : 'Уведомления ЕАПВ',
+                              style: TextStyle(
+                                fontSize: 18,
+                                fontWeight: FontWeight.bold,
+                                color: MainColors().eapoColorMain,
+                              ),
+                            ),
+                            SizedBox(width: 150,
+                              child: Divider(
+                                color: _application.documents == null ? Colors.transparent
+                                    : MainColors().eapoColorMain,
+                                height: 3,
+                                thickness: 3,
+                              ),
+                            ),
+                          ],
                         ),
-                        SizedBox(height: 20,),
+                        SizedBox(height: 10,),
                       ],
                     ),
                   ),
                 ),
                 Expanded(
-                  child: ListView.builder(
-                    itemCount: _application.documents != null ? docs.length : 0,
-                    itemBuilder: (context, index){
-                      return Card(
-                        child: ListTile(
-                          title: Text(_application.documents != null
-                              ? '${docs[index].description}'
-                              : ''
-                          ),
-                          subtitle: Text(_application.documents != null
-                              ? '${DateFormatter().formatDate(docs[index].docDate)}'
-                              : '', textAlign: TextAlign.end,
-                          ),
-                          leading: IconButton(
-                            onPressed: () {
-                              createFileOfPdfUrl(docs[index].docId, _application.eapoRegNo).then((f) {
-                                setState(() {
-                                  remotePDFpath = f.path;
-                                });
-                                if (remotePDFpath.isNotEmpty) {
-                                  Navigator.push(
-                                    context,
-                                    MaterialPageRoute(
-                                      builder: (context) => PDFScreen(path: remotePDFpath),
-                                    ),
-                                  );
-                                }
-                              });
-                            },
-                            iconSize: 30,
-                            icon: Icon(Icons.description),
-                          ),
-                        ),
-                      );
-                    }),
+                  child: Padding(
+                    padding: EdgeInsets.symmetric(vertical: 0, horizontal: 8),
+                    child: ListView.builder(
+                        itemCount: _application.documents != null ? docs.length : 0,
+                        itemBuilder: (context, index){
+                          return Card(
+                            child: ListTile(
+                              title: Text(_application.documents != null
+                                  ? '${docs[index].description}'
+                                  : ''
+                              , style: TextStyle(color: MainColors().eapoColorMain),),
+                              subtitle: Text(_application.documents != null
+                                  ? '${DateFormatter().formatDate(docs[index].docDate)}'
+                                  : '', textAlign: TextAlign.end,
+                              ),
+                              leading: IconButton(
+                                onPressed: () {
+                                  createFileOfPdfUrl(docs[index].docId, _application.eapoRegNo).then((f) {
+                                    setState(() {
+                                      remotePDFpath = f.path;
+                                    });
+                                    if (remotePDFpath.isNotEmpty) {
+                                      Navigator.push(
+                                        context,
+                                        MaterialPageRoute(
+                                          builder: (context) => PDFScreen(path: remotePDFpath),
+                                        ),
+                                      );
+                                    }
+                                  });
+                                },
+                                iconSize: 30,
+                                icon: Icon(Icons.description, color: MainColors().eapoColorMain,),
+                              ),
+                            ),
+                          );
+                        }),
+                  ),
                 ),
               ],
             ),
@@ -157,24 +173,32 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
   Form _form() {
     return Form(
       key: _globalKey,
-      child: Row(
+      child: Flex(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
+        direction: Axis.horizontal,
         children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
-            child: SizedBox(
-              width: 200,
-              height: 50,
-              child: _materialTextField(),
+          Flexible(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+              child: SizedBox(
+                width: 210,
+                height: 50,
+                child: _materialTextField(),
+              ),
             ),
+            flex: 1,
           ),
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
-            child: SizedBox(
-              width: 120,
-              child: _materialBtn(),
+          Flexible(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+              child: SizedBox(
+                width: 140,
+                height: 50,
+                child: _materialBtn(),
+              ),
             ),
-          )
+            flex: 1,
+          ),
         ],
       ),
     );
@@ -184,23 +208,37 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
     return Material(
       elevation: 2.0,
       borderRadius: BorderRadius.circular(8.0),
-      color: Color.fromRGBO(233, 241, 245, 1.0),
+      color: MainColors().eapoColorMain,
       child: MaterialButton(
-          child: Text('Показать'),
+          child: Text('Показать', style: TextStyle(
+            color: Colors.white,
+            fontSize: 18,
+            fontWeight: FontWeight.bold,
+          ),),
           onPressed: () {
             _getData();
           }),
     );
   }
 
-  Material _materialTextField() {
-    return Material(
-      child: TextFormField(
+  TextFormField _materialTextField() {
+    return TextFormField(
         controller: _textEditingController,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
+          fillColor: Colors.white,
+          filled: true,
+          labelText: 'Номер заявки',
+          floatingLabelStyle: TextStyle(
+            fontWeight: FontWeight.bold,
+          ),
         ),
         showCursor: true,
+        // maxLength: 9,
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+          fontSize: 20
+        ),
         validator: (value) {
           if (value == null || value.isEmpty){
             return 'Поле не должно быть пустым';
@@ -211,7 +249,6 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
         onSaved: (value) {
           _appNum = value!;
         },
-      ),
     );
   }
 
