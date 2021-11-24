@@ -8,6 +8,7 @@ import 'package:eapo_mobile_app/model/application.dart';
 import 'package:eapo_mobile_app/model/credentials.dart';
 import 'package:eapo_mobile_app/presentation/applicationInfoView.dart';
 import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
+import 'package:eapo_mobile_app/presentation/customCircularProgressIndicator.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:eapo_mobile_app/utils/dateFormatter.dart';
 import 'package:eapo_mobile_app/utils/httpUtils.dart';
@@ -42,6 +43,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
   var application;
   var _appNum;
   String remotePDFpath = '';
+  bool isLoading = false;
 
   @override
   void initState() {
@@ -154,7 +156,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
                 ),
               ],
             ),
-
+            isLoading ? Center(child: CustomCircularProgressIndicator(),) : Stack(),
           ]),
           bottomNavigationBar: _bottomBar(5),
         )
@@ -255,11 +257,15 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
   void _getData(){
     if (_globalKey.currentState!.validate()) {
       _globalKey.currentState!.save();
+      setState(() {
+        isLoading = true;
+      });
 
       _getDataFromBackend().then<String>((response) {
         if (response.statusCode == 200){
           _createApplicationFromJson(convert.utf8.decode(response.body.codeUnits));
           setState(() {
+            isLoading = false;
             _application = application;
             docs = _application.documents!.document!
                 .where((element) => element.docType == 'OUT' && element.signed == '1')

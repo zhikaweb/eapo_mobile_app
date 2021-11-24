@@ -1,6 +1,7 @@
 import 'dart:async';
 import 'dart:convert';
 
+import 'package:eapo_mobile_app/presentation/customCircularProgressIndicator.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -8,22 +9,28 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:webview_flutter/platform_interface.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class MyWebView extends StatelessWidget {
+class MyWebView extends StatefulWidget {
   final String title;
   final String selectedUrl;
 
   final userAgent =
       'Mozilla/5.0 (Linux; Android 6.0; Nexus 5 Build/MRA58N) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/62.0.3202.94 Mobile Safari/537.36';
 
-  MyWebView({
+  const MyWebView({Key? key,
     required this.title,
     required this.selectedUrl,
-  });
+  }) : super(key: key);
+
+  @override
+  _MyWebViewState createState() => _MyWebViewState();
+}
+
+class _MyWebViewState extends State<MyWebView> {
+  late WebViewController controllerGlobal;
+  bool isLoading = true;
 
   @override
   Widget build(BuildContext context) {
-
-    late WebViewController controllerGlobal;
 
     Future<bool> _exitApp(BuildContext context) async{
       if (await controllerGlobal.canGoBack()) {
@@ -36,27 +43,36 @@ class MyWebView extends StatelessWidget {
     }
 
     return WillPopScope(
-        child: Scaffold(
-            appBar: AppBar(
-              backgroundColor: MainColors().eapoColorMain,
-              title: Text(title),
-            ),
-            body: WebView(
-              initialUrl: selectedUrl,
-              javascriptMode: JavascriptMode.unrestricted,
-              onWebViewCreated: (WebViewController webViewController) {
-                controllerGlobal = webViewController;
-              },
-              userAgent: userAgent,
-              onPageStarted: (String url) {
-                print('Page started loading: $url');
-              },
-              onPageFinished: (String url) {
-                print('Page finished loading: $url');
-              },
-            )
-        ),
-        onWillPop: () =>
+      child: Scaffold(
+          appBar: AppBar(
+            backgroundColor: MainColors().eapoColorMain,
+            title: Text(widget.title),
+          ),
+          body: Stack(
+            children: [
+              WebView(
+                initialUrl: widget.selectedUrl,
+                javascriptMode: JavascriptMode.unrestricted,
+                onWebViewCreated: (WebViewController webViewController) {
+                  controllerGlobal = webViewController;
+                },
+                userAgent: widget.userAgent,
+                onPageStarted: (String url) {
+                  print('Page started loading: $url');
+                },
+                onPageFinished: (String url) {
+                  print('Page finished loading: $url');
+                  setState(() {
+                    isLoading = false;
+                  });
+                },
+              ),
+              isLoading ? Center( child: CustomCircularProgressIndicator(),)
+                  : Stack(),
+            ],
+          )
+      ),
+      onWillPop: () =>
           _exitApp(context),
     );
   }

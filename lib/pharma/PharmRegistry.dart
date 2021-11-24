@@ -1,4 +1,5 @@
 import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
+import 'package:eapo_mobile_app/presentation/customCircularProgressIndicator.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
@@ -19,6 +20,7 @@ class _PharmRegistryState extends State<PharmRegistry> {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
 
   late InAppWebViewController _controller;
+  bool isLoading = true;
 
   @override
   void initState() {
@@ -62,6 +64,7 @@ class _PharmRegistryState extends State<PharmRegistry> {
                         EdgeInsets.only(bottom: 0, top: 70, left: 0, right: 0),
                     child: _webView(),
                   ),
+                  isLoading ? Center(child: CustomCircularProgressIndicator(),) : Stack(),
                 ],
               ),
             ],
@@ -130,6 +133,11 @@ class _PharmRegistryState extends State<PharmRegistry> {
       initialUrlRequest: URLRequest(url: Uri.parse(_url)),
       onWebViewCreated: (controller) {
         _controller = controller;
+      },
+      onLoadStop: (controller, _url){
+        setState(() {
+          isLoading = false;
+        });
       },
     );
   }
