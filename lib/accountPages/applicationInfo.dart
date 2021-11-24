@@ -22,6 +22,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xml/xml.dart';
 import 'package:xml2json/xml2json.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../main.dart';
 import 'PDFScreen.dart';
@@ -328,8 +329,8 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
       var bytes = await consolidateHttpClientResponseBytes(response);
       var dir = await getApplicationDocumentsDirectory();
       developer.log("Download files");
-      developer.log("${dir.path}/$filename");
-      File file = File("${dir.path}/$filename");
+      developer.log("${dir.path}/$filename.pdf");
+      File file = File("${dir.path}/$filename.pdf");
 
       await file.writeAsBytes(bytes, flush: true);
       completer.complete(file);

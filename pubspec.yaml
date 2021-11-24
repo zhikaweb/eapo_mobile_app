@@ -65,10 +65,14 @@ dependencies:
   # Plugin shared preferences
   shared_preferences: ^2.0.8
 
-  # Add BLoC dependency
+  # BLoC dependency
   flutter_bloc: ^7.3.3
 
+  # open pdf files
   flutter_pdfview: ^1.2.1
+
+  # adds permissions to download files
+  permission_handler: ^8.3.0
 
 dev_dependencies:
   flutter_test:

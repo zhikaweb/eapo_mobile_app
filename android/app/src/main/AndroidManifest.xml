@@ -2,6 +2,7 @@
     package="com.example.eapo_mobile_app">
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CLEAR_APP_CACHE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
    <application
         android:label="EAPO-mobile"
         android:icon="@mipmap/ic_launcher">

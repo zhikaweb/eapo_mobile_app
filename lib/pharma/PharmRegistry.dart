@@ -4,6 +4,7 @@ import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
 import 'package:enough_convert/enough_convert.dart';
+import 'dart:developer' as developer;
 
 class PharmRegistry extends StatefulWidget {
   @override
@@ -134,7 +135,11 @@ class _PharmRegistryState extends State<PharmRegistry> {
       onWebViewCreated: (controller) {
         _controller = controller;
       },
+      onLoadStart: (controller, _url) {
+        developer.log('page is loading: ' + _url.toString());
+      },
       onLoadStop: (controller, _url){
+        developer.log('page is loaded: ' + _url.toString());
         setState(() {
           isLoading = false;
         });

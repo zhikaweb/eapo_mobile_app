@@ -1,12 +1,9 @@
 import 'dart:async';
-import 'dart:convert';
 
 import 'package:eapo_mobile_app/presentation/customCircularProgressIndicator.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:url_launcher/url_launcher.dart';
-import 'package:webview_flutter/platform_interface.dart';
+import 'dart:developer' as developer;
 import 'package:webview_flutter/webview_flutter.dart';
 
 class MyWebView extends StatefulWidget {
@@ -58,10 +55,10 @@ class _MyWebViewState extends State<MyWebView> {
                 },
                 userAgent: widget.userAgent,
                 onPageStarted: (String url) {
-                  print('Page started loading: $url');
+                  developer.log('Page started loading: $url');
                 },
                 onPageFinished: (String url) {
-                  print('Page finished loading: $url');
+                  developer.log('Page finished loading: $url');
                   setState(() {
                     isLoading = false;
                   });

@@ -44,8 +44,7 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
             pageSnap: true,
             defaultPage: currentPage!,
             fitPolicy: FitPolicy.BOTH,
-            preventLinkNavigation:
-            false, // if set to true the link is handled in flutter
+            preventLinkNavigation: false, // if set to true the link is handled in flutter
             onRender: (_pages) {
               setState(() {
                 pages = _pages;
@@ -88,21 +87,50 @@ class _PDFScreenState extends State<PDFScreen> with WidgetsBindingObserver {
           )
         ],
       ),
-      floatingActionButton: FutureBuilder<PDFViewController>(
-        future: _controller.future,
-        builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
-          if (snapshot.hasData) {
-            return FloatingActionButton.extended(
-              label: Text("Go to ${pages! ~/ 2}"),
-              onPressed: () async {
-                await snapshot.data!.setPage(pages! ~/ 2);
-              },
-            );
-          }
+      floatingActionButton: Padding(
+        padding: EdgeInsets.only(left: 20, top: 0, right: 0, bottom: 0),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: <Widget>[
+            FutureBuilder<PDFViewController>(
+              future: _controller.future,
+              builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
+                if (snapshot.hasData) {
+                  return FloatingActionButton.extended(
+                    heroTag: "btn1",
+                    extendedPadding: null,
+                    backgroundColor: MainColors().eapoColorMain,
+                    label: Text("Back to ${pages! ~/ 3 + 1}"),
+                    onPressed: () async {
+                      await snapshot.data!.setPage(pages! ~/ 3);
+                    },
+                  );
+                }
 
-          return Container();
-        },
-      ),
+                return Container();
+              },
+            ),
+            FutureBuilder<PDFViewController>(
+              future: _controller.future,
+              builder: (context, AsyncSnapshot<PDFViewController> snapshot) {
+                if (snapshot.hasData) {
+                  return FloatingActionButton.extended(
+                    heroTag: "btn2",
+                    extendedPadding: null,
+                    backgroundColor: MainColors().eapoColorMain,
+                    label: Text("Go to ${pages! ~/ 2 + 1}"),
+                    onPressed: () async {
+                      await snapshot.data!.setPage(pages! ~/ 2);
+                    },
+                  );
+                }
+
+                return Container();
+              },
+            ),
+          ],
+        ),
+      )
     );
   }
 }
