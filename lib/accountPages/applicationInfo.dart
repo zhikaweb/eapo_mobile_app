@@ -22,9 +22,7 @@ import 'package:path_provider/path_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:xml/xml.dart';
 import 'package:xml2json/xml2json.dart';
-import 'package:permission_handler/permission_handler.dart';
 
-import '../main.dart';
 import 'PDFScreen.dart';
 
 class ApplicationInfo extends StatefulWidget {

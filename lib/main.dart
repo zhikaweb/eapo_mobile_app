@@ -1,5 +1,6 @@
 import 'package:eapo_mobile_app/accountPages/applicationInfo.dart';
 import 'package:eapo_mobile_app/accountPages/loginPage.dart';
+import 'package:eapo_mobile_app/accountPages/paymentPPS.dart';
 import 'package:eapo_mobile_app/homePage.dart';
 import 'package:eapo_mobile_app/designPages/designBulletin.dart';
 import 'package:eapo_mobile_app/designPages/designDocs.dart';
@@ -52,6 +53,7 @@ class MyApp extends StatelessWidget {
         '/searchPublDesign': (BuildContext context) => SearchPublDesign(),
         '/login': (BuildContext context) => LoginPage(),
         '/applicationInfo': (BuildContext context) => ApplicationInfo(),
+        '/paymentPPS': (BuildContext context) => PaymentPPS(),
       },
     );
   }
