@@ -1,10 +1,17 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:eapo_mobile_app/model/credentials.dart';
 import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
 import 'package:eapo_mobile_app/presentation/customCircularProgressIndicator.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
+import 'package:eapo_mobile_app/utils/httpUtils.dart';
+import 'package:eapo_mobile_app/utils/networkService.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_inappwebview/flutter_inappwebview.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'dart:developer' as developer;
+import 'package:http/http.dart' as http;
 
 class PaymentPPS extends StatefulWidget {
   const PaymentPPS({Key? key}) : super(key: key);
@@ -17,11 +24,16 @@ class _PaymentPPSState extends State<PaymentPPS> {
   Credentials _credentials = new Credentials();
   TextEditingController _textEditingController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
+  // late WebViewController _controller;
+  late InAppWebViewController _controller;
   var _appNum;
   bool isChecked = true;
   bool isLoading = true;
-  late InAppWebViewController _controller;
-  String _url = '';
+  // String _url = 'https://www.eapo.org/ru/patents/reestr/any_request2021.php?rg=pay&mode=m&i21=';
+  String _url = 'https://www.eapo.org/ru/patents/reestr/any_request2021.php?rg=pay&mode=m&i21=';
+  late Map<String, dynamic> _json;
+  late String _paymentOption;
+  late Map<String, dynamic> _annpatfees;
 
   @override
   void initState() {
@@ -59,10 +71,10 @@ class _PaymentPPSState extends State<PaymentPPS> {
                 clipBehavior: Clip.none,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(bottom: 0, top: 70, left: 0, right: 0),
-                    child: _url.isEmpty ? Container() : _webView(),
+                    margin: EdgeInsets.only(bottom: 0, top: 120, left: 0, right: 0),
+                    child: _webView(),
                   ),
-                  isLoading ? Center(child: CustomCircularProgressIndicator(),) : Stack(),
+                  // isLoading ? Center(child: CustomCircularProgressIndicator(),) : Stack(),
                 ],
               ),
             ],
@@ -115,9 +127,9 @@ class _PaymentPPSState extends State<PaymentPPS> {
             ],
           ),
           Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16, vertical: 0),
+            padding: EdgeInsets.symmetric(horizontal: 0, vertical: 0),
             child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
+              mainAxisAlignment: MainAxisAlignment.start,
               children: <Widget>[
                 _checkbox(),
                 Text('Списать с авансового счета',
@@ -146,7 +158,7 @@ class _PaymentPPSState extends State<PaymentPPS> {
             fontWeight: FontWeight.bold,
           ),),
           onPressed: () {
-            _loadData();
+            _loadUrl();
           }),
     );
   }
@@ -215,6 +227,9 @@ class _PaymentPPSState extends State<PaymentPPS> {
       },
       onLoadStart: (controller, _url) {
         developer.log('page is loading: ' + _url.toString());
+        if (_url.toString().contains("pay_request")) {
+          _controller.evaluateJavascript(source: "console.log(SendData('***'))");
+        }
       },
       onLoadStop: (controller, _url){
         developer.log('page is loaded: ' + _url.toString());
@@ -222,15 +237,59 @@ class _PaymentPPSState extends State<PaymentPPS> {
           isLoading = false;
         });
       },
+      onConsoleMessage: (InAppWebViewController controller, ConsoleMessage consoleMessage) {
+        developer.log("console message: ${consoleMessage.message}");
+        if (consoleMessage.message.isNotEmpty && consoleMessage.message.startsWith('{')) {
+          _json = json.decode(consoleMessage.message);
+          _json["dossier_number"] = _appNum;
+
+          isChecked ? _annpatfees = { "paymentoption" : "advance-account" }
+          : _annpatfees = { "paymentoption" : "payment-document" };
+          _annpatfees["annpatfees"] = _json;
+
+          developer.log(_annpatfees.toString());
+          sendPaymentData(_annpatfees);
+        }
+      },
     );
   }
 
-  void _loadData(){
+  sendPaymentData(Map jsonMap) {
+    _sendDataToBackend(jsonMap).then((response) {
+      if (response.statusCode == 200) {
+        developer.log("Данные успешно переданы : " + response.body);
+      } else {
+        developer.log('Передача не удалась : ' + response.body);
+      }
+      throw new Exception(response.reasonPhrase);
+    }).catchError((error) {
+      developer.log(error.runtimeType.toString() + ' : ' + error.toString());
+    });
+  }
+
+  Future<http.Response> _sendDataToBackend(Map jsonMap) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _credentials.login = (prefs.getString('login') ?? '');
+      _credentials.password = (prefs.getString('pass') ?? '');
+    });
+
+    String url = HttpUtils.mainUrl + 'mobile/pps';
+    var body = utf8.encode(json.encode(jsonMap));
+
+    return await http.post(Uri.parse(url), headers: {
+      HttpHeaders.authorizationHeader: NetworkService(_credentials)
+          .calculateAuthentication(),
+      HttpHeaders.contentTypeHeader: "application/json"
+      }, body: body
+    );
+  }
+
+  void _loadUrl(){
     if (_globalKey.currentState!.validate()) {
       _globalKey.currentState!.save();
 
-      _controller.loadUrl(
-          urlRequest: URLRequest(url: Uri.parse(_url + _appNum)));
+      _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(_url + _appNum)));
     }
   }
 
