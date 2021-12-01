@@ -24,16 +24,32 @@ class _PaymentPPSState extends State<PaymentPPS> {
   Credentials _credentials = new Credentials();
   TextEditingController _textEditingController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
-  // late WebViewController _controller;
   late InAppWebViewController _controller;
-  var _appNum;
+
+  final String _url = 'https://www.eapo.org/ru/patents/reestr/any_request2021.php?rg=pay&mode=m&i21=';
+  final String _idOper = 'PPS';
+
   bool isChecked = true;
-  bool isLoading = true;
-  // String _url = 'https://www.eapo.org/ru/patents/reestr/any_request2021.php?rg=pay&mode=m&i21=';
-  String _url = 'https://www.eapo.org/ru/patents/reestr/any_request2021.php?rg=pay&mode=m&i21=';
+  bool isLoading = false;
+
+  var _appNum;
+
   late Map<String, dynamic> _json;
-  late String _paymentOption;
   late Map<String, dynamic> _annpatfees;
+
+  final String initialPage = new Uri.dataFromString(
+      '<html><body style="background: #BDDAEAFF;"></body></html>',
+      mimeType: 'text/html').toString();
+
+  String successPage = new Uri
+      .dataFromString('<html><body style="background: #BDDAEAFF; font-size: 100px; padding: 16px;">Данные по заявке успешно поданы!</body></html>',
+      mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
+      .toString();
+
+  String failedPage = new Uri.dataFromString(
+      '<html><body style="background: #BDDAEAFF; font-size: 100px; padding: 16px;">Заявка не найдена или нет прав доступа!</body></html>',
+      mimeType: 'text/html', encoding: Encoding.getByName('utf-8'))
+      .toString();
 
   @override
   void initState() {
@@ -74,7 +90,7 @@ class _PaymentPPSState extends State<PaymentPPS> {
                     margin: EdgeInsets.only(bottom: 0, top: 120, left: 0, right: 0),
                     child: _webView(),
                   ),
-                  // isLoading ? Center(child: CustomCircularProgressIndicator(),) : Stack(),
+                  isLoading ? Center(child: CustomCircularProgressIndicator(),) : Stack(),
                 ],
               ),
             ],
@@ -219,9 +235,10 @@ class _PaymentPPSState extends State<PaymentPPS> {
   }
 
   Widget _webView() {
+
     return InAppWebView(
       initialUrlRequest: URLRequest(
-          url: Uri.parse(_url)),
+          url: Uri.parse(initialPage)),
       onWebViewCreated: (controller) {
         _controller = controller;
       },
@@ -248,32 +265,33 @@ class _PaymentPPSState extends State<PaymentPPS> {
           _annpatfees["annpatfees"] = _json;
 
           developer.log(_annpatfees.toString());
-          sendPaymentData(_annpatfees);
+          _sendPaymentData(_annpatfees);
         }
       },
     );
   }
 
-  sendPaymentData(Map jsonMap) {
-    _sendDataToBackend(jsonMap).then((response) {
+  _sendPaymentData(Map jsonMap) {
+    _sendJsonToBackend(jsonMap).then((response) {
       if (response.statusCode == 200) {
         developer.log("Данные успешно переданы : " + response.body);
+        _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(successPage)));
       } else {
         developer.log('Передача не удалась : ' + response.body);
+        // _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(failedPage)));
       }
-      throw new Exception(response.reasonPhrase);
+      throw new Exception(response.reasonPhrase! + " " + response.statusCode.toString());
     }).catchError((error) {
       developer.log(error.runtimeType.toString() + ' : ' + error.toString());
     });
   }
 
-  Future<http.Response> _sendDataToBackend(Map jsonMap) async {
+  Future<http.Response> _sendJsonToBackend(Map jsonMap) async {
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {
       _credentials.login = (prefs.getString('login') ?? '');
       _credentials.password = (prefs.getString('pass') ?? '');
     });
-
     String url = HttpUtils.mainUrl + 'mobile/pps';
     var body = utf8.encode(json.encode(jsonMap));
 
@@ -288,10 +306,30 @@ class _PaymentPPSState extends State<PaymentPPS> {
   void _loadUrl(){
     if (_globalKey.currentState!.validate()) {
       _globalKey.currentState!.save();
-
-      _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(_url + _appNum)));
+      _checkOperation(_appNum).then((response) {
+        if (response.statusCode == 200) {
+          developer.log('Заявка принята : ' + response.statusCode.toString());
+          _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(_url + _appNum)));
+        } else {
+          developer.log('Ошибка : ' + response.statusCode.toString() + ' ' + response.body);
+          _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(failedPage)));
+        }
+      });
     }
   }
 
-  // https://www.eapo.org/ru/patents/reestr/any_request2021.php?rg=pay&mode=m&i21='+ _appNum
+  Future<http.Response> _checkOperation(String appNum) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _credentials.login = (prefs.getString('login') ?? '');
+      _credentials.password = (prefs.getString('pass') ?? '');
+    });
+    String url = HttpUtils.mainUrl + 'mobile/checkoperation?eapoRegNo=$appNum&idoper=$_idOper';
+    return await http.get(Uri.parse(url), headers: {
+      HttpHeaders.authorizationHeader: NetworkService(_credentials)
+          .calculateAuthentication()
+      }
+    );
+  }
+
 }
