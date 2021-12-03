@@ -16,7 +16,7 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginPage extends StatefulWidget {
-  // const LoginPage({Key? key}) : super(key: key);
+  const LoginPage({Key? key}) : super(key: key);
 
   @override
   _LoginPageState createState() => _LoginPageState();
@@ -112,69 +112,73 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  TextFormField _inputLogin(){
-    return TextFormField(
-      controller: _loginController,
-      decoration: InputDecoration(
-        suffixIcon: IconButton(
-          icon: Icon(Icons.clear_outlined), onPressed: () {
-            _loginController.clear();
-          },
-        ),
-        border: OutlineInputBorder(borderSide: BorderSide.none),
-        hintText: 'Имя пользователя',
-        hintStyle: TextStyle(fontSize: 18),
-        fillColor: Colors.white,
-        filled: true,
-      ),
-      validator: (value) {
-        if (value == null || value.isEmpty) {
-          return 'Please enter login';
-        }
-        return null;
-      },
-      onSaved: (value) async {
-        _credentials.login = value!.trim();
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        setState(() {
-          prefs.setString('login', _credentials.login);
-        });
-      }
+  Material _inputLogin(){
+    return Material(
+        child: TextFormField(
+            controller: _loginController,
+            decoration: InputDecoration(
+              suffixIcon: IconButton(
+                icon: Icon(Icons.clear_outlined), onPressed: () {
+                _loginController.clear();
+              },
+              ),
+              border: OutlineInputBorder(borderSide: BorderSide.none),
+              hintText: 'Имя пользователя',
+              hintStyle: TextStyle(fontSize: 18),
+              fillColor: Colors.white,
+              filled: true,
+            ),
+            validator: (value) {
+              if (value == null || value == '') {
+                return 'Please enter login';
+              }
+              return null;
+            },
+            onSaved: (value) async {
+              _credentials.login = value!;
+              SharedPreferences prefs = await SharedPreferences.getInstance();
+              setState(() {
+                prefs.setString('login', _credentials.login);
+              });
+            }
+        )
     );
   }
 
-  TextFormField _inputPassword(){
-    return TextFormField(
-      controller: _passwordController,
-      decoration: InputDecoration(
-        suffixIcon: IconButton(
-          icon: Icon(_hidePassword ? Icons.visibility : Icons.visibility_off),
-          onPressed: () {
+  Material _inputPassword(){
+    return Material(
+      child: TextFormField(
+        controller: _passwordController,
+        decoration: InputDecoration(
+          suffixIcon: IconButton(
+            icon: Icon(_hidePassword ? Icons.visibility : Icons.visibility_off),
+            onPressed: () {
               setState(() {
                 _hidePassword = !_hidePassword;
               });
             },
+          ),
+          border: OutlineInputBorder(borderSide: BorderSide.none),
+          hintText: 'Пароль',
+          hintStyle: TextStyle(fontSize: 18),
+          fillColor: Colors.white,
+          filled: true,
         ),
-        border: OutlineInputBorder(borderSide: BorderSide.none),
-        hintText: 'Пароль',
-        hintStyle: TextStyle(fontSize: 18),
-        fillColor: Colors.white,
-        filled: true,
-      ),
-      obscureText: _hidePassword,
-      validator: (value) {
-        if (value!.isEmpty) {
-          return 'Please enter password';
+        obscureText: _hidePassword,
+        validator: (value) {
+          if (value == null || value == '') {
+            return 'Please enter password';
+          }
+          return null;
+        },
+        onSaved: (value) async {
+          _credentials.password = value!;
+          SharedPreferences prefs = await SharedPreferences.getInstance();
+          setState(() {
+            prefs.setString('pass', _credentials.password);
+          });
         }
-        return null;
-      },
-      onSaved: (value) async {
-        _credentials.password = value!.trim();
-        SharedPreferences prefs = await SharedPreferences.getInstance();
-        setState(() {
-          prefs.setString('pass', _credentials.password);
-        });
-      }
+    ),
     );
   }
 
@@ -237,29 +241,33 @@ class _LoginPageState extends State<LoginPage> {
 
   _submitForm() {
     if (_globalKey.currentState!.validate()) {
-      developer.log('Form is valid!');
       _globalKey.currentState!.save();
+      developer.log('Form is valid!');
       _loadData();
-    }
-    else {
+    } else {
       print('Form is not valid!');
     }
   }
 
-  void _loadData() async{
-    _checkAuthentication().then((response) => {
+  _loadData() {
+    try {
+      _checkAuthentication().then((response) =>
+      {
         if (response.statusCode == 200) {
           developer.log('response: ' + response.body),
-          _portalUser = new PortalUser.fromJson(convert.json.decode(response.body)),
+          _portalUser =
+          new PortalUser.fromJson(convert.json.decode(response.body)),
           developer.log('portalUser: ' + _portalUser.fullUserName.toString()),
           saveUser(_portalUser.fullUserName.toString()),
         } else {
-          developer.log(response.statusCode.toString()),
-          _showAlertDialog(context, 'Ошибка входа', 'Неверный логин и/или пароль')
-        }
-      }).catchError((error) {
-        developer.log(error.toString());
+            developer.log(response.statusCode.toString()),
+            _showAlertDialog(
+                context, 'Ошибка входа', 'Неверный логин и/или пароль')
+          }
       });
+    } catch (e) {
+      developer.log(e.toString());
+    }
   }
 
   Future<http.Response> _checkAuthentication() async {

@@ -14,7 +14,8 @@ import 'dart:developer' as developer;
 import 'package:http/http.dart' as http;
 
 class PaymentPPS extends StatefulWidget {
-  const PaymentPPS({Key? key}) : super(key: key);
+  final String? externalNumAppli;
+  const PaymentPPS({Key? key, required this.externalNumAppli}) : super(key: key);
 
   @override
   _PaymentPPSState createState() => _PaymentPPSState();
@@ -26,9 +27,6 @@ class _PaymentPPSState extends State<PaymentPPS> {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   late InAppWebViewController _controller;
 
-  final String _url = 'https://www.eapo.org/ru/patents/reestr/any_request2021.php?rg=pay&mode=m&i21=';
-  final String _idOper = 'PPS';
-
   bool isChecked = true;
   bool isLoading = false;
 
@@ -37,6 +35,8 @@ class _PaymentPPSState extends State<PaymentPPS> {
   late Map<String, dynamic> _json;
   late Map<String, dynamic> _annpatfees;
 
+  final String _url = 'https://www.eapo.org/ru/patents/reestr/any_request2021.php?rg=pay&mode=m&i21=';
+  final String _idOper = 'PPS';
   final String initialPage = new Uri.dataFromString(
       '<html><body style="background: #BDDAEAFF;"></body></html>',
       mimeType: 'text/html').toString();
@@ -53,6 +53,7 @@ class _PaymentPPSState extends State<PaymentPPS> {
 
   @override
   void initState() {
+    _textEditingController.text = widget.externalNumAppli!;
     super.initState();
   }
 
@@ -72,7 +73,7 @@ class _PaymentPPSState extends State<PaymentPPS> {
           backgroundColor: Colors.transparent,
           appBar: AppBar(
               backgroundColor: MainColors().eapoColorMain,
-              title: Text('ИНФОРМАЦИЯ ПО ЗАЯВКЕ'),
+              title: Text('УПЛАТА ППС'),
               leading: IconButton(
                 icon: Icon(Icons.arrow_back_ios),
                 onPressed: () {Navigator.of(context).pop();},
@@ -275,10 +276,10 @@ class _PaymentPPSState extends State<PaymentPPS> {
     _sendJsonToBackend(jsonMap).then((response) {
       if (response.statusCode == 200) {
         developer.log("Данные успешно переданы : " + response.body);
-        _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(successPage)));
+        _loadPageOnResponse(successPage);
       } else {
         developer.log('Передача не удалась : ' + response.body);
-        // _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(failedPage)));
+        _loadPageOnResponse(failedPage);
       }
       throw new Exception(response.reasonPhrase! + " " + response.statusCode.toString());
     }).catchError((error) {
@@ -312,8 +313,11 @@ class _PaymentPPSState extends State<PaymentPPS> {
           _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(_url + _appNum)));
         } else {
           developer.log('Ошибка : ' + response.statusCode.toString() + ' ' + response.body);
-          _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(failedPage)));
+          _loadPageOnResponse(failedPage);
         }
+        throw new Exception(response.reasonPhrase);
+      }).catchError((error) {
+        developer.log(error.runtimeType.toString() + ' : ' + error.toString());
       });
     }
   }
@@ -330,6 +334,10 @@ class _PaymentPPSState extends State<PaymentPPS> {
           .calculateAuthentication()
       }
     );
+  }
+
+  _loadPageOnResponse(String url) {
+    _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(url)));
   }
 
 }

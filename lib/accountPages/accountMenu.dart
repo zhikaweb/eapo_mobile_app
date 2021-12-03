@@ -62,7 +62,7 @@ class _AccountMenuState extends State<AccountMenu> {
                   SizedBox(height: 16,),
                   _divider(),
                   SizedBox(height: 32,),
-                  BtnFoo(title: 'Уведомления'),
+                  BtnMainMenu(title: 'Уведомления', route: '/notifications',),
                   SizedBox(height: 32,),
                   BtnMainMenu(title: 'Информация по заявке', route: '/applicationInfo',),
                   SizedBox(height: 32,),

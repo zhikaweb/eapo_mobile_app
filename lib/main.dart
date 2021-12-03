@@ -21,6 +21,8 @@ import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
+import 'accountPages/notificationPage.dart';
+
 void main() => runApp(MyApp());
 
 class MyApp extends StatelessWidget {
@@ -52,8 +54,9 @@ class MyApp extends StatelessWidget {
         '/designBull': (BuildContext context) => DesignBulletin(),
         '/searchPublDesign': (BuildContext context) => SearchPublDesign(),
         '/login': (BuildContext context) => LoginPage(),
-        '/applicationInfo': (BuildContext context) => ApplicationInfo(),
-        '/paymentPPS': (BuildContext context) => PaymentPPS(),
+        '/applicationInfo': (BuildContext context) => ApplicationInfo(externalNumAppli: ''),
+        '/paymentPPS': (BuildContext context) => PaymentPPS(externalNumAppli: '',),
+        '/notifications': (BuildContext context) => NotificationPage(),
       },
     );
   }

@@ -26,7 +26,8 @@ import 'package:xml2json/xml2json.dart';
 import 'PDFScreen.dart';
 
 class ApplicationInfo extends StatefulWidget {
-  const ApplicationInfo({Key? key}) : super(key: key);
+  final String? externalNumAppli;
+  const ApplicationInfo({Key? key, required this.externalNumAppli}) : super(key: key);
 
   @override
   _ApplicationInfoState createState() => _ApplicationInfoState();
@@ -34,7 +35,7 @@ class ApplicationInfo extends StatefulWidget {
 
 class _ApplicationInfoState extends State<ApplicationInfo> {
 
-  TextEditingController _textEditingController = TextEditingController();
+  final TextEditingController _textEditingController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   Credentials _credentials = new Credentials();
   Application _application = Application.a();
@@ -47,6 +48,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
   @override
   void initState() {
     // TODO: implement initState
+    _textEditingController.text = widget.externalNumAppli!;
     super.initState();
   }
 
@@ -238,7 +240,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
         // maxLength: 9,
         style: TextStyle(
             fontWeight: FontWeight.bold,
-          fontSize: 22
+            fontSize: 22
         ),
         validator: (value) {
           if (value == null || value.isEmpty){

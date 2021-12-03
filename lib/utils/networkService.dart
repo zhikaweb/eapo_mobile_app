@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:typed_data';
 
 import 'package:eapo_mobile_app/model/credentials.dart';
 
@@ -9,10 +10,15 @@ class NetworkService {
 
   String calculateAuthentication() {
     List<int> prefix = utf8.encode(credentials.login + ":");
+    // print(prefix);
     List<int> pass = utf8.encode(credentials.password);
-    List<int> usernamePass = prefix + pass;
+    // print(pass);
+    List<int> usernamePass = [];
+    usernamePass.addAll(prefix);
+    usernamePass.addAll(pass);
+    // print(usernamePass);
     List.copyRange(prefix, 0, usernamePass, 0, prefix.length);
-    List.copyRange(pass, 0, usernamePass, prefix.length, pass.length);
+    List.copyRange(pass, 0, usernamePass, 0, pass.length);
     return 'Basic ' + base64.encode(usernamePass);
   }
 }
