@@ -64,14 +64,33 @@ class _NotificationPageState extends State<NotificationPage> {
               alignment: Alignment.bottomRight,
               child: SvgPicture.asset('assets/images/eg_sm_bottomright.svg'),
             ),
-            _portalMessages.length == 0 ? Container(child: Text('Уведомлений нет'),) :
+            _portalMessages.length == 0 ?
+            Container(
+              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+                width: MediaQuery.of(context).size.width,
+                  child: Card(
+                    shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(8)),
+                    elevation: 3,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
+                      child: Text('Новых уведомлений нет',
+                        style: TextStyle(
+                            fontSize: 16,
+                            fontWeight: FontWeight.bold,
+                            color: MainColors().eapoColorMain
+                        ),
+                      ),
+                    )
+                  )
+            ) :
             Padding(
               padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),
               child: ListView.builder(
                   itemCount: _portalMessages.length > 0 ? _portalMessages.length : 0,
                   itemBuilder: (context, index){
                     return Card(
-                      margin: EdgeInsets.only(bottom: 10, top: 0, left: 8, right: 8),
+                      margin: EdgeInsets.only(bottom: 16, top: 0, left: 8, right: 8),
                       shape: RoundedRectangleBorder(
                           borderRadius: BorderRadius.circular(8)),
                       elevation: 3.0,
@@ -80,12 +99,15 @@ class _NotificationPageState extends State<NotificationPage> {
                             gradient: _changeBorderColor(_portalMessages[index].type),
                             borderRadius: new BorderRadius.all(const Radius.circular(8.0))),
                         child: ListTile(
-                          title: Text(_portalMessages.length > 0
-                              ? '${_portalMessages[index].message}'
-                              : ''
-                            , style: TextStyle(color: MainColors().eapoColorMain),),
+                          title: Padding(
+                            padding: EdgeInsets.only(top: 0, left: 8, bottom: 0, right: 0),
+                            child: Text(_portalMessages.length > 0
+                                ? '${_portalMessages[index].message}'
+                                : ''
+                              , style: TextStyle(color: MainColors().eapoColorMain),),
+                          ),
                           subtitle: Padding(
-                            padding: EdgeInsets.only(top: 8, left: 0, bottom: 0, right: 0),
+                            padding: EdgeInsets.only(top: 16, left: 8, bottom: 0, right: 0),
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: <Widget>[
