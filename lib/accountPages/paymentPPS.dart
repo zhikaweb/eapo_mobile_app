@@ -273,18 +273,19 @@ class _PaymentPPSState extends State<PaymentPPS> {
   }
 
   _sendPaymentData(Map jsonMap) {
-    _sendJsonToBackend(jsonMap).then((response) {
-      if (response.statusCode == 200) {
-        developer.log("Данные успешно переданы : " + response.body);
-        _loadPageOnResponse(successPage);
-      } else {
-        developer.log('Передача не удалась : ' + response.body);
-        _loadPageOnResponse(failedPage);
-      }
-      throw new Exception(response.reasonPhrase! + " " + response.statusCode.toString());
-    }).catchError((error) {
-      developer.log(error.runtimeType.toString() + ' : ' + error.toString());
-    });
+    try {
+      _sendJsonToBackend(jsonMap).then((response) {
+        if (response.statusCode == 200) {
+          developer.log("Данные успешно переданы : " + response.body);
+          _loadPageOnResponse(successPage);
+        } else {
+          developer.log('Передача не удалась : ' + response.body);
+          _loadPageOnResponse(failedPage);
+        }
+      });
+    } catch (e) {
+      throw Exception(e);
+    }
   }
 
   Future<http.Response> _sendJsonToBackend(Map jsonMap) async {
@@ -307,18 +308,19 @@ class _PaymentPPSState extends State<PaymentPPS> {
   void _loadUrl(){
     if (_globalKey.currentState!.validate()) {
       _globalKey.currentState!.save();
-      _checkOperation(_appNum).then((response) {
-        if (response.statusCode == 200) {
-          developer.log('Заявка принята : ' + response.statusCode.toString());
-          _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(_url + _appNum)));
-        } else {
-          developer.log('Ошибка : ' + response.statusCode.toString() + ' ' + response.body);
-          _loadPageOnResponse(failedPage);
-        }
-        throw new Exception(response.reasonPhrase);
-      }).catchError((error) {
-        developer.log(error.runtimeType.toString() + ' : ' + error.toString());
-      });
+      try {
+        _checkOperation(_appNum).then((response) {
+          if (response.statusCode == 200) {
+            developer.log('Заявка принята : ' + response.statusCode.toString());
+            _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(_url + _appNum)));
+          } else {
+            developer.log('Ошибка : ' + response.statusCode.toString() + ' ' + response.body);
+            _loadPageOnResponse(failedPage);
+          }
+        });
+      } catch (e) {
+        throw Exception(e);
+      }
     }
   }
 

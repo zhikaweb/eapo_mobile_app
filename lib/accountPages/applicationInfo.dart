@@ -261,26 +261,27 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
       setState(() {
         isLoading = true;
       });
-
-      _getDataFromBackend().then<String>((response) {
-        if (response.statusCode == 200){
-          _createApplicationFromJson(convert.utf8.decode(response.body.codeUnits));
-          setState(() {
-            isLoading = false;
-            _application = application;
-            docs = _application.documents!.document!
-                .where((element) => element.docType == 'OUT' && element.signed == '1')
-                .toList();
-            docs.sort((a,b) => b.docDate.compareTo(a.docDate));
-          });
-          developer.log('application: ' + _application.eapoRegNo.toString());
-        } else {
-          developer.log('status code : ' + response.statusCode.toString());
-        }
-        throw new Exception(response.reasonPhrase);
-      }).catchError((error) {
-        developer.log(error.runtimeType.toString() + ' : ' + error.toString());
-      });
+      try {
+        _getDataFromBackend().then<String>((response) {
+          if (response.statusCode == 200){
+            _createApplicationFromJson(convert.utf8.decode(response.body.codeUnits));
+            setState(() {
+              isLoading = false;
+              _application = application;
+              docs = _application.documents!.document!
+                  .where((element) => element.docType == 'OUT' && element.signed == '1')
+                  .toList();
+              docs.sort((a,b) => b.docDate.compareTo(a.docDate));
+            });
+            developer.log('application: ' + _application.eapoRegNo.toString());
+          } else {
+            developer.log('status code : ' + response.statusCode.toString());
+          }
+          throw new Exception(response.reasonPhrase);
+        });
+      } catch (e) {
+        throw Exception(e);
+      }
     }
   }
 

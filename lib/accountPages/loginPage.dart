@@ -266,7 +266,7 @@ class _LoginPageState extends State<LoginPage> {
           }
       });
     } catch (e) {
-      developer.log(e.toString());
+      throw Exception(e);
     }
   }
 

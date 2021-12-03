@@ -125,20 +125,22 @@ class _NotificationPageState extends State<NotificationPage> {
   }
 
   _getNotifications(){
-    _getAllNotes().then((response) => {
-      if (response.statusCode == 200) {
-        developer.log('response: ' + response.body),
-        setState(() {
-          _portalMessages = (convert.json.decode(response.body) as List).map((i) =>
-          PortalMessage.fromJson(i)).toList();
-        }),
-        developer.log('_portalMessage: ' + _portalMessages[0].message.toString()),
-      } else {
-        developer.log(response.statusCode.toString()),
-      }
-    }).catchError((error) {
-      developer.log(error.toString());
-    });
+    try {
+      _getAllNotes().then((response) => {
+        if (response.statusCode == 200) {
+          developer.log('response: ' + response.body),
+          setState(() {
+            _portalMessages = (convert.json.decode(response.body) as List).map((i) =>
+                PortalMessage.fromJson(i)).toList();
+          }),
+          developer.log('_portalMessage: ' + _portalMessages[0].message.toString()),
+        } else {
+          developer.log(response.statusCode.toString()),
+        }
+      });
+    } catch (e) {
+      throw Exception(e);
+    }
 }
 
   Future<http.Response> _getAllNotes() async {
