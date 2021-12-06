@@ -157,7 +157,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
                 ),
               ],
             ),
-            isLoading ? Center(child: CustomCircularProgressIndicator(),) : Stack(),
+            // isLoading ? Center(child: CustomCircularProgressIndicator(),) : Stack(),
           ]),
           bottomNavigationBar: _bottomBar(5),
         )
@@ -176,34 +176,48 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
   Form _form() {
     return Form(
       key: _globalKey,
-      child: Flex(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        direction: Axis.horizontal,
-        children: [
-          Flexible(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
-              child: SizedBox(
-                width: 210,
-                height: 50,
-                child: _materialTextField(),
+      child: Column(
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(left: 16, right: 0, top: 0, bottom: 0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text('Номер заявки', style: TextStyle(
+                  color: MainColors().eapoColorMain, fontSize: 16, fontWeight: FontWeight.bold
+                ),
               ),
             ),
-            flex: 1,
           ),
-          Flexible(
-            child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
-              child: SizedBox(
-                width: 140,
-                height: 50,
-                child: _materialBtn(),
+          Flex(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            direction: Axis.horizontal,
+            children: [
+              Flexible(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
+                  child: SizedBox(
+                    width: 210,
+                    height: 50,
+                    child: _materialTextField(),
+                  ),
+                ),
+                flex: 1,
               ),
-            ),
-            flex: 1,
+              Flexible(
+                child: Padding(
+                  padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
+                  child: SizedBox(
+                    width: 140,
+                    height: 50,
+                    child: _materialBtn(),
+                  ),
+                ),
+                flex: 1,
+              ),
+            ],
           ),
         ],
-      ),
+      )
     );
   }
 
@@ -231,10 +245,11 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
           border: OutlineInputBorder(),
           fillColor: Colors.white,
           filled: true,
-          labelText: 'Номер заявки',
-          floatingLabelStyle: TextStyle(
-            fontWeight: FontWeight.bold,
-          ),
+          hintText: 'XXXXXXXXX',
+          focusColor: MainColors().eapoColorMain,
+          // floatingLabelStyle: TextStyle(
+          //   fontWeight: FontWeight.bold,
+          // ),
         ),
         showCursor: true,
         // maxLength: 9,
@@ -275,6 +290,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
             });
             developer.log('application: ' + _application.eapoRegNo.toString());
           } else {
+            _showAlertDialog(context, 'Просмотр данных невозможен', 'Заявка не найдена или нет прав доступа');
             developer.log('status code : ' + response.statusCode.toString());
           }
           throw new Exception(response.reasonPhrase);
@@ -340,5 +356,32 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
     }
 
     return completer.future;
+  }
+
+  _showAlertDialog(BuildContext context, String title, String text) {
+    // set up the button
+    Widget okButton = TextButton(
+      child: Text('OK'),
+      onPressed: () {
+        Navigator.of(context).pop();
+      },
+    );
+
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      title: Text(title),
+      content: Text(text),
+      actions: [
+        okButton,
+      ],
+    );
+
+    // show the dialog
+    showDialog(
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }

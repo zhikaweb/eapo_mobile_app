@@ -18,12 +18,17 @@ import 'package:eapo_mobile_app/eapoPages/about.dart';
 import 'package:eapo_mobile_app/eapoPages/accounts.dart';
 import 'package:eapo_mobile_app/eapoPages/contacts.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
+import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'accountPages/notificationPage.dart';
 
-void main() => runApp(MyApp());
+void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override

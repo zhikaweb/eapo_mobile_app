@@ -10,6 +10,9 @@ import 'package:eapo_mobile_app/presentation/customBottomAppBarImpl.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:eapo_mobile_app/utils/httpUtils.dart';
 import 'package:eapo_mobile_app/utils/networkService.dart';
+import 'package:eapo_mobile_app/utils/pushNotificationsManager.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:http/http.dart' as http;
@@ -30,6 +33,17 @@ class _LoginPageState extends State<LoginPage> {
   final TextEditingController _passwordController = TextEditingController();
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   bool _hidePassword = true;
+
+  String? _token;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    PushNotificationsManager manager = new PushNotificationsManager();
+    manager.init();
+    _token = _getToken().toString();
+    super.initState();
+  }
 
   @override
   void dispose() {
@@ -250,15 +264,23 @@ class _LoginPageState extends State<LoginPage> {
   }
 
   _loadData() {
+    var json;
     try {
-      _checkAuthentication().then((response) =>
-      {
+      _checkAuthentication().then((response) => {
         if (response.statusCode == 200) {
           developer.log('response: ' + response.body),
-          _portalUser =
-          new PortalUser.fromJson(convert.json.decode(response.body)),
-          developer.log('portalUser: ' + _portalUser.fullUserName.toString()),
-          saveUser(_portalUser.fullUserName.toString()),
+          json = convert.json.decode(response.body),
+          developer.log("Sending token..."),
+          _sendToken().then((value) {
+            if (value.statusCode == 200) {
+              developer.log(value.statusCode.toString() + " token received, creating PortalUser...");
+              _portalUser = new PortalUser.fromJson(json);
+              developer.log('PortalUser is: ' + _portalUser.fullUserName.toString());
+              _saveUser(_portalUser.fullUserName.toString());
+            } else {
+              developer.log("message: Неверный токен!" + value.statusCode.toString());
+            }
+          }),
         } else {
             developer.log(response.statusCode.toString()),
             _showAlertDialog(
@@ -280,7 +302,25 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future<void> saveUser(String portalUsername) async {
+  Future<String?> _getToken() async {
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    print("token: " + preferences.getString("token").toString());
+    return preferences.getString("token");
+  }
+
+  Future<http.Response> _sendToken() async {
+    String url = HttpUtils.mainUrl + 'mobile/token';
+    var body = _token;
+
+    return await http.post(Uri.parse(url), headers: {
+      HttpHeaders.authorizationHeader: NetworkService(_credentials)
+          .calculateAuthentication(),
+    }, body: body
+    );
+  }
+
+
+  Future<void> _saveUser(String portalUsername) async {
     WidgetsFlutterBinding.ensureInitialized();
     SharedPreferences prefs = await SharedPreferences.getInstance();
     setState(() {

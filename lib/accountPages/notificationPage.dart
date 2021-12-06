@@ -65,24 +65,14 @@ class _NotificationPageState extends State<NotificationPage> {
               child: SvgPicture.asset('assets/images/eg_sm_bottomright.svg'),
             ),
             _portalMessages.length == 0 ?
-            Container(
-              margin: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
-                width: MediaQuery.of(context).size.width,
-                  child: Card(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(8)),
-                    elevation: 3,
-                    child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 16, vertical: 16),
-                      child: Text('Новых уведомлений нет',
-                        style: TextStyle(
-                            fontSize: 16,
-                            fontWeight: FontWeight.bold,
-                            color: MainColors().eapoColorMain
-                        ),
-                      ),
-                    )
-                  )
+            Center(
+              child: Text('Новых уведомлений нет',
+                style: TextStyle(
+                  fontSize: 16,
+                  fontWeight: FontWeight.bold,
+                  color: MainColors().eapoColorMain
+                ),
+              ),
             ) :
             Padding(
               padding: EdgeInsets.symmetric(vertical: 16, horizontal: 8),

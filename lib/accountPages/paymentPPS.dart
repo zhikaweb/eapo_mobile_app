@@ -88,7 +88,7 @@ class _PaymentPPSState extends State<PaymentPPS> {
                 clipBehavior: Clip.none,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(bottom: 0, top: 120, left: 0, right: 0),
+                    margin: EdgeInsets.only(bottom: 0, top: 130, left: 0, right: 0),
                     child: _webView(),
                   ),
                   isLoading ? Center(child: CustomCircularProgressIndicator(),) : Stack(),
@@ -115,13 +115,23 @@ class _PaymentPPSState extends State<PaymentPPS> {
       key: _globalKey,
       child: Column(
         children: <Widget>[
+          Padding(
+            padding: EdgeInsets.only(left: 16, right: 0, top: 5, bottom: 0),
+            child: Align(
+              alignment: Alignment.topLeft,
+              child: Text('Номер заявки', style: TextStyle(
+                  color: MainColors().eapoColorMain, fontSize: 16, fontWeight: FontWeight.bold
+              ),
+              ),
+            ),
+          ),
           Flex(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             direction: Axis.horizontal,
             children: [
               Flexible(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+                  padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
                   child: SizedBox(
                     width: 210,
                     height: 50,
@@ -132,7 +142,7 @@ class _PaymentPPSState extends State<PaymentPPS> {
               ),
               Flexible(
                 child: Padding(
-                  padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 10.0),
+                  padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
                   child: SizedBox(
                     width: 140,
                     height: 50,
@@ -187,10 +197,8 @@ class _PaymentPPSState extends State<PaymentPPS> {
         border: OutlineInputBorder(),
         fillColor: Colors.white,
         filled: true,
-        labelText: 'Номер заявки',
-        floatingLabelStyle: TextStyle(
-          fontWeight: FontWeight.bold,
-        ),
+        hintText: 'XXXXXXXXX',
+        focusColor: MainColors().eapoColorMain,
       ),
       showCursor: true,
       style: TextStyle(
@@ -244,6 +252,9 @@ class _PaymentPPSState extends State<PaymentPPS> {
         _controller = controller;
       },
       onLoadStart: (controller, _url) {
+        setState(() {
+          isLoading = true;
+        });
         developer.log('page is loading: ' + _url.toString());
         if (_url.toString().contains("pay_request")) {
           _controller.evaluateJavascript(source: "console.log(SendData('***'))");
@@ -311,8 +322,11 @@ class _PaymentPPSState extends State<PaymentPPS> {
       try {
         _checkOperation(_appNum).then((response) {
           if (response.statusCode == 200) {
-            developer.log('Заявка принята : ' + response.statusCode.toString());
-            _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(_url + _appNum)));
+            setState(() {
+              isLoading = false;
+              developer.log('Заявка принята : ' + response.statusCode.toString());
+              _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(_url + _appNum)));
+            });
           } else {
             developer.log('Ошибка : ' + response.statusCode.toString() + ' ' + response.body);
             _loadPageOnResponse(failedPage);
