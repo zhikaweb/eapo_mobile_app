@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:io';
 import 'dart:convert' as convert;
 
@@ -10,6 +11,7 @@ import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:eapo_mobile_app/utils/dateFormatter.dart';
 import 'package:eapo_mobile_app/utils/httpUtils.dart';
 import 'package:eapo_mobile_app/utils/networkService.dart';
+import 'package:enough_convert/windows/windows1251.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -27,6 +29,7 @@ class NotificationPage extends StatefulWidget {
 class _NotificationPageState extends State<NotificationPage> {
   Credentials _credentials = new Credentials();
   List<PortalMessage> _portalMessages = [];
+  final codec = const Windows1251Codec(allowInvalid: false);
 
   @override
   void initState() {
@@ -105,7 +108,7 @@ class _NotificationPageState extends State<NotificationPage> {
                                     ? 'Заявка №${_portalMessages[index].applicationNumber}'
                                     : '', textAlign: TextAlign.start,
                                 ),
-                                Text(_portalMessages.length > 0
+                                Text(_portalMessages[index].sendingDate != null
                                     ? '${DateFormatter().formatDate(_portalMessages[index].sendingDate)}'
                                     : '', textAlign: TextAlign.start,
                                 ),
@@ -140,7 +143,7 @@ class _NotificationPageState extends State<NotificationPage> {
     try {
       _getAllNotes().then((response) => {
         if (response.statusCode == 200) {
-          developer.log('response: ' + response.body),
+          developer.log('response: ' + utf8.decode(response.bodyBytes)),
           setState(() {
             _portalMessages = (convert.json.decode(response.body) as List).map((i) =>
                 PortalMessage.fromJson(i)).toList();
@@ -164,7 +167,8 @@ class _NotificationPageState extends State<NotificationPage> {
     String url = HttpUtils.mainUrl + 'mobile/messages';
     return await http.get(Uri.parse(url), headers: {
       HttpHeaders.authorizationHeader: NetworkService(_credentials)
-          .calculateAuthentication()
+          .calculateAuthentication(),
+      HttpHeaders.acceptCharsetHeader: "utf-8"
     });
    }
 

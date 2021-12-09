@@ -10,8 +10,8 @@ PortalMessage _$PortalMessageFromJson(Map<String, dynamic> json) =>
     PortalMessage(
       json['id'] as int?,
       json['message'] as String?,
-      PortalMessage._fromJson(json['creationDate'] as int),
-      PortalMessage._fromJson(json['sendingDate'] as int),
+      json['creationDate'] == null ? null : PortalMessage._fromJson(json['creationDate'] as int),
+      json['sendingDate'] == null ? null : PortalMessage._fromJson(json['sendingDate'] as int),
       json['status'] as int?,
       json['type'] as String?,
       json['applicationNumber'] as String?,

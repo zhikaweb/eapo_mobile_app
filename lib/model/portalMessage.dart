@@ -5,24 +5,24 @@ part 'portalMessage.g.dart';
 
 @JsonSerializable()
 class PortalMessage {
-  final int? id;
+  int? id;
 
-  final String? message;
+  String? message;
 
   @JsonKey(ignore: true)
   PortalUser? user;
 
   @JsonKey(fromJson: _fromJson, toJson: _toJson)
-  final DateTime? creationDate;
+  DateTime? creationDate;
 
   @JsonKey(fromJson: _fromJson, toJson: _toJson)
-  final DateTime? sendingDate;
+  DateTime? sendingDate;
 
-  final int? status;
+  int? status;
 
-  final String? type;
+  String? type;
 
-  final String? applicationNumber;
+  String? applicationNumber;
 
   PortalMessage(this.id, this.message, this.creationDate,
       this.sendingDate, this.status, this.type, this.applicationNumber);

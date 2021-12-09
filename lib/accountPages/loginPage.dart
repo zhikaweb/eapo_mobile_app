@@ -34,14 +34,13 @@ class _LoginPageState extends State<LoginPage> {
   final GlobalKey<FormState> _globalKey = GlobalKey<FormState>();
   bool _hidePassword = true;
 
-  String? _token;
+  String? _token = "";
 
   @override
   void initState() {
     // TODO: implement initState
     PushNotificationsManager manager = new PushNotificationsManager();
     manager.init();
-    _token = _getToken().toString();
     super.initState();
   }
 
@@ -302,20 +301,15 @@ class _LoginPageState extends State<LoginPage> {
     );
   }
 
-  Future<String?> _getToken() async {
-    SharedPreferences preferences = await SharedPreferences.getInstance();
-    print("token: " + preferences.getString("token").toString());
-    return preferences.getString("token");
-  }
-
   Future<http.Response> _sendToken() async {
     String url = HttpUtils.mainUrl + 'mobile/token';
-    var body = _token;
+    SharedPreferences preferences = await SharedPreferences.getInstance();
+    print("token: " + preferences.getString("token").toString());
 
     return await http.post(Uri.parse(url), headers: {
       HttpHeaders.authorizationHeader: NetworkService(_credentials)
           .calculateAuthentication(),
-    }, body: body
+    }, body: (preferences.getString("token") ?? '')
     );
   }
 
