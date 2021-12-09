@@ -1,15 +1,15 @@
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:eapo_mobile_app/presentation/screenResolution.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 import 'accountPages/accountMenu.dart';
+import 'accountPages/notificationPage.dart';
 
 class HomePage extends StatefulWidget {
-  // const HomePage2({Key key}) : super(key: key);
-
   @override
   _HomePageState createState() => _HomePageState();
 }
@@ -35,6 +35,12 @@ class _HomePageState extends State<HomePage> {
   late String _userName;
 
   ScreenResolution screenResolution = new ScreenResolution();
+
+  @override
+  void initState() {
+    super.initState();
+    setupInteractedMessage();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -430,4 +436,30 @@ class _HomePageState extends State<HomePage> {
 
   void _launchUrl(String url) async =>
       await canLaunch(Uri.encodeFull(url)) ? await launch(Uri.encodeFull(url)) : throw 'Could not launch $url';
+
+  Future<void> setupInteractedMessage() async {
+    // Get any messages which caused the application to open from
+    // a terminated state.
+    RemoteMessage? initialMessage =
+    await FirebaseMessaging.instance.getInitialMessage();
+    print("initialMessage: " + initialMessage.toString());
+
+    // If the message also contains a data property with a "type" of "chat",
+    // navigate to a chat screen
+    if (initialMessage != null) {
+      _handleMessage(initialMessage);
+    }
+
+    // Also handle any interaction when the app is in the background via a
+    // Stream listener
+    FirebaseMessaging.onMessageOpenedApp.listen(_handleMessage);
+  }
+
+  void _handleMessage(RemoteMessage message) {
+    if (message.data.isNotEmpty) {
+      Navigator.push(context, MaterialPageRoute(
+          builder: (context) => NotificationPage()
+      ));
+    }
+  }
 }

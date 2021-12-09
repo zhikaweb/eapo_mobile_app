@@ -24,11 +24,6 @@ class PushNotificationsManager {
         provisional: false,
         sound: true,
       );
-      await _firebaseMessaging.setForegroundNotificationPresentationOptions(
-        alert: true, // Required to display a heads up notification
-        badge: true,
-        sound: true,
-      );
 
       print('User granted permission: ${settings.authorizationStatus}');
 
@@ -39,6 +34,8 @@ class PushNotificationsManager {
       preferences.setString("token", token!);
 
       _initialized = true;
+
     }
   }
+
 }
