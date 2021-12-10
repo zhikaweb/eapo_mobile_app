@@ -146,7 +146,8 @@ class _NotificationPageState extends State<NotificationPage> {
           developer.log('response: ' + utf8.decode(response.bodyBytes)),
           setState(() {
             _portalMessages = (convert.json.decode(response.body) as List).map((i) =>
-                PortalMessage.fromJson(i)).toList();
+                PortalMessage.fromJson(i)).take(10).toList();
+            _portalMessages.sort((a,b) => b.creationDate!.compareTo(a.creationDate ?? DateTime.now()));
           }),
           developer.log('_portalMessage: ' + _portalMessages[0].message.toString()),
         } else {
