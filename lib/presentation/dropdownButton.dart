@@ -22,34 +22,41 @@ class _AppDropdownButtonState extends State<AppDropdownButton> {
       child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
-            DropdownButton<dynamic>(
-              hint: Text("Выберите количество месяцев",
-                style: TextStyle(color: MainColors().eapoColorMain, fontSize: 18),
+            Material(
+              elevation: 5.0,
+              borderRadius: BorderRadius.circular(4.0),
+              child: DropdownButton<dynamic>(
+                value: selectedItem,
+                hint: Text("Выберите количество месяцев",
+                  style: TextStyle(color: Colors.black87, fontSize: 18),
+                ),
+                elevation: 16,
+                style: TextStyle(color: Colors.black87, fontSize: 18),
+                items: widget.monthPayments.entries
+                    .map<DropdownMenuItem<String>>(
+                        (MapEntry<String, dynamic> e) => DropdownMenuItem<String>(
+                      value: e.value.toString(),
+                      child: Container(
+                        padding: EdgeInsets.symmetric(horizontal: 8, vertical: 0),
+                        width: MediaQuery.of(context).size.width - 42,
+                        height: 20,
+                        child: Text(e.key),
+                      ),
+                    ))
+                    .toList(),
+                onChanged: (newKey) {
+                  _dropDownItemSelected(newKey);
+                },
               ),
-              elevation: 16,
-              style: TextStyle(color: MainColors().eapoColorMain),
-              underline: Container(
-                height: 2,
-                color: MainColors().eapoColorMain,
-              ),
-              items: widget.monthPayments.entries
-                  .map<DropdownMenuItem<String>>(
-                      (MapEntry<String, dynamic> e) => DropdownMenuItem<String>(
-                    value: e.value.toString(),
-                    child: Container(
-                      width: MediaQuery.of(context).size.width - 42,
-                        child: Text(e.key, maxLines: 3, overflow: TextOverflow.fade,),
-                    ),
-                  ))
-                  .toList(),
-              onChanged: (newKey) {
-                _dropDownItemSelected(newKey);
-              },
             ),
             SizedBox(height: 20,),
-            Text("Сумма", style: TextStyle(color: MainColors().eapoColorMain, fontSize: 18),),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              child: Text("Сумма", style: TextStyle(color: MainColors().eapoColorMain, fontSize: 18),),
+            ),
             Material(
               child: TextFormField(
+                style: TextStyle(fontSize: 18),
                 controller: _sumEditingController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),

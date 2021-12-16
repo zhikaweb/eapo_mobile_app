@@ -112,17 +112,25 @@ class _PaymentPSRState extends State<PaymentPSR> {
           mainAxisAlignment: MainAxisAlignment.start,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              child: Text("Документ", style: TextStyle(color: MainColors().eapoColorMain, fontSize: 18),),
+            ),
             AppDropdownInput(items: descLetters,),
             SizedBox(height: 20,),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              child: Text("Количество месяцев для продления", style: TextStyle(color: MainColors().eapoColorMain, fontSize: 18),),
+            ),
             AppDropdownButton(monthPayments: monthPayments),
             SizedBox(height: 20,),
-            Container(
-              child: Text("Дата продления",
-                style: TextStyle(color: MainColors().eapoColorMain, fontSize: 18),
-              ),
+            Padding(
+              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+              child: Text("Дата продления", style: TextStyle(color: MainColors().eapoColorMain, fontSize: 18),),
             ),
             Material(
               child: TextFormField(
+                style: TextStyle(fontSize: 18),
                 controller: _dateEditingController,
                 decoration: InputDecoration(
                   border: OutlineInputBorder(),
