@@ -107,62 +107,62 @@ class _PaymentPSRState extends State<PaymentPSR> {
 
   Form _paymentForm(){
     return Form(
-        key: _paymentFormKey,
-        child: Column(
-          mainAxisAlignment: MainAxisAlignment.start,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              child: Text("Документ", style: TextStyle(color: MainColors().eapoColorMain, fontSize: 18),),
-            ),
-            AppDropdownInput(items: descLetters,),
-            SizedBox(height: 20,),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              child: Text("Количество месяцев для продления", style: TextStyle(color: MainColors().eapoColorMain, fontSize: 18),),
-            ),
-            AppDropdownButton(monthPayments: monthPayments),
-            SizedBox(height: 20,),
-            Padding(
-              padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
-              child: Text("Дата продления", style: TextStyle(color: MainColors().eapoColorMain, fontSize: 18),),
-            ),
-            Material(
-              child: TextFormField(
-                style: TextStyle(fontSize: 18),
-                controller: _dateEditingController,
-                decoration: InputDecoration(
-                  border: OutlineInputBorder(),
-                  focusColor: MainColors().eapoColorMain,
-                ),
+      key: _paymentFormKey,
+      child: Column(
+        mainAxisAlignment: MainAxisAlignment.start,
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: <Widget>[
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+            child: Text("Документ", style: fontStyle(),),
+          ),
+          AppDropdownInput(items: descLetters,),
+          SizedBox(height: 20,),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+            child: Text("Количество месяцев для продления", style: fontStyle(),),
+          ),
+          AppDropdownButton(monthPayments: monthPayments),
+          SizedBox(height: 20,),
+          Padding(
+            padding: EdgeInsets.symmetric(vertical: 4, horizontal: 8),
+            child: Text("Дата продления", style: fontStyle(),),
+          ),
+          Material(
+            child: TextFormField(
+              style: TextStyle(fontSize: 18),
+              controller: _dateEditingController,
+              decoration: InputDecoration(
+                border: OutlineInputBorder(),
+                focusColor: MainColors().eapoColorMain,
               ),
             ),
-            SizedBox(height: 20,),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Material(
-                  elevation: 5.0,
-                  borderRadius: BorderRadius.circular(8.0),
-                  color: MainColors().eapoColorMain,
-                  child: MaterialButton(
-                      minWidth: 120,
-                      height: 60,
-                      onPressed: () {
-                        _showAlertDialog(context, 'Данные успешно отправлены!', '');
-                      },
-                      child: Text(
-                        "Отправить",
-                        textAlign: TextAlign.center,
-                        style: TextStyle(fontSize: 20, color: Colors.white),
-                      )
-                  ),
+          ),
+          SizedBox(height: 20,),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: [
+              Material(
+                elevation: 5.0,
+                borderRadius: BorderRadius.circular(8.0),
+                color: MainColors().eapoColorMain,
+                child: MaterialButton(
+                    minWidth: 120,
+                    height: 60,
+                    onPressed: () {
+                      _showAlertDialog(context, 'Данные успешно отправлены!', '');
+                    },
+                    child: Text(
+                      "Отправить",
+                      textAlign: TextAlign.center,
+                      style: TextStyle(fontSize: 20, color: Colors.white, fontWeight: FontWeight.bold),
+                    )
                 ),
-              ],
-            ),
-          ],
-        ),
+              ),
+            ],
+          ),
+        ],
+      ),
     );
   }
 
@@ -177,7 +177,7 @@ class _PaymentPSRState extends State<PaymentPSR> {
                 alignment: Alignment.topLeft,
                 child: Text('Номер заявки', style: TextStyle(
                     color: MainColors().eapoColorMain, fontSize: 16, fontWeight: FontWeight.bold
-                  ),
+                ),
                 ),
               ),
             ),
@@ -284,12 +284,12 @@ class _PaymentPSRState extends State<PaymentPSR> {
         if (response.statusCode == 200){
           developer.log(response.body);
           json = convert.json.decode(response.body);
-           setState(() {
-             isLoading = false;
-             descLetters = [];
-             monthPayments.clear();
-             _dateEditingController.clear();
-           });
+          setState(() {
+            isLoading = false;
+            descLetters = [];
+            monthPayments.clear();
+            _dateEditingController.clear();
+          });
           _prolongation = new Prolongation.fromJson(json);
           descLetters.add(_prolongation.corresp!.descletter ?? "");
           monthPayments = _prolongation.monthPayments!;
@@ -318,7 +318,7 @@ class _PaymentPSRState extends State<PaymentPSR> {
     return await http.get(Uri.parse(url + _appNum), headers: {
       HttpHeaders.authorizationHeader: NetworkService(_credentials)
           .calculateAuthentication(),
-      },
+    },
     );
   }
 
@@ -346,6 +346,14 @@ class _PaymentPSRState extends State<PaymentPSR> {
       builder: (BuildContext context) {
         return alert;
       },
+    );
+  }
+
+  TextStyle fontStyle(){
+    return TextStyle(
+        fontSize: 18,
+        color: MainColors().eapoColorMain,
+        fontWeight: FontWeight.bold
     );
   }
 }

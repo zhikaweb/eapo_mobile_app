@@ -22,9 +22,12 @@ class _AppDropdownInputState extends State<AppDropdownInput> {
         width: MediaQuery.of(context).size.width - 16,
         child: DropdownButton<dynamic>(
           value: _selected ? _choice : null,
-          hint: Text("Выберите документ",
-            style: TextStyle(color: Colors.black87,
-              fontSize: 18,
+          hint: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 8, vertical: 8),
+            child: Text("Выберите документ",
+              style: TextStyle(color: Colors.black87,
+                fontSize: 18,
+              ),
             ),
           ),
           elevation: 16,
