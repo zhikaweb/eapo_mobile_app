@@ -53,7 +53,7 @@ class _PaymentPPSState extends State<PaymentPPS> {
 
   @override
   void initState() {
-    _textEditingController.text = widget.externalNumAppli!;
+    _textEditingController.text = widget.externalNumAppli ?? "";
     super.initState();
   }
 
@@ -88,7 +88,7 @@ class _PaymentPPSState extends State<PaymentPPS> {
                 clipBehavior: Clip.none,
                 children: <Widget>[
                   Container(
-                    margin: EdgeInsets.only(bottom: 0, top: 130, left: 0, right: 0),
+                    margin: EdgeInsets.only(bottom: 0, top: 140, left: 0, right: 0),
                     child: _webView(),
                   ),
                   isLoading ? Center(child: CustomCircularProgressIndicator(),) : Stack(),
@@ -127,6 +127,7 @@ class _PaymentPPSState extends State<PaymentPPS> {
           ),
           Flex(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
             direction: Axis.horizontal,
             children: [
               Flexible(
@@ -134,7 +135,6 @@ class _PaymentPPSState extends State<PaymentPPS> {
                   padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
                   child: SizedBox(
                     width: 210,
-                    height: 50,
                     child: _materialTextField(),
                   ),
                 ),
@@ -144,8 +144,8 @@ class _PaymentPPSState extends State<PaymentPPS> {
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
                   child: SizedBox(
-                    width: 140,
-                    height: 50,
+                    width: 150,
+                    height: 55,
                     child: _materialBtn(),
                   ),
                 ),
@@ -181,7 +181,7 @@ class _PaymentPPSState extends State<PaymentPPS> {
       child: MaterialButton(
           child: Text('Показать', style: TextStyle(
             color: Colors.white,
-            fontSize: 18,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),),
           onPressed: () {
@@ -192,18 +192,21 @@ class _PaymentPPSState extends State<PaymentPPS> {
 
   TextFormField _materialTextField() {
     return TextFormField(
+      keyboardType: TextInputType.number,
       controller: _textEditingController,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
         fillColor: Colors.white,
         filled: true,
-        hintText: 'XXXXXXXXX',
+        errorMaxLines: 2,
         focusColor: MainColors().eapoColorMain,
       ),
       showCursor: true,
+      cursorHeight: 26.0,
       style: TextStyle(
           fontWeight: FontWeight.bold,
-          fontSize: 22
+          fontSize: 22,
+          height: 0.7,
       ),
       validator: (value) {
         if (value == null || value.isEmpty){
@@ -324,11 +327,12 @@ class _PaymentPPSState extends State<PaymentPPS> {
           if (response.statusCode == 200) {
             setState(() {
               isLoading = false;
-              developer.log('Заявка принята : ' + response.statusCode.toString());
+              developer.log('Операция по заявке $_appNum разрешена : ' + response.statusCode.toString());
+              developer.log('Загрузка веб-страницы...');
               _controller.loadUrl(urlRequest: URLRequest(url: Uri.parse(_url + _appNum)));
             });
           } else {
-            developer.log('Ошибка : ' + response.statusCode.toString() + ' ' + response.body);
+            developer.log('Отказ в операции по заявке : ' + response.statusCode.toString() + ' ' + response.body);
             _loadPageOnResponse(failedPage);
           }
         });

@@ -24,6 +24,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'accountPages/notificationPage.dart';
+import 'accountPages/paymentPSR.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -91,6 +92,7 @@ class _MyAppState extends State<MyApp> {
         '/login': (BuildContext context) => LoginPage(),
         '/applicationInfo': (BuildContext context) => ApplicationInfo(externalNumAppli: ''),
         '/paymentPPS': (BuildContext context) => PaymentPPS(externalNumAppli: '',),
+        '/paymentPSR': (BuildContext context) => PaymentPSR(externalNumAppli: '',),
         '/notifications': (BuildContext context) => NotificationPage(),
       },
     );

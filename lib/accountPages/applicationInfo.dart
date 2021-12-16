@@ -48,7 +48,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
   @override
   void initState() {
     // TODO: implement initState
-    _textEditingController.text = widget.externalNumAppli!;
+    _textEditingController.text = widget.externalNumAppli ?? "";
     super.initState();
   }
 
@@ -190,6 +190,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
           ),
           Flex(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
+            crossAxisAlignment: CrossAxisAlignment.start,
             direction: Axis.horizontal,
             children: [
               Flexible(
@@ -197,7 +198,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
                   padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
                   child: SizedBox(
                     width: 210,
-                    height: 50,
+                    // height: 50,
                     child: _materialTextField(),
                   ),
                 ),
@@ -206,9 +207,10 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
               Flexible(
                 child: Padding(
                   padding: EdgeInsets.symmetric(horizontal: 0.0, vertical: 5.0),
+                  // child: _materialBtn(),
                   child: SizedBox(
-                    width: 140,
-                    height: 50,
+                    width: 150,
+                    height: 55,
                     child: _materialBtn(),
                   ),
                 ),
@@ -229,7 +231,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
       child: MaterialButton(
           child: Text('Показать', style: TextStyle(
             color: Colors.white,
-            fontSize: 18,
+            fontSize: 20,
             fontWeight: FontWeight.bold,
           ),),
           onPressed: () {
@@ -240,22 +242,22 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
 
   TextFormField _materialTextField() {
     return TextFormField(
+        keyboardType: TextInputType.number,
         controller: _textEditingController,
         decoration: InputDecoration(
           border: OutlineInputBorder(),
           fillColor: Colors.white,
           filled: true,
-          hintText: 'XXXXXXXXX',
+          errorMaxLines: 2,
           focusColor: MainColors().eapoColorMain,
-          // floatingLabelStyle: TextStyle(
-          //   fontWeight: FontWeight.bold,
-          // ),
         ),
         showCursor: true,
+        cursorHeight: 26.0,
         // maxLength: 9,
         style: TextStyle(
             fontWeight: FontWeight.bold,
-            fontSize: 22
+            fontSize: 22,
+            height: 0.7,
         ),
         validator: (value) {
           if (value == null || value.isEmpty){
@@ -277,7 +279,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
         isLoading = true;
       });
       try {
-        _getDataFromBackend().then<String>((response) {
+        _getDataFromBackend().then((response) {
           if (response.statusCode == 200){
             _createApplicationFromJson(convert.utf8.decode(response.body.codeUnits));
             setState(() {
@@ -293,7 +295,6 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
             _showAlertDialog(context, 'Просмотр данных невозможен', 'Заявка не найдена или нет прав доступа');
             developer.log('status code : ' + response.statusCode.toString());
           }
-          throw new Exception(response.reasonPhrase);
         });
       } catch (e) {
         throw Exception(e);
@@ -332,8 +333,11 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
 
   Future<File> createFileOfPdfUrl(String? docId, String? appNum) async {
     Completer<File> completer = Completer();
-    _credentials.login = 'StalAN';
-    _credentials.password = 'ADH563jk';
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    setState(() {
+      _credentials.login = (prefs.getString('login') ?? '');
+      _credentials.password = (prefs.getString('pass') ?? '');
+    });
     developer.log("Start download pdf");
     try {
       final url = HttpUtils.mainUrl + 'signed/eapoRegNo/' + appNum! + '/docId/' + docId!;

@@ -67,8 +67,8 @@ class _AccountMenuState extends State<AccountMenu> {
                   BtnMainMenu(title: 'Информация по заявке', route: '/applicationInfo',),
                   SizedBox(height: 32,),
                   BtnMainMenu(title: 'Уплата ППС', route: '/paymentPPS',),
-                  // SizedBox(height: 32,),
-                  // BtnFoo(title: 'Продление срока ответа'),
+                  SizedBox(height: 32,),
+                  BtnMainMenu(title: 'Продление срока ответа', route: '/paymentPSR',),
                 ],
               ),
             )
