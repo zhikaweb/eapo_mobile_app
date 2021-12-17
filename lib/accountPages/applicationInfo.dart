@@ -242,7 +242,7 @@ class _ApplicationInfoState extends State<ApplicationInfo> {
 
   TextFormField _materialTextField() {
     return TextFormField(
-        keyboardType: TextInputType.number,
+        // keyboardType: TextInputType.number,
         controller: _textEditingController,
         decoration: InputDecoration(
           border: OutlineInputBorder(),

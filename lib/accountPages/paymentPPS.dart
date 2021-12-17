@@ -192,7 +192,7 @@ class _PaymentPPSState extends State<PaymentPPS> {
 
   TextFormField _materialTextField() {
     return TextFormField(
-      keyboardType: TextInputType.number,
+      // keyboardType: TextInputType.number,
       controller: _textEditingController,
       decoration: InputDecoration(
         border: OutlineInputBorder(),

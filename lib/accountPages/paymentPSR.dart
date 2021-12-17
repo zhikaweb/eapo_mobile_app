@@ -232,7 +232,6 @@ class _PaymentPSRState extends State<PaymentPSR> {
 
   TextFormField _materialTextField() {
     return TextFormField(
-      keyboardType: TextInputType.number,
       controller: _textEditingController,
       decoration: InputDecoration(
         border: OutlineInputBorder(),
