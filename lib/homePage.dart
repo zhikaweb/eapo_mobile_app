@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 
 import 'accountPages/accountMenu.dart';
 import 'accountPages/notificationPage.dart';
@@ -456,6 +457,7 @@ class _HomePageState extends State<HomePage> {
   }
 
   void _handleMessage(RemoteMessage message) {
+    FlutterAppBadger.removeBadge();
     if (message.data.isNotEmpty) {
       Navigator.push(context, MaterialPageRoute(
           builder: (context) => NotificationPage()

@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'dart:convert' as convert;
+import 'dart:developer' as developer;
 
 import 'package:eapo_mobile_app/accountPages/applicationInfo.dart';
 import 'package:eapo_mobile_app/accountPages/paymentPPS.dart';
@@ -16,7 +17,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'dart:developer' as developer;
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:http/http.dart' as http;
 
 class NotificationPage extends StatefulWidget {
@@ -33,8 +34,9 @@ class _NotificationPageState extends State<NotificationPage> {
 
   @override
   void initState() {
-    _getNotifications();
     super.initState();
+    FlutterAppBadger.removeBadge();
+    _getNotifications();
   }
 
   @override

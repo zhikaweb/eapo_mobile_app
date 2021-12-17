@@ -20,13 +20,22 @@ import 'package:eapo_mobile_app/eapoPages/contacts.dart';
 import 'package:eapo_mobile_app/presentation/mainColors.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
+import 'package:flutter_app_badger/flutter_app_badger.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 
 import 'accountPages/notificationPage.dart';
 import 'accountPages/paymentPSR.dart';
 
+Future<void> _firebaseMessagingBackgroundHandler(RemoteMessage message) async {
+  await Firebase.initializeApp();
+  FlutterAppBadger.updateBadgeCount(1);
+
+  print("Handling a background message: ${message.messageId}");
+}
+
 void main() async {
+  FirebaseMessaging.onBackgroundMessage(_firebaseMessagingBackgroundHandler);
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
@@ -34,10 +43,20 @@ void main() async {
     badge: true,
     sound: true,
   );
+  await FirebaseMessaging.instance.requestPermission(
+    alert: true,
+    announcement: false,
+    badge: true,
+    carPlay: false,
+    criticalAlert: false,
+    provisional: false,
+    sound: true,
+  );
 
   FirebaseMessaging.onMessage.listen((RemoteMessage message) {
     print('Got a message whilst in the foreground!');
     print('Message data: ${message.data}');
+    FlutterAppBadger.updateBadgeCount(1);
 
     if (message.notification != null) {
       print('Message also contained a notification: ${message.notification}');
