@@ -71,23 +71,20 @@ class _PaymentPSRState extends State<PaymentPSR> {
               alignment: Alignment.bottomRight,
               child: SvgPicture.asset('assets/images/eg_sm_bottomright.svg'),
             ),
-            Flex(
-              direction: Axis.vertical,
-              children: [
-                Expanded(
-                  flex: 0,
+            Container(
+              child: SingleChildScrollView(
                   child: Padding(
                     padding: EdgeInsets.symmetric(vertical: 10, horizontal: 8),
-                    child: Column(
-                      children: <Widget>[
-                        _searchForm(),
-                        SizedBox(height: 20,),
-                        _paymentForm(),
-                      ],
-                    ),
+                      child: Column(
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          _searchForm(),
+                          SizedBox(height: 20,),
+                          _paymentForm(),
+                        ],
+                      ),
                   ),
                 ),
-              ],
             ),
             // isLoading ? Center(child: CustomCircularProgressIndicator(),) : Stack(),
           ]),
