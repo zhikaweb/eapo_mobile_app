@@ -18,7 +18,7 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   List listUrl = ['https://www.facebook.com/eapo.official',
     'https://www.youtube.com/channel/UCPzUFvo897pAnXjU1H06POA',
-    'https://twitter.com/EAPO_official'];
+    'https://twitter.com/EAPO_official', 'https://t.me/eapveapo'];
 
 
   List routeNames = ['/menuEapo', '/menuInvents', '/menuDesigns', '/pharma', '/login'];
@@ -30,7 +30,7 @@ class _HomePageState extends State<HomePage> {
     'assets/images/lk.svg'];
 
   List socialIconsPaths = ['assets/images/fb.svg',
-    'assets/images/ut.svg', 'assets/images/twt.svg'];
+    'assets/images/ut.svg', 'assets/images/twt.svg', 'assets/images/telegram.svg'];
 
   late String _login;
   late String _userName;
@@ -55,7 +55,7 @@ class _HomePageState extends State<HomePage> {
             screenResolution.topPositionGearContainer = 84;
             screenResolution.leftPositionGearContainer = -22;
             screenResolution.topPositionSocialIconContainer = 568;
-            screenResolution.leftPositionSocialIconContainer = 91;
+            screenResolution.leftPositionSocialIconContainer = 65;
             return _buildContainer(
                 screenResolution.globalContainerWidth,
                 screenResolution.globalContainerHeight,
@@ -72,7 +72,7 @@ class _HomePageState extends State<HomePage> {
             screenResolution.topPositionGearContainer = 84;
             screenResolution.leftPositionGearContainer = -2;
             screenResolution.topPositionSocialIconContainer = 628;
-            screenResolution.leftPositionSocialIconContainer = 111;
+            screenResolution.leftPositionSocialIconContainer = 85;
             return _buildContainer(
                 screenResolution.globalContainerWidth,
                 screenResolution.globalContainerHeight,
@@ -89,7 +89,7 @@ class _HomePageState extends State<HomePage> {
             screenResolution.topPositionGearContainer = 134;
             screenResolution.leftPositionGearContainer = -32;
             screenResolution.topPositionSocialIconContainer = 688;
-            screenResolution.leftPositionSocialIconContainer = 91;
+            screenResolution.leftPositionSocialIconContainer = 65;
             return _buildContainer(
               screenResolution.globalContainerWidth,
               screenResolution.globalContainerHeight,
@@ -106,7 +106,7 @@ class _HomePageState extends State<HomePage> {
             screenResolution.topPositionGearContainer = 134;
             screenResolution.leftPositionGearContainer = -22;
             screenResolution.topPositionSocialIconContainer = 718;
-            screenResolution.leftPositionSocialIconContainer = 91;
+            screenResolution.leftPositionSocialIconContainer = 65;
             return _buildContainer(
               screenResolution.globalContainerWidth,
               screenResolution.globalContainerHeight,
@@ -123,7 +123,7 @@ class _HomePageState extends State<HomePage> {
             screenResolution.topPositionGearContainer = 134;
             screenResolution.leftPositionGearContainer = -22;
             screenResolution.topPositionSocialIconContainer = 748;
-            screenResolution.leftPositionSocialIconContainer = 91;
+            screenResolution.leftPositionSocialIconContainer = 65;
             return _buildContainer(
               screenResolution.globalContainerWidth,
               screenResolution.globalContainerHeight,
@@ -140,7 +140,7 @@ class _HomePageState extends State<HomePage> {
             screenResolution.topPositionGearContainer = 134;
             screenResolution.leftPositionGearContainer = 208;
             screenResolution.topPositionSocialIconContainer = 748;
-            screenResolution.leftPositionSocialIconContainer = 321;
+            screenResolution.leftPositionSocialIconContainer = 295;
             return _buildContainer(
               screenResolution.globalContainerWidth,
               screenResolution.globalContainerHeight,
@@ -156,7 +156,7 @@ class _HomePageState extends State<HomePage> {
             screenResolution.topPositionGearContainer = 84;
             screenResolution.leftPositionGearContainer = -22;
             screenResolution.topPositionSocialIconContainer = 568;
-            screenResolution.leftPositionSocialIconContainer = 91;
+            screenResolution.leftPositionSocialIconContainer = 65;
             return _buildContainer(
               screenResolution.globalContainerWidth,
               screenResolution.globalContainerHeight,
@@ -310,6 +310,8 @@ class _HomePageState extends State<HomePage> {
                                       containerWithStackAndSocialBtn(socialIconsPaths[1], listUrl[1]),
                                       SizedBox(width : 24),
                                       containerWithStackAndSocialBtn(socialIconsPaths[2], listUrl[2]),
+                                      SizedBox(width : 24),
+                                      containerWithStackAndSocialBtn(socialIconsPaths[3], listUrl[3]),
                                     ],
                                   ),
                                 )
@@ -349,8 +351,8 @@ class _HomePageState extends State<HomePage> {
         child: Stack(
             children: <Widget>[
               Positioned(
-                  top: 4,
-                  left: -16,
+                  top: 0,
+                  left: -20,
                   child: socialBtn(iconPath, socialURL)
               ),
             ]
